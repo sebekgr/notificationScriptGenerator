@@ -2,12 +2,11 @@ const express = require('express');
 const app = express();
 const passportSetup = require('./config/passportSetup');
 const mongoose = require('mongoose');
-const key = require('./config/key_dev');
+const key = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 9000;
-const path = require('path');
 
 //connect with db
 mongoose.connect(key.mongoDB, () => { console.log('connected to mongoDB')});
@@ -30,6 +29,8 @@ app.use(passport.session());
 //set up routes
 require('./routes/authRoutes')(app);
 
+
+//set up routes for production. Serving client side assets
 if(process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 
