@@ -1,17 +1,8 @@
 const router = require('express').Router();
 
-
-const isLogged = (req,res, next) => {
-    if(!req.user) {
-        return res.redirect('/auth/google');
-    }
-    next();
-}
-
-router.get('/', isLogged,  (req, res) => {
+router.get('/', (req, res, next) => {
     res.redirect('/');
+    next();
 });
-
-
 
 module.exports = router;

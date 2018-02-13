@@ -6,13 +6,15 @@
     "/auth/google": {
       "target": "http://localhost:9000"
     },
-    "/*": {
+    "/auth/logout": {
+      "target": "http://localhost:9000"
+    },
+    "/auth/current_user": {
       "target": "http://localhost:9000"
     }
   },
   "dependencies": {
     "axios": "^0.17.1",
-    "history": "^4.7.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
