@@ -1,22 +1,12 @@
 import React from 'react';
-import { push } from 'react-router-redux'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 
 const Home = props => (
   <div>
     <h1>Home</h1>
     <p>Welcome home!</p>
-    <button onClick={() => props.changePage()}>Go to about page via redux</button>
+    <a href="/auth/google">Login in </a>
   </div>
     );
 
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  changePage: () => push('/profile')
-}, dispatch)
-
-export default connect(
-  null, 
-  mapDispatchToProps
-)(Home)
+export default Home;

@@ -1,26 +1,27 @@
 import React, {Component} from 'react';
-import {Route, Switch, Redirect, Link, withRouter, BrowserRouter} from 'react-router-dom';
+import {Route, Switch, Redirect, Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
 import Profile from './Profile';
 import ScriptCreator from './ScriptCreator';
 import Home from './Home';
 import NotFound from './NotFound';
+import Header from './Header';
 
-// const PrivateRoute = ({auth, component: Component, ...rest }) => (
-//     <Route
-//       {...rest}
-//       render={props =>
-//         auth ? (
-//           <Component {...props} />
-//         ) : (
-//           <Redirect
-//             to="/"
-//           />
-//         )
-//       }
-//     />
-//   );
+const PrivateRoute = ({auth, component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={props =>
+        auth ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to="/"
+          />
+        )
+      }
+    />
+  );
 
 class App extends Component {
 
@@ -31,17 +32,16 @@ class App extends Component {
     render() {
         return (
             <div>
-                <header>
-                    <Link to="/">Home</Link>
-                    <Link to="/profile">Profile</Link>
-                    <Link to="/profile/editor">CreateScript</Link>
-                </header>
+                <Header />
+                    
 
                 <main>
+                <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/profile" component={Profile} />
-                    <Route exact path="/profile/editor" component={ScriptCreator} />
-                    <Route  exact component={NotFound} />
+                    <PrivateRoute auth={this.props.auth} exact path="/profile" component={Profile} />
+                    <PrivateRoute auth={this.props.auth} exact path="/profile/editor" component={ScriptCreator} />
+                    <Route component={NotFound} />
+                    </Switch>  
                 </main>
             </div>
         );
@@ -49,9 +49,7 @@ class App extends Component {
 }
 
 const mapStateToProps = ({auth}) => {
-     
     return {auth};
-    
 }
 
-export default connect(mapStateToProps, actions)(App)
+export default withRouter(connect(mapStateToProps, actions)(App));
