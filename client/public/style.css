@@ -1,6 +1,29 @@
 .editorBoxContainer {
     display: grid;
-    grid-template-columns: .2fr 1fr .2fr;
+    grid-template-columns: .2fr .2fr 1fr;
     border: 1px solid red;
     width: 100%;
+    height: 40vw;
 }
+
+.previewBox{
+    background-color: rgb(33, 38, 66);
+    display: flex;
+    position: relative;
+}
+
+.active{
+    border: 2px dotted orange!important;
+}
+
+
+.toolBox{
+    border: 1px solid green;
+}
+.toolBoxItem:hover{
+    background-color: rgb(218, 218, 218);
+}
+.toolBoxElement{
+   cursor: pointer;
+}
+

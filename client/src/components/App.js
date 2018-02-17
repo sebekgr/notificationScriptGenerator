@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Route, Switch, Redirect, Link, withRouter} from 'react-router-dom';
+import {Route, Switch, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
 import Profile from './Profile';
@@ -8,16 +8,14 @@ import Home from './Home';
 import NotFound from './NotFound';
 import Header from './Header';
 
-const PrivateRoute = ({auth, component: Component, ...rest }) => (
+  const PrivateRoute = ({auth, component: Component, ...rest }) => (
     <Route
       {...rest}
       render={props =>
         auth ? (
           <Component {...props} />
         ) : (
-          <Redirect
-            to="/"
-          />
+          <Route component={NotFound} />
         )
       }
     />
@@ -33,15 +31,14 @@ class App extends Component {
         return (
             <div>
                 <Header />
-                    
 
                 <main>
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    <PrivateRoute auth={this.props.auth} exact path="/profile" component={Profile} />
-                    <PrivateRoute auth={this.props.auth} exact path="/profile/editor" component={ScriptCreator} />
+                    <PrivateRoute  exact path="/profile" component={Profile} auth={this.props.auth} />
+                    <PrivateRoute  exact path="/profile/editor" component={ScriptCreator} auth={this.props.auth} />
                     <Route component={NotFound} />
-                    </Switch>  
+                </Switch>  
                 </main>
             </div>
         );
