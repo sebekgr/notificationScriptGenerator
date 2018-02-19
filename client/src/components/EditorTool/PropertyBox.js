@@ -1,12 +1,13 @@
-import React, {Component} from 'react';
+import React from 'react';
+import PropertyBoxEditor from './Assets/PropertyBoxEditor';
 
+const PropertyBox = () => {
+    return(
+        <div>
 
-class PropertyBox extends Component {
-    render() {
-        return (
-            <div>property box</div>
-        )
-    }
+            <PropertyBoxEditor />
+        </div>
+    )
 }
 
 export default PropertyBox;

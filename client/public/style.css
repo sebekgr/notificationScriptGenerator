@@ -7,9 +7,13 @@
 }
 
 .previewBox{
-    background-color: rgb(33, 38, 66);
+    background-image: url('bg.png');
     display: flex;
-    position: relative;
+    overflow: scroll;
+    padding: 20px;
+}
+.mainCanvas {
+    margin: auto;
 }
 
 .active{
@@ -27,3 +31,19 @@
    cursor: pointer;
 }
 
+
+
+/*elemnts*/
+
+.componentWrapper{
+    position: relative;
+}
+.deleteComponentBtn{
+    position: absolute;
+    right:0;
+    top:0;
+    display: none;
+}
+.componentWrapper:hover .deleteComponentBtn{
+    display: block;
+}

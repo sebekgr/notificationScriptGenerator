@@ -1,10 +1,8 @@
 
 const initialState = {
-    position: "absolute",
-    top: `50%`,
-    left: `50%`,
     background: "#fff",
     border: "none",
+    padding: "20px"
 }
 
 export default function (state = initialState, action) {

@@ -1,12 +1,11 @@
 
-export const addElement = (elemType, style, content, selected, id) => {
+export const addElement = (elemType, style, content, id) => {
     return {
         type: 'ADD_ELEMENT',
         elemType,
         style,
         content,
         id,
-        selected
     }
 }
 
@@ -16,22 +15,39 @@ export const deleteElement = id => {
         id
     }
 }
+export const resetSelected = () => {
+    return {
+        type: 'RESET_SELECTED',
+    }
+}
+
+export const selectElement = id => {
+    return {
+        type: 'SELECT_ELEMENT',
+        id
+    }
+}
+
+export const updateElement = (id, value, property) => {
+    return {
+        type: 'UPDATE_ELEMENT',
+        id,
+        value,
+        property
+    }
+}
+
+export const updateElementContent = (id, content) => {
+    return {
+        type: 'UPDATE_ELEMENT_CONTENT',
+        id,
+        content
+    }
+}
 
 export const toogleElement = id => {
     return {
         type: 'TOOGLE_ELEMENT',
         id
-    }
-}
-
-export const getCanvas = () => {
-    return { 
-        type: 'GET_CANVAS'
-    }
-}
-
-export const getElements = () => {
-    return {
-        type: 'GET_ELEMENTS'
     }
 }
