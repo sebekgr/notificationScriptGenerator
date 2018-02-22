@@ -9,17 +9,13 @@
 .previewBox{
     background-image: url('bg.png');
     display: flex;
-    overflow: scroll;
+    overflow-x: scroll;
+    overflow-y: scroll;
     padding: 20px;
 }
 .mainCanvas {
     margin: auto;
 }
-
-.active{
-    border: 2px dotted orange!important;
-}
-
 
 .toolBox{
     border: 1px solid green;
@@ -35,15 +31,28 @@
 
 /*elemnts*/
 
-.componentWrapper{
+.element{
+    cursor: pointer;
+}
+
+.active{
     position: relative;
+    -webkit-box-shadow: 0 0 5px 5px rgba(115,138,230,1),0 0 5px 5px rgba(115,138,230,1)!important;
+    -moz-box-shadow: 0 0 5px 5px rgba(115,138,230,1),0 0 5px 5px rgba(115,138,230,1)!important;
+    box-shadow: 0 0 5px 5px rgba(115,138,230,1),0 0 5px 5px rgba(115,138,230,1)!important;
+    z-index:10!important;
 }
 .deleteComponentBtn{
-    position: absolute;
-    right:0;
-    top:0;
+    position: absolute; 
+    z-index:11;
     display: none;
+    transform: translate(-25px, -25px);
 }
-.componentWrapper:hover .deleteComponentBtn{
+
+.deleteComponentBtn:hover{
+    display: block;
+}
+
+.element:hover + .deleteComponentBtn{
     display: block;
 }

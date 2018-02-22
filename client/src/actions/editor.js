@@ -1,11 +1,11 @@
 
-export const addElement = (elemType, style, content, id) => {
+export const addElement = (elemType, style, content) => {
     return {
         type: 'ADD_ELEMENT',
         elemType,
         style,
         content,
-        id,
+        id: Date.now()
     }
 }
 

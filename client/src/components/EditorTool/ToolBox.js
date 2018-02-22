@@ -3,15 +3,34 @@ import {connect} from 'react-redux';
 import * as actions from '../../actions/editor';
 
 
+const defaultIMG = {
+    style: {
+        width: "100px",
+        height: "auto",
+        float: "none",
+        textAlign: "center",
+        borderColor: "black",
+        border: "1px solid red",
+        borderRadius: "3px",
+        margin: "auto",
+        padding: "auto"
+    },
+    content: "https://thesocietypages.org/socimages/files/2009/05/nopic_192.gif"
+}
+
+
 class ToolBox extends Component {
 
 
-    addElement(elemType, style = {fontSize: "100px", color: "red", textDecoration: "underline", border: "1px solid red"}, content="provide your text here"){
+    addElement(elemType, style = {fontSize: "100px", color: "red", textDecoration: "underline"}, content="provide your text here"){
         
         if(elemType === "img") {
-            this.props.addElement(elemType, style = {border: "20px solid orange"});
+            this.props.addElement(elemType, defaultIMG.style,  defaultIMG.content);
+        } else if(elemType === "p"){
+            this.props.addElement(elemType, style = {color: "black"}, content);
         } else {
             this.props.addElement(elemType, style, content);
+            
         }
 
         

@@ -2,7 +2,7 @@
 const initialState = {
     background: "#fff",
     border: "none",
-    padding: "20px"
+    padding: "20px",
 }
 
 export default function (state = initialState, action) {
