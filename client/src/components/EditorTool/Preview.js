@@ -1,22 +1,15 @@
 import React, {Component} from 'react';
 import MainCanvas from './MainCanvas';
-import {connect} from 'react-redux';
-import * as actions from '../../actions/editor';
-
 
 class Preview extends Component {
 
-    resetSelected() {
-        this.props.resetSelected();
-    }
-
     render() {
         return (
-            <div className="previewBox" >
+            <div className="previewBox style-3" >
                 <MainCanvas />
             </div>
         )
     }
 }
 
-export default connect(null, actions)(Preview);
+export default Preview;

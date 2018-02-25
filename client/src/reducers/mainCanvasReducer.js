@@ -1,16 +1,30 @@
 
 const initialState = {
-    background: "#fff",
-    border: "none",
-    padding: "20px",
+    delay: 5,
+    animation: "flip",
+    style: {
+        animationDuration: "1s",
+        backgroundColor: "#fff",
+        border: "none",
+        width: "500px",
+        height: "500px",
+        padding: "20px",
+        borderRadius: "5px"
+    }
 }
 
 export default function (state = initialState, action) {
-    switch (action.type) {
+    const {property, value, type, name} = action;
+    switch (type) {
 
-        case 'GET_CANVAS': 
-            return state;
+        case 'CHANGE_ANIMATION':
+            const animation = name;
+            return {...state, animation, ...state.style}
         
+
+        case 'UPDATE_CANVAS':
+           const style = { ...state.style, [property]: value };
+           return {...state, style}
 
         default: 
         return state;

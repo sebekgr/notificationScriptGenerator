@@ -14,7 +14,7 @@ export default function (state = initialState, action) {
             return {...state, 
                 elements: [...state.elements,
                     {
-                        id,
+                        id: Date.now(),
                         elemType,
                         content,
                         style,

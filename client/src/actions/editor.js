@@ -5,7 +5,6 @@ export const addElement = (elemType, style, content) => {
         elemType,
         style,
         content,
-        id: Date.now()
     }
 }
 
@@ -15,12 +14,6 @@ export const deleteElement = id => {
         id
     }
 }
-export const resetSelected = () => {
-    return {
-        type: 'RESET_SELECTED',
-    }
-}
-
 export const selectElement = id => {
     return {
         type: 'SELECT_ELEMENT',
@@ -42,12 +35,5 @@ export const updateElementContent = (id, content) => {
         type: 'UPDATE_ELEMENT_CONTENT',
         id,
         content
-    }
-}
-
-export const toogleElement = id => {
-    return {
-        type: 'TOOGLE_ELEMENT',
-        id
     }
 }

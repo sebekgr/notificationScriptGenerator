@@ -1,0 +1,55 @@
+{
+	"h1": {
+		"style": {
+			"fontSize": "32px",
+			"fontFamily": "Verdana",
+			"color": "blalck",
+			"margin": "auto",
+			"float": "none",
+			"textAlign": "left",
+			"fontWeight": "normal"
+		},
+		"content": "Provide your Header1 content here"
+	},
+	"h2": {
+		"style": {
+			"fontSize": "24px",
+			"fontFamily": "Verdana",
+			"color": "black",
+			"margin": "auto",
+			"float": "none",
+			"textAlign": "left",
+			"fontWeight": "normal"
+		},
+		"content": "Provide your Header2 content here"
+	},
+	"p": {
+		"style": {
+			"fontSize": "16px",
+			"fontFamily": "Verdana",
+			"color": "black",
+			"margin": "auto",
+			"float": "none",
+			"textAlign": "left",
+			"fontWeight": "normal"
+		},
+		"content": "Provide your text here"
+	},
+	"img": {
+		"style": {
+			"width": "100px",
+			"height": "100px",
+			"float": "none",
+			"borderColor": "black",
+			"borderStyle": "solid",
+			"borderRadius": "15px",
+			"margin": "auto"
+		},
+		"content": "https://thesocietypages.org/socimages/files/2009/05/nopic_192.gif"
+	},
+	"span": {
+		"width": "100%",
+        "height": "40px"
+        
+	}
+}

@@ -1,25 +1,200 @@
-.editorBoxContainer {
-    display: grid;
-    grid-template-columns: .2fr .2fr 1fr;
-    border: 1px solid red;
-    width: 100%;
-    height: 40vw;
+/*animation*/
+@-webkit-keyframes fadeInDown {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @-webkit-keyframes flip {
+    from {
+      -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -360deg);
+      transform: perspective(400px) rotate3d(0, 1, 0, -360deg);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+  
+    40% {
+      -webkit-transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -190deg);
+      transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -190deg);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+  
+    50% {
+      -webkit-transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -170deg);
+      transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -170deg);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+  
+    80% {
+      -webkit-transform: perspective(400px) scale3d(0.95, 0.95, 0.95);
+      transform: perspective(400px) scale3d(0.95, 0.95, 0.95);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+  
+    to {
+      -webkit-transform: perspective(400px);
+      transform: perspective(400px);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+  }
+  
+  @keyframes flip {
+    from {
+      -webkit-transform: perspective(400px) rotate3d(0, 1, 0, -360deg);
+      transform: perspective(400px) rotate3d(0, 1, 0, -360deg);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+  
+    40% {
+      -webkit-transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -190deg);
+      transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -190deg);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+  
+    50% {
+      -webkit-transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -170deg);
+      transform: perspective(400px) translate3d(0, 0, 150px) rotate3d(0, 1, 0, -170deg);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+  
+    80% {
+      -webkit-transform: perspective(400px) scale3d(0.95, 0.95, 0.95);
+      transform: perspective(400px) scale3d(0.95, 0.95, 0.95);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+  
+    to {
+      -webkit-transform: perspective(400px);
+      transform: perspective(400px);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+  }
+  
+  .flip {
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+    -webkit-animation-name: flip;
+    animation-name: flip;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  
+  .fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+  }
+
+
+
+
+
+
+
+
+/*scrollbar*/
+.style-3::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
 }
 
+.style-3::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+.style-3::-webkit-scrollbar-thumb
+{
+	background-color: #000000;
+}
+
+
+.editorBoxContainer {
+    border: 1px solid red;
+    display: grid;
+    grid-template-columns: .3fr 1fr;
+    grid-template-rows: 50px 1fr;
+    height: calc(100vh - 35px);
+}
+.toolBoxContainer{
+   grid-column: 1/ span 2;
+   grid-row: 1/ span 1;
+   background: green;
+   display: flex;
+   align-items: center;
+   padding: 20px;
+}
+.toolBoxList{
+    display: flex;
+}
+
+.urlInput{
+    width: 200px;
+}
+
+.propertyListContainer{
+    display: flex;
+    flex-flow: column wrap;
+    background: orange;
+    justify-content:flex-start;
+    padding: 10px;
+}
+.propertyValue{
+    width: 100%;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+.propertyListBox{
+    max-height: 80vh;
+    overflow-y: auto;
+}
+.propertyLabel{
+    flex: 1;
+}
 .previewBox{
     background-image: url('bg.png');
-    display: flex;
-    overflow-x: scroll;
-    overflow-y: scroll;
+    overflow:auto;
     padding: 20px;
 }
 .mainCanvas {
-    margin: auto;
+    overflow: visible;
+    margin: 20px;
+    position: relative;
 }
 
-.toolBox{
-    border: 1px solid green;
-}
 .toolBoxItem:hover{
     background-color: rgb(218, 218, 218);
 }
@@ -27,13 +202,27 @@
    cursor: pointer;
 }
 
-
+/*canvas*/
+.mainCanvas:after{
+    content: '';
+    display: block;
+    height: 0;
+    clear: both;
+}
 
 /*elemnts*/
 
+span.element{
+  display: block!important;
+  background: grey;
+  opacity: .2;
+  text-align: center;
+}
 .element{
     cursor: pointer;
+    box-sizing: border-box;
 }
+
 
 .active{
     position: relative;
@@ -43,10 +232,16 @@
     z-index:10!important;
 }
 .deleteComponentBtn{
-    position: absolute; 
-    z-index:11;
+    position: absolute;
     display: none;
-    transform: translate(-25px, -25px);
+    border:0;
+    z-index: 11;
+    border-radius: 50%;
+    border: 2px solid red;
+    background: transparent;
+    color: red;
+    font-weight: bold;
+    font-size:20px;
 }
 
 .deleteComponentBtn:hover{

@@ -2,11 +2,16 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../actions/editor';
 import PropertyItem from './Assets/PropertyItem';
+import PropertyItemColor from './Assets/PropertyItemColor';
+import PropertyItemRadioFloat from './Assets/PropertyItemRadioFloat';
+import PropertyItemRadioTextAlign from './Assets/PropertyItemRadioTextAlign';
+import CanvasPropertyEditor from './CanvasPropertyEditor';
+
 
 class PropertyBox extends Component {
 
     handleChange(id, e, prop){
-        this.props.updateElement(id, e.target.value, prop);
+            this.props.updateElement(id, e.target.value, prop);
     }
 
     updateElementContent(id, e) {
@@ -30,14 +35,47 @@ class PropertyBox extends Component {
 
             for(let [property, val] of Object.entries(selectedElement.style)){
                 
-                list.push(
-                    <PropertyItem
-                        key={key2--}
-                        property={property}
-                        val={val}
-                        handleChange={(e) => this.handleChange(selectedElement.id, e, property)}
-                    />
-                );
+
+                if(property.includes("Color")){
+                    list.push(
+                        <PropertyItemColor
+                            key={key2--}
+                            property={property}
+                            val={val}
+                            handleChange={(e) => this.handleChange(selectedElement.id, e, property)}
+                        />
+                    );
+                } else if(property.includes("float")) {
+                    list.push(
+                        <PropertyItemRadioFloat
+                            key={key2--}
+                            property={property}
+                            isChecked={val}
+                            handleChange={(e) => this.handleChange(selectedElement.id, e, property)}
+                        />
+                    );
+                } 
+                else if(property.includes("Align")) {
+                    list.push(
+                        <PropertyItemRadioTextAlign
+                            key={key2--}
+                            property={property}
+                            isChecked={val}
+                            handleChange={(e) => this.handleChange(selectedElement.id, e, property)}
+                        />
+                    );
+                }
+                else {
+                    list.push(
+                        <PropertyItem
+                            key={key2--}
+                            property={property}
+                            val={val}
+                            handleChange={(e) => this.handleChange(selectedElement.id, e, property)}
+                        />
+                    );
+                }
+                
             }
 
         }
@@ -45,9 +83,15 @@ class PropertyBox extends Component {
     }
     
     render(){
+        const {selectedElement} = this.props.elements;
+        const isSelect = selectedElement.hasOwnProperty('elemType');
         return(
-            <div className="propertyList">
+            <div className="propertyListContainer">
+            <h3>Property editor</h3>
+            {isSelect ? null : <CanvasPropertyEditor />}
+                <ul className="propertyListBox style-3" >
                 {this.renderPropertyItem()}
+                </ul>
             </div>
         )
     }
@@ -59,33 +103,3 @@ const mapStateToProps = ({elements}) => {
 }
 
 export default connect(mapStateToProps, actions)(PropertyBox);
-
-// updateElement(id, e, k) {
-//     this.props.updateElement(id, e.target.value, k);
-// }
-// updateElementContent(id, e) {
-//     this.props.updateElementContent(id, e.target.value);
-// }
-
-// renderList(ident) {
-//     let list = [];
-//     let {selectedElement} = this.props.elements;
-//     if(selectedElement.hasOwnProperty('elemType') ) {
-//         let id = selectedElement.id;
-//         let i = 1;
-//         let j = 100;
-//         list.push(<p key={id}>Content</p>,
-//                  <input key={id+j} defaultValue={selectedElement.content} onChange={(e)=>this.updateElementContent(id, e)}/>)
-//        for(let [k, val] of Object.entries(selectedElement.style)){
-           
-//         list.push(
-//             <p key={i++}>{k.toLowerCase()}</p>,  <input key={j--} defaultValue={val} onChange={(e) => this.updateElement(id, e, k)} />);
-
-//        }
-//     }
-//     else{
-//         return false;
-//     }
-//     return list;
-    
-// }
