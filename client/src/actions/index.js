@@ -6,6 +6,7 @@ import {
     selectElement,
     updateElement,
     updateElementContent,
+    onSortEnd
 } from './editor';
 
 import {
@@ -30,7 +31,8 @@ export {addElement,
     toggleCanvasEdit,
     fetchUser,
     logoutUser,
-    changeAnimation
+    changeAnimation,
+    onSortEnd
 }
 
 

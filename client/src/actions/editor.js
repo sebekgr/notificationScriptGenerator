@@ -1,4 +1,13 @@
 
+export const onSortEnd = (elementsOrder, oldIndex, newIndex) => {
+    return {
+        type: 'ON_SORT_END',
+        elementsOrder,
+        oldIndex,
+        newIndex
+    }
+}
+
 export const addElement = (elemType, style, content) => {
     return {
         type: 'ADD_ELEMENT',
