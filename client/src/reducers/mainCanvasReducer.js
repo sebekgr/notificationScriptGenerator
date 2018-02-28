@@ -1,10 +1,11 @@
 
 const initialState = {
     delay: 5,
-    animation: "flip",
+    animationList: ["bounce", "flip", "fadeInDown", "fadeInLeft", "fadeInRight", "zoomIn", "rubberBand"],
     style: {
-        animationDuration: "1s",
+        animationDuration: "1000ms",
         backgroundColor: "#fff",
+        animationName: "bounce",
         border: "none",
         width: "500px",
         height: "500px",
@@ -13,18 +14,17 @@ const initialState = {
     }
 }
 
-export default function (state = initialState, action) {
-    const {property, value, type, name} = action;
+export default (state = initialState, action) => {
+    const {property, value, type} = action;
     switch (type) {
-
-        case 'CHANGE_ANIMATION':
-            const animation = name;
-            return {...state, animation, ...state.style}
-        
-
         case 'UPDATE_CANVAS':
+            console.log("update canvas", property, value);
            const style = { ...state.style, [property]: value };
            return {...state, style}
+
+        case 'TEST':
+        console.log("test", state);
+        return state;
 
         default: 
         return state;

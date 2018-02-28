@@ -2,10 +2,14 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
 import ComponentElement from './Assets/ComponentElement';
-//import SortableList from './SortableList';
+
 import {SortableContainer} from 'react-sortable-hoc';
 
 class MainCanvas extends Component {
+
+    state = {
+        background: '#fff',
+      };
 
     deleteElement(id, e) {
         this.props.deleteElement(id);
@@ -26,10 +30,13 @@ class MainCanvas extends Component {
     onSortEnd = ({oldIndex, newIndex}) => {
         let elementsOrder = this.props.elements.elements;
         this.props.onSortEnd(elementsOrder, oldIndex, newIndex);
-      };
+    };
+
+    handleChangeComplete = (color) => {
+        this.setState({ background: color.hex });
+    };
 
     render(){
-        const animation = this.props.mainCanvas.animation;
         const isActive = this.props.elements.selectedElement.id;
         const SortableList = SortableContainer(({elements, handleDelete, handleSelect, handleHover}) => {
             return (
@@ -57,9 +64,9 @@ class MainCanvas extends Component {
               </ul>
             );
           });
-
         return(
-            <div className={`mainCanvas ${animation}`} style={this.props.mainCanvas.style} >
+            <div className="mainCanvas" style={this.props.mainCanvas.style} >
+                
                 <SortableList
                     elements={this.props.elements.elements}
                     onSortEnd={this.onSortEnd}

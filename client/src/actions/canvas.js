@@ -6,15 +6,8 @@ export const updateCanvas = (value, property) => {
     }
 }
 
-export const toggleCanvasEdit = () => {
+export const testCanvas = () => {
     return {
-        type: 'TOGGLE_CANVAS_EDIT',
-    }
-}
-
-export const changeAnimation = name =>{
-    return {
-        type: 'CHANGE_ANIMATION',
-        name
+        type: 'TEST',
     }
 }

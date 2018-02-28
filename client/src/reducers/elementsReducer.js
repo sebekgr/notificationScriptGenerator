@@ -4,16 +4,20 @@ let initialState = {
     elements: [
 
     ],
-    selectedElement: {}
+    selectedElement: {},
+    floatRadio: ["none", "left", "right"],
+    alignRadio: ["left", "center", "right"],
+    fonts: ["Lato", "Karma", "Open Sans Condensed", "Josefin Sans"]
+
 };
 
-export default function (state = initialState, action) {
+export default  (state = initialState, action) => {
    
     const {id, elemType, content, style, type, property, value, elementsOrder, oldIndex, newIndex} = action;
     switch (type) {
 
         case 'ON_SORT_END':
-        return Object.assign({}, state, {elements: arrayMove(elementsOrder, oldIndex, newIndex)}, ...state);
+            return Object.assign({}, state, {elements: arrayMove(elementsOrder, oldIndex, newIndex)}, ...state);
         
         case 'ADD_ELEMENT':
             return {...state, 

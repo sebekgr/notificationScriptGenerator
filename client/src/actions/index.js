@@ -11,8 +11,7 @@ import {
 
 import {
     updateCanvas,
-    toggleCanvasEdit,
-    changeAnimation
+    testCanvas
 } from './canvas';
 
 import {
@@ -21,17 +20,16 @@ import {
 } from './user';
 
 
-export {addElement,
+export {
+    testCanvas,
+    addElement,
     deleteElement,
-    resetSelected,
     selectElement,
     updateElementContent,
     updateElement,
     updateCanvas,
-    toggleCanvasEdit,
     fetchUser,
     logoutUser,
-    changeAnimation,
     onSortEnd
 }
 

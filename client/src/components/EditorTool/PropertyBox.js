@@ -1,17 +1,29 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../../actions/editor';
+import * as actions from '../../actions';
 import PropertyItem from './Assets/PropertyItem';
 import PropertyItemColor from './Assets/PropertyItemColor';
-import PropertyItemRadioFloat from './Assets/PropertyItemRadioFloat';
-import PropertyItemRadioTextAlign from './Assets/PropertyItemRadioTextAlign';
-import CanvasPropertyEditor from './CanvasPropertyEditor';
+import PropertyItemRadio from './Assets/PropertyItemRadio';
+import PropertyItemRange from './Assets/PropertyItemRange';
+import PropertyItemSelect from './Assets/PropertyItemSelect';
 
 
 class PropertyBox extends Component {
 
     handleChange(id, e, prop){
-            this.props.updateElement(id, e.target.value, prop);
+        let newValue = null;
+        if((e.match(/^\d+/)) && (prop === "animationDuration")) {
+            newValue = `${e}ms`;
+        } else if(e.match(/^\d+/)) {
+            newValue = `${e}px`;
+        } else {
+            newValue = e;
+        }
+        if(id) {
+            this.props.updateElement(id, newValue, prop);
+        } else {
+            this.props.updateCanvas(newValue, prop);
+        }
     }
 
     updateElementContent(id, e) {
@@ -22,74 +34,79 @@ class PropertyBox extends Component {
         let list = [];
         let key = 1;
         let key2 = 1000;
-        const {selectedElement} = this.props.elements;
-        if(selectedElement.hasOwnProperty('elemType')){
+        const rangeRegex = /^\d+/;
+        const colorRegex = /(color)/i;
+        const selectRegex = /(family|animationName)/i;
+        const radioRegex = /(float|align)/i;
+        const {forEdit, selectList} = this.props;
+        const {floatRadio, alignRadio, fonts} = this.props.elements;
+        const {animationList} = this.props.mainCanvas;
+        
+        if(forEdit.hasOwnProperty('elemType')){
+            var {float, textAlign, fontFamily} = this.props.elements.selectedElement.style;
             list.push(
                 <PropertyItem
                     key={key++}
                     property="Content"
-                    val={selectedElement.content}
-                    handleChange={(e) => this.updateElementContent(selectedElement.id, e)}
+                    val={forEdit.content}
+                    handleChange={(e) => this.updateElementContent(forEdit.id, e)}
                 />
             );
+        }
 
-            for(let [property, val] of Object.entries(selectedElement.style)){
-                
+        for(let [property, val] of Object.entries(forEdit.style)){
 
-                if(property.includes("Color")){
-                    list.push(
-                        <PropertyItemColor
-                            key={key2--}
-                            property={property}
-                            val={val}
-                            handleChange={(e) => this.handleChange(selectedElement.id, e, property)}
-                        />
-                    );
-                } else if(property.includes("float")) {
-                    list.push(
-                        <PropertyItemRadioFloat
-                            key={key2--}
-                            property={property}
-                            isChecked={val}
-                            handleChange={(e) => this.handleChange(selectedElement.id, e, property)}
-                        />
-                    );
-                } 
-                else if(property.includes("Align")) {
-                    list.push(
-                        <PropertyItemRadioTextAlign
-                            key={key2--}
-                            property={property}
-                            isChecked={val}
-                            handleChange={(e) => this.handleChange(selectedElement.id, e, property)}
-                        />
-                    );
-                }
-                else {
-                    list.push(
-                        <PropertyItem
-                            key={key2--}
-                            property={property}
-                            val={val}
-                            handleChange={(e) => this.handleChange(selectedElement.id, e, property)}
-                        />
-                    );
-                }
-                
+            if(val.match(rangeRegex)) {
+                list.push(
+                    <PropertyItemRange
+                        key={key2--}
+                        property={property}
+                        val={val}
+                        handleChange={e => this.handleChange(forEdit.id, e.target.value, property)}
+                    />
+                )
+            } else if (property.match(radioRegex)) {
+                let type = property.match(/(float)/) ? floatRadio : alignRadio;
+                let isChecked = property.match(/(float)/) ? float : textAlign;
+                list.push(
+                    <PropertyItemRadio
+                        key={key2--}
+                        property={property}
+                        val={val}
+                        type={type}
+                        isChecked={isChecked}
+                        handleChange={e => this.handleChange(forEdit.id, e.target.value, property)}
+                    />
+                )
+            } else if(property.match(colorRegex)) {
+                list.push(
+                    <PropertyItemColor
+                        key={key2--}
+                        property={property}
+                        val={val}
+                        handleChange={color => this.handleChange(forEdit.id, color.hex, property)}
+                    />
+                )
+            } else if(property.match(selectRegex)) {
+                list.push(
+                    <PropertyItemSelect
+                        property={property}
+                        val={val}
+                        key={key2--}
+                        selectList={selectList}
+                        handleChange={e => this.handleChange(forEdit.id, e.target.value, property)}
+                    />
+                )
             }
-
         }
         return list;
     }
     
     render(){
-        const {selectedElement} = this.props.elements;
-        const isSelect = selectedElement.hasOwnProperty('elemType');
         return(
             <div className="propertyListContainer">
             <h3>Property editor</h3>
-            {isSelect ? null : <CanvasPropertyEditor />}
-                <ul className="propertyListBox style-3" >
+                <ul className="propertyListBox style-3">
                 {this.renderPropertyItem()}
                 </ul>
             </div>
@@ -98,8 +115,8 @@ class PropertyBox extends Component {
     
 }
 
-const mapStateToProps = ({elements}) => {
-    return {elements};
+const mapStateToProps = ({elements, mainCanvas}) => {
+    return {elements, mainCanvas};
 }
 
 export default connect(mapStateToProps, actions)(PropertyBox);

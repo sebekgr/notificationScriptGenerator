@@ -1,6 +1,5 @@
 import React from 'react';
 import {SortableElement} from 'react-sortable-hoc';
-//SortableElement(({active, onSelect, content, elemType: Element, style, onHover})
 
 const  ComponentElement = SortableElement(({active, onSelect, content, elemType: Element, style, onHover}) => {
     const element =
