@@ -10,6 +10,16 @@ import PropertyItemSelect from './Assets/PropertyItemSelect';
 
 class PropertyBox extends Component {
 
+    constructor(props){
+        super(props);
+
+        this.rangeRegex = /^\d+/;
+        this.colorRegex = /(color)/i;
+        this.selectRegex = /(family|animationName)/i;
+        this.radioRegex = /(float|align)/i;
+        this.counter = 0;
+    }
+
     handleChange(id, e, prop){
         let newValue = null;
         if((e.match(/^\d+/)) && (prop === "animationDuration")) {
@@ -30,15 +40,11 @@ class PropertyBox extends Component {
         this.props.updateElementContent(id, e.target.value);
     }
 
-    renderPropertyItem(){
+    renderPropertyItem(forEdit, forEditStyle){
         let list = [];
         let key = 1;
         let key2 = 1000;
-        const rangeRegex = /^\d+/;
-        const colorRegex = /(color)/i;
-        const selectRegex = /(family|animationName)/i;
-        const radioRegex = /(float|align)/i;
-        const {forEdit, selectList} = this.props;
+        const {selectList} = this.props;
         const {floatRadio, alignRadio, fonts} = this.props.elements;
         const {animationList} = this.props.mainCanvas;
         
@@ -54,9 +60,9 @@ class PropertyBox extends Component {
             );
         }
 
-        for(let [property, val] of Object.entries(forEdit.style)){
+        for(let [property, val] of Object.entries(forEditStyle)){
 
-            if(val.match(rangeRegex)) {
+            if(val.match(this.rangeRegex)) {
                 list.push(
                     <PropertyItemRange
                         key={key2--}
@@ -65,7 +71,7 @@ class PropertyBox extends Component {
                         handleChange={e => this.handleChange(forEdit.id, e.target.value, property)}
                     />
                 )
-            } else if (property.match(radioRegex)) {
+            } else if (property.match(this.radioRegex)) {
                 let type = property.match(/(float)/) ? floatRadio : alignRadio;
                 let isChecked = property.match(/(float)/) ? float : textAlign;
                 list.push(
@@ -78,7 +84,7 @@ class PropertyBox extends Component {
                         handleChange={e => this.handleChange(forEdit.id, e.target.value, property)}
                     />
                 )
-            } else if(property.match(colorRegex)) {
+            } else if(property.match(this.colorRegex)) {
                 list.push(
                     <PropertyItemColor
                         key={key2--}
@@ -87,7 +93,7 @@ class PropertyBox extends Component {
                         handleChange={color => this.handleChange(forEdit.id, color.hex, property)}
                     />
                 )
-            } else if(property.match(selectRegex)) {
+            } else if(property.match(this.selectRegex)) {
                 list.push(
                     <PropertyItemSelect
                         property={property}
@@ -103,11 +109,11 @@ class PropertyBox extends Component {
     }
     
     render(){
+        const {forEdit} = this.props;
         return(
             <div className="propertyListContainer">
             <h3>Property editor</h3>
                 <ul className="propertyListBox style-3">
-                {this.renderPropertyItem()}
                 </ul>
             </div>
         )

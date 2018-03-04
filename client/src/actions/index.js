@@ -2,16 +2,17 @@
 import {
     addElement,
     deleteElement,
-    resetSelected,
     selectElement,
     updateElement,
     updateElementContent,
-    onSortEnd
 } from './editor';
 
 import {
     updateCanvas,
-    testCanvas
+    addCanvas,
+    initCanvas,
+    selectCanvas,
+    onSortEnd,
 } from './canvas';
 
 import {
@@ -21,13 +22,15 @@ import {
 
 
 export {
-    testCanvas,
     addElement,
     deleteElement,
     selectElement,
     updateElementContent,
     updateElement,
     updateCanvas,
+    selectCanvas,
+    addCanvas,
+    initCanvas,
     fetchUser,
     logoutUser,
     onSortEnd

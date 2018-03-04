@@ -1,15 +1,24 @@
 import React, {Component} from 'react';
 import MainCanvas from './MainCanvas';
+import {connect} from 'react-redux';
+import * as actions from '../../actions/index';
 
 class Preview extends Component {
+
+    componentDidMount(){
+        this.props.initCanvas();
+    }
 
     render() {
         return (
             <div className="previewBox style-3" >
-                <MainCanvas />
+                <MainCanvas current={this.props.selectedCanvas}/>
             </div>
         )
     }
 }
 
-export default Preview;
+const mapStateToProps = ({mainCanvas}) => {
+    return {mainCanvas};
+}
+export default connect(mapStateToProps, actions)(Preview);

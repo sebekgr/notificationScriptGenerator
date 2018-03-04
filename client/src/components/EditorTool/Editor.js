@@ -9,15 +9,17 @@ class Editor extends Component {
     render() {
         const editElement = this.props.elements.selectedElement;
         const editCanvas = this.props.mainCanvas;
+        const editForm = this.props.elements.selectedElement;
         const fontList = this.props.elements.fonts;
         const animationList = this.props.mainCanvas.animationList;
         let props = Object.keys(this.props.elements.selectedElement).length === 0 ? editCanvas : editElement;
         let selectList = Object.keys(this.props.elements.selectedElement).length === 0 ? animationList : fontList;
-       
+
+      
         return(
             <div className="editorBoxContainer">
                <ToolBox />
-               <PropertyBox forEdit={props} selectList={selectList}/>
+               <PropertyBox/>
                <Preview />
             </div>
         )

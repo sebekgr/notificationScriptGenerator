@@ -1,4 +1,20 @@
 {
+	"canvas": {
+		"name": "Another Canvas",
+		"transitionToNext": 1000,
+		"delay": 5000,
+		"style": {
+			"animationDuration": "1000ms",
+                "backgroundColor": "grey",
+                "animationName": "bounce",
+                "border": "none",
+                "width": "500px",
+                "height": "500px",
+                "padding": "20px",
+                "borderRadius": "5px"
+		}
+
+	},
 	"h1": {
 		"style": {
 			"fontSize": "32px",
@@ -60,5 +76,38 @@
 	"span": {
         "height": "40px"
         
+	},
+	"form": {
+		"style": {
+			"formStyle":{
+				"textAlign": "center",
+				"padding": "10px",
+				"backgroundColor": "#df44fd"
+			},
+			"submitStyle":{
+				"width": "50px",
+				"height": "50px",
+				"borderWidth": "2px",
+				"borderStyle": "solid",
+				"borderColor": "#000000",
+				"borderRadius": "15px",
+				"margin": "2px"
+			},
+			"inputStyle":{
+				"width": "100px",
+				"height": "20px",
+				"borderWidth": "2px",
+				"borderStyle": "solid",
+				"borderColor": "#000000",
+				"borderRadius": "13px",
+				"margin": "2px"
+			}
+		},		
+		"content": {
+			"action": "https://mydomain.com/api/newsletter/add/value",
+			"input" :"Provide your email and Subscribe Us !",
+			"submit" : "Subscribe"
+		} 
 	}
+	
 }

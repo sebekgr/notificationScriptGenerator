@@ -386,6 +386,17 @@
 	background-color: #000000;
 }
 
+/*canvas style*/
+.canvasList{
+  display: flex;
+}
+.canvasTag{
+  padding:5px;
+  border: 1px solid black;
+  background-color: #fff;
+  border-radius: 3px;
+}
+
 
 .editorBoxContainer {
     border: 1px solid red;

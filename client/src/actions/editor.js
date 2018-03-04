@@ -1,19 +1,10 @@
-
-export const onSortEnd = (elementsOrder, oldIndex, newIndex) => {
-    return {
-        type: 'ON_SORT_END',
-        elementsOrder,
-        oldIndex,
-        newIndex
-    }
-}
-
-export const addElement = (elemType, style, content) => {
+export const addElement = (elemType, style, content,id) => {
     return {
         type: 'ADD_ELEMENT',
         elemType,
         style,
         content,
+        id: Date.now()
     }
 }
 

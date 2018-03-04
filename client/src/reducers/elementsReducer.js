@@ -1,4 +1,4 @@
-import {arrayMove} from 'react-sortable-hoc';
+
 
 let initialState = {
     elements: [
@@ -13,17 +13,14 @@ let initialState = {
 
 export default  (state = initialState, action) => {
    
-    const {id, elemType, content, style, type, property, value, elementsOrder, oldIndex, newIndex} = action;
+    const {id, elemType, content, style, type, property, value} = action;
     switch (type) {
-
-        case 'ON_SORT_END':
-            return Object.assign({}, state, {elements: arrayMove(elementsOrder, oldIndex, newIndex)}, ...state);
-        
+       
         case 'ADD_ELEMENT':
             return {...state, 
                 elements: [...state.elements,
                     {
-                        id: Date.now(),
+                        id,
                         elemType,
                         content,
                         style,

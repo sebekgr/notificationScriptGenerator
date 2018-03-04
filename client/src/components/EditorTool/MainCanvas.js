@@ -7,9 +7,6 @@ import {SortableContainer} from 'react-sortable-hoc';
 
 class MainCanvas extends Component {
 
-    state = {
-        background: '#fff',
-      };
 
     deleteElement(id, e) {
         this.props.deleteElement(id);
@@ -28,15 +25,26 @@ class MainCanvas extends Component {
     }
 
     onSortEnd = ({oldIndex, newIndex}) => {
-        let elementsOrder = this.props.elements.elements;
-        this.props.onSortEnd(elementsOrder, oldIndex, newIndex);
+        const children = this.props.mainCanvas.selectedCanvas.children;
+        this.props.onSortEnd(children, oldIndex, newIndex);
     };
 
-    handleChangeComplete = (color) => {
-        this.setState({ background: color.hex });
-    };
+
+    findChildren(){
+        const arr = this.props.mainCanvas.selectedCanvas.children;
+        let elementsEachCanvas = [];
+        if(arr) {
+            for(let i = 0; i <arr.length; i++){
+                elementsEachCanvas.push(this.props.elements.elements.find(element => element.id === arr[i]));
+            }
+        } else{
+            false;
+        }
+        return elementsEachCanvas;
+    }
 
     render(){
+      
         const isActive = this.props.elements.selectedElement.id;
         const SortableList = SortableContainer(({elements, handleDelete, handleSelect, handleHover}) => {
             return (
@@ -45,7 +53,7 @@ class MainCanvas extends Component {
                     const refBtnName = element.id + "btn";
                return [
                     <ComponentElement
-                        onClick={() => alert(`click w ${element.elemType}`)}
+                        
                         key={element.id}
                         index={index}
                         {...element}
@@ -64,13 +72,16 @@ class MainCanvas extends Component {
               </ul>
             );
           });
+
+         
+
         return(
-            <div className="mainCanvas" style={this.props.mainCanvas.style} >
+            <div className="mainCanvas" style={this.props.mainCanvas.selectedCanvas.style} >
                 
                 <SortableList
-                    elements={this.props.elements.elements}
+                    elements={this.findChildren()}
                     onSortEnd={this.onSortEnd}
-                    pressDelay={100}
+                    pressDelay={300}
                 />
             </div>
         );
