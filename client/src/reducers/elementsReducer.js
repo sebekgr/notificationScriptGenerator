@@ -7,15 +7,16 @@ let initialState = {
     selectedElement: {},
     floatRadio: ["none", "left", "right"],
     alignRadio: ["left", "center", "right"],
-    fonts: ["Lato", "Karma", "Open Sans Condensed", "Josefin Sans"]
+    fonts: ["Lato", "Karma", "Open Sans Condensed", "Josefin Sans"],
 
 };
 
 export default  (state = initialState, action) => {
    
-    const {id, elemType, content, style, type, property, value} = action;
+    const {id, elemType, content, style, type, property, value, childrenList} = action;
     switch (type) {
-       
+
+      
         case 'ADD_ELEMENT':
             return {...state, 
                 elements: [...state.elements,

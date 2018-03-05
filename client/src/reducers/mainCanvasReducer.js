@@ -1,8 +1,8 @@
 
-import {arrayMove} from 'react-sortable-hoc';
+import { arrayMove } from 'react-sortable-hoc';
 
 const initialState = {
-    
+
     animationList: ["bounce", "flip", "fadeInDown", "fadeInLeft", "fadeInRight", "zoomIn", "rubberBand"],
     canvases: [
         {
@@ -23,61 +23,95 @@ const initialState = {
             children: []
         }
     ],
-    selectedCanvas:{}
-    
+    selectedCanvas: {}
+
 }
 
 export default (state = initialState, action) => {
-    const {property, id, value, type, name, style, transitionToNext, delay, elementsOrder, oldIndex, newIndex} = action;
+    const { property, id, value, type, name, style, transitionToNext, delay, elementsOrder, oldIndex, newIndex } = action;
     switch (type) {
 
         case 'ON_SORT_END':
             const sortChildren = arrayMove(elementsOrder, oldIndex, newIndex);
             const sortInCanvas = state.canvases.map(canvas => {
-                if(canvas.id === state.selectedCanvas.id) {
-                    return {...canvas, children: sortChildren}
-                } else {return canvas}
+                if (canvas.id === state.selectedCanvas.id) {
+                    return { ...canvas, children: sortChildren }
+                } else { return canvas }
             })
 
-            return Object.assign({}, state, {canvases:sortInCanvas, selectedCanvas: {...state.selectedCanvas, children: sortChildren}});
-
-        case 'INIT_CANVAS':
-        return Object.assign({}, state, {selectedCanvas: state.canvases[0]});
-
-        case 'ADD_CANVAS': 
-
-            const newCanvas = {id: Date.now(), name,transitionToNext, delay, style, children: []};
-            return {...state, 
-                canvases: [...state.canvases, newCanvas, ...state],
-                selectedCanvas: newCanvas
-                
-            }
+            return Object.assign({}, state, { canvases: sortInCanvas, selectedCanvas: { ...state.selectedCanvas, children: sortChildren } });
 
         case 'ADD_ELEMENT':
             let children = [];
             const currentCanvas = state.selectedCanvas.id;
-            const canvases = state.canvases.map( canvas => {
-                if(canvas.id === currentCanvas) {
-                   children = [...canvas.children, id];
-                   return {...canvas, children}
+            const canvases = state.canvases.map(canvas => {
+                if (canvas.id === currentCanvas) {
+                    children = [...canvas.children, id];
+                    return { ...canvas, children }
                 } else {
                     return canvas
                 }
-             });
-             
-        return Object.assign({}, state, {canvases, selectedCanvas: {...state.selectedCanvas, children: [...state.selectedCanvas.children, id]}})
-    
+            });
+
+            return Object.assign({}, state, { canvases, selectedCanvas: { ...state.selectedCanvas, children: [...state.selectedCanvas.children, id] } })
+
+            case 'DELETE_ELEMENT':
+
+            const notDeleteChildren = state.selectedCanvas.children.filter(child => child !== id);
+
+            const updateCanvas = state.canvases.map( canvas => {
+                if(canvas.id === state.selectedCanvas.id) {
+                    return {...canvas, children : notDeleteChildren}
+                } else {
+                    return canvas
+                }
+            })
+
+            return {...state,
+                canvases: updateCanvas,
+                 selectedCanvas: {
+                     ...state.selectedCanvas,
+                     children: notDeleteChildren}}
+            // let heloper = [];
+            // const updateCanvasesChildren = state.canvases.map( canvas => {
+            //     if(canvas.id === state.selectedCanvas.id) {
+            //         return {...canvas, children: notDeleteChildren}
+            //     }
+            // })
+            // console.log(notDeleteChildren, 'id from canvas reducer');
+            // return {...state,
+            //     canvases: updateCanvasesChildren,
+            //      selectedCanvas: {
+            //          ...state.selectedCanvas,
+            //          children: notDeleteChildren}}
+
+
+        case 'INIT_CANVAS':
+            return Object.assign({}, state, { selectedCanvas: state.canvases[0] });
+
+        case 'ADD_CANVAS':
+
+            const newCanvas = { id: Date.now(), name, transitionToNext, delay, style, children: [] };
+            return {
+                ...state,
+                canvases: [...state.canvases, newCanvas, ...state],
+                selectedCanvas: newCanvas
+
+            }
+
+
+
 
         case 'UPDATE_CANVAS':
-           let newStyle = { ...state.style, [property]: value };
-           return {...state, newStyle}
+            let newStyle = { ...state.style, [property]: value };
+            return { ...state, newStyle }
 
         case 'SELECT_CANVAS':
-            const chosenCanvas = state.canvases.find( canvas => canvas.id === id);
-            return {...state, selectedCanvas: chosenCanvas}
+            const chosenCanvas = state.canvases.find(canvas => canvas.id === id);
+            return { ...state, selectedCanvas: chosenCanvas }
 
-        default: 
-        return state;
+        default:
+            return state;
     }
 }
 

@@ -7,6 +7,12 @@ import {SortableContainer} from 'react-sortable-hoc';
 
 class MainCanvas extends Component {
 
+    constructor(props){
+        super(props);
+
+        this.counter = 0;
+    }
+
 
     deleteElement(id, e) {
         this.props.deleteElement(id);
@@ -29,22 +35,29 @@ class MainCanvas extends Component {
         this.props.onSortEnd(children, oldIndex, newIndex);
     };
 
+    test() {
+        let canvasChildren = this.props.mainCanvas.selectedCanvas.children;
+          let totalElements = this.props.elements.elements;
+          
+          let renderChildren =  totalElements.filter(child => canvasChildren.includes(child.id));
+          console.log(this.counter++, " poraz ", renderChildren);
+          return renderChildren;
+    }
 
-    findChildren(){
-        const arr = this.props.mainCanvas.selectedCanvas.children;
-        let elementsEachCanvas = [];
-        if(arr) {
-            for(let i = 0; i <arr.length; i++){
-                elementsEachCanvas.push(this.props.elements.elements.find(element => element.id === arr[i]));
-            }
-        } else{
-            false;
-        }
-        return elementsEachCanvas;
+    test2(){
+        let tab = [];
+        let canvasChildren = this.props.mainCanvas.selectedCanvas.children;
+          let totalElements = this.props.elements.elements;
+
+          if(canvasChildren){
+              for(let i = 0; i <canvasChildren.length; i++){
+                tab.push(totalElements.find(elem => elem.id === canvasChildren[i]));
+              }
+          }
+          return tab;
     }
 
     render(){
-      
         const isActive = this.props.elements.selectedElement.id;
         const SortableList = SortableContainer(({elements, handleDelete, handleSelect, handleHover}) => {
             return (
@@ -73,13 +86,12 @@ class MainCanvas extends Component {
             );
           });
 
-         
-
+          
         return(
             <div className="mainCanvas" style={this.props.mainCanvas.selectedCanvas.style} >
                 
                 <SortableList
-                    elements={this.findChildren()}
+                    elements={this.test2()}
                     onSortEnd={this.onSortEnd}
                     pressDelay={300}
                 />

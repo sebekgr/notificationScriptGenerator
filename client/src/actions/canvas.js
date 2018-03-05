@@ -37,3 +37,10 @@ export const onSortEnd = (elementsOrder, oldIndex, newIndex) => {
         newIndex
     }
 }
+
+export const getChildren = childrenList => {
+    return {
+        type: 'GET_CHILDREN',
+        childrenList
+    }
+}

@@ -7,8 +7,6 @@ class ToolBox extends Component {
 
 
        addElement(elemType){
-           const parent = this.props.mainCanvas.selectedCanvas.id;
-
         switch(elemType) {
             case 'img':
                 return this.props.addElement(elemType, defaultStyle.img.style, defaultStyle.img.content);
@@ -21,7 +19,7 @@ class ToolBox extends Component {
             case 'span':
                 return this.props.addElement(elemType, defaultStyle.span, "Temporary background");
             case 'form':
-                return this.props.addElement(elemType, defaultStyle.form.style, defaultStyle.form.content,);
+                return this.props.addElement(elemType, defaultStyle.form.style, defaultStyle.form.content);
             default:
                 return this.props.addElement(elemType);
         }
@@ -31,6 +29,7 @@ class ToolBox extends Component {
 
     render() {
         let canvaslist = this.props.mainCanvas.canvases.map( canvas => {
+          
             return(
              <li
                 onClick={() => this.props.selectCanvas(canvas.id)}
