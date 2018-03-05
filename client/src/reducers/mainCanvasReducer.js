@@ -55,36 +55,26 @@ export default (state = initialState, action) => {
 
             return Object.assign({}, state, { canvases, selectedCanvas: { ...state.selectedCanvas, children: [...state.selectedCanvas.children, id] } })
 
-            case 'DELETE_ELEMENT':
+        case 'DELETE_ELEMENT':
 
             const notDeleteChildren = state.selectedCanvas.children.filter(child => child !== id);
 
-            const updateCanvas = state.canvases.map( canvas => {
-                if(canvas.id === state.selectedCanvas.id) {
-                    return {...canvas, children : notDeleteChildren}
+            const updateCanvas = state.canvases.map(canvas => {
+                if (canvas.id === state.selectedCanvas.id) {
+                    return { ...canvas, children: notDeleteChildren }
                 } else {
                     return canvas
                 }
             })
 
-            return {...state,
+            return {
+                ...state,
                 canvases: updateCanvas,
-                 selectedCanvas: {
-                     ...state.selectedCanvas,
-                     children: notDeleteChildren}}
-            // let heloper = [];
-            // const updateCanvasesChildren = state.canvases.map( canvas => {
-            //     if(canvas.id === state.selectedCanvas.id) {
-            //         return {...canvas, children: notDeleteChildren}
-            //     }
-            // })
-            // console.log(notDeleteChildren, 'id from canvas reducer');
-            // return {...state,
-            //     canvases: updateCanvasesChildren,
-            //      selectedCanvas: {
-            //          ...state.selectedCanvas,
-            //          children: notDeleteChildren}}
-
+                selectedCanvas: {
+                    ...state.selectedCanvas,
+                    children: notDeleteChildren
+                }
+            }
 
         case 'INIT_CANVAS':
             return Object.assign({}, state, { selectedCanvas: state.canvases[0] });
@@ -99,12 +89,20 @@ export default (state = initialState, action) => {
 
             }
 
+        case 'UPDATE_CANVAS': {
+            let style = {}
+            const canvases = state.canvases.map(el => {
+                if (el.id === id) {
+                    style = { ...el.style, [property]: value };
+                     return { ...el, style };
+                } else {
+                     return el;
+                }
+            });
 
+            return Object.assign({}, state, {canvases, selectedCanvas: {...state.selectedCanvas, style}});
 
-
-        case 'UPDATE_CANVAS':
-            let newStyle = { ...state.style, [property]: value };
-            return { ...state, newStyle }
+        }
 
         case 'SELECT_CANVAS':
             const chosenCanvas = state.canvases.find(canvas => canvas.id === id);

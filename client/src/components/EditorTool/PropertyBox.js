@@ -17,7 +17,7 @@ class PropertyBox extends Component {
         this.colorRegex = /(color)/i;
         this.selectRegex = /(family|animationName)/i;
         this.radioRegex = /(float|align)/i;
-        this.counter = 0;
+
     }
 
     handleChange(id, e, prop){
@@ -29,27 +29,29 @@ class PropertyBox extends Component {
         } else {
             newValue = e;
         }
-        if(id) {
-            this.props.updateElement(id, newValue, prop);
+
+        if(Object.keys(this.props.elements.selectedElement).length === 0){
+            this.props.updateCanvas(id, newValue, prop);
         } else {
-            this.props.updateCanvas(newValue, prop);
+            this.props.updateElement(id, newValue, prop);
         }
+           
+
     }
 
     updateElementContent(id, e) {
         this.props.updateElementContent(id, e.target.value);
     }
 
-    renderPropertyItem(forEdit, forEditStyle){
+    renderPropertyItem(forEdit, forEditStyle, listSelect){
         let list = [];
         let key = 1;
         let key2 = 1000;
-        const {selectList} = this.props;
         const {floatRadio, alignRadio, fonts} = this.props.elements;
-        const {animationList} = this.props.mainCanvas;
+    
         
         if(forEdit.hasOwnProperty('elemType')){
-            var {float, textAlign, fontFamily} = this.props.elements.selectedElement.style;
+        var {float, textAlign, fontFamily} = forEdit.style;    
             list.push(
                 <PropertyItem
                     key={key++}
@@ -60,6 +62,7 @@ class PropertyBox extends Component {
             );
         }
 
+        if(forEditStyle) {
         for(let [property, val] of Object.entries(forEditStyle)){
 
             if(val.match(this.rangeRegex)) {
@@ -99,21 +102,29 @@ class PropertyBox extends Component {
                         property={property}
                         val={val}
                         key={key2--}
-                        selectList={selectList}
+                        selectList={listSelect}
                         handleChange={e => this.handleChange(forEdit.id, e.target.value, property)}
                     />
                 )
             }
         }
+        }
         return list;
     }
     
     render(){
-        const {forEdit} = this.props;
+        const fontList = this.props.elements.fonts;
+        const animationList = this.props.mainCanvas.animationList;
+        const selectedCanvas = this.props.mainCanvas.selectedCanvas;
+        const selectedElement = this.props.elements.selectedElement;
+        const selectedItem = Object.keys(selectedElement).length === 0 ? selectedCanvas : selectedElement;
+        const listSelect = selectedItem === selectedElement ? fontList : animationList;
+        console.log(selectedItem.id);
         return(
             <div className="propertyListContainer">
             <h3>Property editor</h3>
                 <ul className="propertyListBox style-3">
+                {this.renderPropertyItem(selectedItem, selectedItem.style, listSelect)}
                 </ul>
             </div>
         )

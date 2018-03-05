@@ -1,6 +1,7 @@
-export const updateCanvas = (value, property) => {
+export const updateCanvas = (id, value, property) => {
     return {
         type: 'UPDATE_CANVAS',
+        id,
         value,
         property
     }
@@ -38,9 +39,3 @@ export const onSortEnd = (elementsOrder, oldIndex, newIndex) => {
     }
 }
 
-export const getChildren = childrenList => {
-    return {
-        type: 'GET_CHILDREN',
-        childrenList
-    }
-}

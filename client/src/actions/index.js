@@ -12,8 +12,7 @@ import {
     addCanvas,
     initCanvas,
     selectCanvas,
-    onSortEnd,
-    getChildren
+    onSortEnd
 } from './canvas';
 
 import {
@@ -34,8 +33,7 @@ export {
     initCanvas,
     fetchUser,
     logoutUser,
-    onSortEnd,
-    getChildren
+    onSortEnd
 }
 
 
