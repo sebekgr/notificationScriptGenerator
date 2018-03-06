@@ -19,7 +19,7 @@ class PropertyBox extends Component {
         this.radioRegex = /(float|align)/i;
     }
 
-    handleChange(id, e, prop) {
+    handleChange(id, e, prop, much) {
         let newValue = null;
         if ((e.match(/^\d+/)) && (prop === "animationDuration")) {
             newValue = `${e}ms`;
@@ -29,20 +29,30 @@ class PropertyBox extends Component {
             newValue = e;
         }
 
-        if (Object.keys(this.props.elements.selectedElement).length === 0) {
+        if (Object.keys(this.props.elements.selectedElement).length === 0 && much < 2) {
             this.props.updateCanvas(id, newValue, prop);
-        } else {
+
+        } else if(Object.keys(this.props.elements.selectedElement).length !== 0 && much < 2 ){
             this.props.updateElement(id, newValue, prop);
+
         }
+        if(much > 1) {
+            this.props.updateForm(id, newValue, prop, much);
+        }
+        
 
 
     }
 
-    updateElementContent(id, e) {
-        this.props.updateElementContent(id, e.target.value);
+    updateElementContent(id, e, much) {
+        if(much > 1) {
+            this.props.updateFormContent(id, e.target.value, much);
+        } else {
+            this.props.updateElementContent(id, e.target.value);
+        }
     }
 
-    renderPropertyItem(forEdit, forEditStyle, listSelect, much = 1) {
+    renderPropertyItem(forEdit, forEditStyle, listSelect, content, name = "Content", much = 1) {
         let i = 1*much;
         let j = 100*much;
         let list = []
@@ -52,9 +62,9 @@ class PropertyBox extends Component {
                 list.push(
                     <PropertyItem
                         key={i++}
-                        property="Content"
-                        val={forEdit.content}
-                        handleChange={(e) => this.updateElementContent(forEdit.id, e)}
+                        property={name}
+                        val={content}
+                        handleChange={(e) => this.updateElementContent(forEdit.id, e, much)}
                     />
                 );
             }
@@ -71,7 +81,7 @@ class PropertyBox extends Component {
                                 key={j++}
                                 property={property}
                                 val={val}
-                                handleChange={e => this.handleChange(forEdit.id, e.target.value, property)}
+                                handleChange={e => this.handleChange(forEdit.id, e.target.value, property, much)}
                             />
                         )
                     } else if (property.match(this.radioRegex)) {
@@ -84,7 +94,7 @@ class PropertyBox extends Component {
                                 val={val}
                                 type={type}
                                 isChecked={isChecked}
-                                handleChange={e => this.handleChange(forEdit.id, e.target.value, property)}
+                                handleChange={e => this.handleChange(forEdit.id, e.target.value, property, much)}
                             />
                         )
                     } else if (property.match(this.colorRegex)) {
@@ -93,7 +103,7 @@ class PropertyBox extends Component {
                                 key={j++}
                                 property={property}
                                 val={val}
-                                handleChange={color => this.handleChange(forEdit.id, color.hex, property)}
+                                handleChange={color => this.handleChange(forEdit.id, color.hex, property, much)}
                             />
                         )
                     } else if (property.match(this.selectRegex)) {
@@ -103,7 +113,7 @@ class PropertyBox extends Component {
                                 val={val}
                                 key={j++}
                                 selectList={listSelect}
-                                handleChange={e => this.handleChange(forEdit.id, e.target.value, property)}
+                                handleChange={e => this.handleChange(forEdit.id, e.target.value, property, much)}
                             />
                         )
                     }
@@ -118,13 +128,13 @@ class PropertyBox extends Component {
 
         if(selectedItem.elemType === "form") {
             mylist = [];
-            mylist.push(this.renderPropertyItem(selectedItem, style.formStyle, listSelect,2));
-            mylist.push(this.renderPropertyItem(selectedItem, style.submitStyle, listSelect,3));
-            mylist.push(this.renderPropertyItem(selectedItem, style.inputStyle, listSelect,4));
+            mylist.push(this.renderPropertyItem(selectedItem, style.formStyle, listSelect, selectedItem.content.action, "Form Action",2));
+            mylist.push(this.renderPropertyItem(selectedItem, style.submitStyle, listSelect, selectedItem.content.input,"Input text",3));
+            mylist.push(this.renderPropertyItem(selectedItem, style.inputStyle, listSelect, selectedItem.content.submit,"Submit text", 4));
             return mylist;
         } else {
             mylist = [];
-            mylist.push(this.renderPropertyItem(selectedItem, style, listSelect));
+            mylist.push(this.renderPropertyItem(selectedItem, style, listSelect, selectedItem.content));
             return mylist;
         }
 

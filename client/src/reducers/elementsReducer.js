@@ -13,7 +13,7 @@ let initialState = {
 
 export default  (state = initialState, action) => {
    
-    const {id, elemType, content, style, type, property, value, childrenList} = action;
+    const {id, elemType, content, style, type, property, value, much,} = action;
     switch (type) {
 
       
@@ -55,6 +55,7 @@ export default  (state = initialState, action) => {
                     return el;
                 }
             });
+            console.log('update element content');
             return Object.assign({}, state, {elements, selectedElement: {...state.selectedElement, content}});       
 
         case 'UPDATE_ELEMENT': {
@@ -68,10 +69,41 @@ export default  (state = initialState, action) => {
                 }
             });
 
-
             return Object.assign({}, state, {elements, selectedElement: {...state.selectedElement, style}});
 
         }
+
+        case 'UPDATE_FORM':
+        let styl = null;
+        let newStyle = {}
+            if(much === 2){
+                styl = "formStyle";
+            } else if (much === 3) {
+                styl = "submitStyle";
+            } else if (much === 4) {
+                styl = "inputStyle";
+            }
+            let elemy = state.elements.map(el => {
+                if(el.id === id) {
+                    newStyle = { ...el.style, [styl]: {...el.style[styl], [property]: value}};
+                    console.log(newStyle);
+                    return {...el, style: newStyle}
+                }
+                else return el;
+            })
+           
+            return Object.assign({}, state, {elements: elemy, selectedElement: {...state.selectedElement, style: newStyle}});
+
+        //     let newStyle = {...findForEdit.style[styl], [property]: value};
+        //    let newElem = {...findForEdit, style: {...findForEdit.style, [styl]: newStyle}}
+        //    console.log(findForEdit);
+        //    console.log(newElem);
+
+        // return Object.assign({}, state, {elements: {...findRest, findForEdit: newElem}});
+
+        case 'UPDATE_FORM_CONTENT':
+        console.log('UPDATE_FORM_CONTENT');
+        return state;
 
 
         default: 

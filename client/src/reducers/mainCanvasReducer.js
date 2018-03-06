@@ -99,6 +99,7 @@ export default (state = initialState, action) => {
                      return el;
                 }
             });
+            console.log('update canvas');
 
             return Object.assign({}, state, {canvases, selectedCanvas: {...state.selectedCanvas, style}});
 

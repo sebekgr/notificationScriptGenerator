@@ -37,3 +37,21 @@ export const updateElementContent = (id, content) => {
         content
     }
 }
+
+export const updateForm = (id, value, property, much) => {
+    return {
+        type: 'UPDATE_FORM',
+        id,
+        value,
+        property,
+        much
+    }
+}
+export const updateFormContent = (id, content, much) => {
+    return {
+        type: 'UPDATE_FORM_CONTENT',
+        id,
+        content,
+        much
+    }
+}
