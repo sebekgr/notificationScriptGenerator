@@ -7,12 +7,6 @@ import {SortableContainer} from 'react-sortable-hoc';
 
 class MainCanvas extends Component {
 
-    constructor(props){
-        super(props);
-
-        this.counter = 0;
-    }
-
 
     deleteElement(id, e) {
         this.props.deleteElement(id);
@@ -35,16 +29,7 @@ class MainCanvas extends Component {
         this.props.onSortEnd(children, oldIndex, newIndex);
     };
 
-    test() {
-        let canvasChildren = this.props.mainCanvas.selectedCanvas.children;
-          let totalElements = this.props.elements.elements;
-          
-          let renderChildren =  totalElements.filter(child => canvasChildren.includes(child.id));
-          console.log(this.counter++, " poraz ", renderChildren);
-          return renderChildren;
-    }
-
-    test2(){
+    renderElements(){
         let tab = [];
         let canvasChildren = this.props.mainCanvas.selectedCanvas.children;
           let totalElements = this.props.elements.elements;
@@ -91,7 +76,7 @@ class MainCanvas extends Component {
             <div className="mainCanvas" style={this.props.mainCanvas.selectedCanvas.style} >
                 
                 <SortableList
-                    elements={this.test2()}
+                    elements={this.renderElements()}
                     onSortEnd={this.onSortEnd}
                     pressDelay={300}
                 />

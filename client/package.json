@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "cuid": "^2.1.0",
     "history": "^4.7.2",
     "react": "^16.2.0",
     "react-color": "^2.14.0",

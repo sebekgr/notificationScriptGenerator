@@ -29,6 +29,82 @@
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>
+    <script>
+    
+    let form= {
+  content: {
+    action: "http://googole.com/",
+    input: "input provide",
+    submit: "subscribe",
+  },
+  elemType: "form",
+  id: 5343434,
+  style: {
+    formStyle:{
+				textAlign: "center",
+				padding: "10px",
+				backgroundColor: "#df44fd"
+			},
+			submitStyle:{
+				width: "50px",
+				height: "50px",
+				borderWidth: "2px",
+				borderStyle: "solid",
+				borderColor: "#000000",
+				borderRadius: "15px",
+				margin: "2px"
+			},
+			inputStyle:{
+				width: "100px",
+				height: "20px",
+				borderWidth: "2px",
+				borderStyle: "solid",
+				borderColor: "#000000",
+				borderRadius: "13px",
+				margin: "2px"
+			}
+		},		
+		content: {
+			action: "https://mydomain.com/api/newsletter/add/value",
+			input :"Provide your email and Subscribe Us !",
+			submit : "Subscribe"
+		} 
+  }
 
+
+  //content
+  // for(let [key, val] of Object.entries(form.content)){
+  //   console.log(key, val);
+  // }
+
+
+  //style desc
+  //  for(let style in form.style){
+  //    console.log(style);
+  //    for(let [key, val] of Object.entries(form.style[style])){
+  //      console.log(key, val);
+  //    }
+  //  }
+
+  // for(let style in form.style){
+  //   console.log(style);
+  // }
+
+  //  for(let i = 0; i < 3; i++) {
+  //   // console.log(form.style);
+  //    for(let key in form.style){
+  //      console.log(form.style[key]);
+  //    }
+  //  }
+
+    //console.log(form.style[2])
+    //console.log([form.style].forEach( el => console.log(el)));
+
+    //  for(let key in form.style){
+    //    console.log(form.style[key]);
+    //  }
+
+
+    </script>
   </body>
 </html>
