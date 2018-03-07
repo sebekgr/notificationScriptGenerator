@@ -28,7 +28,8 @@ class PropertyBox extends Component {
             newValue = e;
         }
         if (Object.keys(this.props.elements.selectedElement).length === 0 && much < 2) {
-            if(prop === "transitionToNext" || "delay"){
+            if(prop === "transitionToNext" || prop === "delay"){
+                console.log("wykonano content edit");
                 this.props.updateCanvasContent(id, newValue, prop)
             } else {
                 this.props.updateCanvas(id, newValue, prop);
