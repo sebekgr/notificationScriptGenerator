@@ -6,7 +6,6 @@ import PropertyItemColor from './Assets/PropertyItemColor';
 import PropertyItemRadio from './Assets/PropertyItemRadio';
 import PropertyItemRange from './Assets/PropertyItemRange';
 import PropertyItemSelect from './Assets/PropertyItemSelect';
-import cuid from 'cuid';
 
 
 class PropertyBox extends Component {
@@ -28,10 +27,12 @@ class PropertyBox extends Component {
         } else {
             newValue = e;
         }
-
         if (Object.keys(this.props.elements.selectedElement).length === 0 && much < 2) {
-            this.props.updateCanvas(id, newValue, prop);
-
+            if(prop === "transitionToNext" || "delay"){
+                this.props.updateCanvasContent(id, newValue, prop)
+            } else {
+                this.props.updateCanvas(id, newValue, prop);
+            }
         } else if(Object.keys(this.props.elements.selectedElement).length !== 0 && much < 2 ){
             this.props.updateElement(id, newValue, prop);
 
@@ -39,8 +40,6 @@ class PropertyBox extends Component {
         if(much > 1) {
             this.props.updateForm(id, newValue, prop, much);
         }
-        
-
 
     }
 
@@ -52,11 +51,16 @@ class PropertyBox extends Component {
         }
     }
 
+    updateCanvasContent(id, e, prop){
+
+    }
+
     renderPropertyItem(forEdit, forEditStyle, listSelect, content, name = "Content", much = 1) {
         let i = 1*much;
         let j = 100*much;
         let list = []
                 const { floatRadio, alignRadio, fonts } = this.props.elements;
+                
             if (forEdit.hasOwnProperty('elemType')) {
                 var { float, textAlign, fontFamily } = forEditStyle;
                 list.push(
@@ -65,6 +69,29 @@ class PropertyBox extends Component {
                         property={name}
                         val={content}
                         handleChange={(e) => this.updateElementContent(forEdit.id, e, much)}
+                    />
+                );
+            }
+
+            if (forEdit.hasOwnProperty('transitionToNext')) {
+                var { float, textAlign, fontFamily } = forEditStyle;
+                list.push(
+                    <PropertyItemRange
+                        key={i++}
+                        property={"Transition to next canvas"}
+                        val={forEdit['transitionToNext']}
+                        handleChange={e => this.handleChange(forEdit.id, e.target.value, "transitionToNext", much)}
+                    />
+                );
+            }
+            if (forEdit.hasOwnProperty('delay')) {
+                var { float, textAlign, fontFamily } = forEditStyle;
+                list.push(
+                    <PropertyItemRange
+                        key={i++}
+                        property={"Delay with fire-up the canvas "}
+                        val={forEdit['delay']}
+                        handleChange={e => this.handleChange(forEdit.id, e.target.value, "delay", much)}
                     />
                 );
             }
@@ -119,7 +146,7 @@ class PropertyBox extends Component {
                     }
                 }
             }
-            return <p style={{border: '2px solid red', margin: '10px 0'}}>{list}</p>;
+            return <div key={j*6} style={{border: '2px solid red', margin: '10px 0'}}>{list}</div>;
     }
 
     renderTest(selectedItem, style, listSelect){
@@ -128,9 +155,9 @@ class PropertyBox extends Component {
 
         if(selectedItem.elemType === "form") {
             mylist = [];
-            mylist.push(this.renderPropertyItem(selectedItem, style.formStyle, listSelect, selectedItem.content.action, "Form Action",2));
-            mylist.push(this.renderPropertyItem(selectedItem, style.submitStyle, listSelect, selectedItem.content.input,"Input text",3));
-            mylist.push(this.renderPropertyItem(selectedItem, style.inputStyle, listSelect, selectedItem.content.submit,"Submit text", 4));
+            mylist.push(this.renderPropertyItem(selectedItem, style.formStyle, listSelect, selectedItem.content.action, "Form action",2));
+            mylist.push(this.renderPropertyItem(selectedItem, style.submitStyle, listSelect, selectedItem.content.input,"Textfield",3));
+            mylist.push(this.renderPropertyItem(selectedItem, style.inputStyle, listSelect, selectedItem.content.submit,"Button form", 4));
             return mylist;
         } else {
             mylist = [];

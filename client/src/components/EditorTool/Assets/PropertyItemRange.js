@@ -3,7 +3,7 @@ import React from 'react';
 
 const PropertyItemRange = ({property, val, handleChange, min, max}) => {
     //property.replace( /([a-z])([A-Z])/g, '$1 $2' ).toUpperCase();
-    
+   
     let newVal = val.slice(0, -2);
   
     return(

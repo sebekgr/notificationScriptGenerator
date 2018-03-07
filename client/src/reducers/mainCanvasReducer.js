@@ -8,8 +8,8 @@ const initialState = {
         {
             id: 4563,
             name: "Main canvas",
-            transitionToNext: 1000,
-            delay: 5000,
+            transitionToNext: "1000ms",
+            delay: "5000ms",
             style: {
                 animationDuration: "1000ms",
                 backgroundColor: "white",
@@ -99,10 +99,21 @@ export default (state = initialState, action) => {
                      return el;
                 }
             });
-            console.log('update canvas');
-
             return Object.assign({}, state, {canvases, selectedCanvas: {...state.selectedCanvas, style}});
 
+        }
+
+        case 'UPDATE_CANVAS_CONTENT': {
+            let updateCanvas = {};
+            const updateCanvases = state.canvases.map(el => {
+                if (el.id === id) {
+                    return updateCanvas = { ...el, [property]: value };
+
+                } else {
+                    return el;
+                }
+            });
+            return Object.assign({}, state, {canvases: updateCanvases, selectedCanvas: updateCanvas})
         }
 
         case 'SELECT_CANVAS':

@@ -14,7 +14,8 @@ import {
     addCanvas,
     initCanvas,
     selectCanvas,
-    onSortEnd
+    onSortEnd,
+    updateCanvasContent
 } from './canvas';
 
 import {
@@ -37,7 +38,8 @@ export {
     logoutUser,
     onSortEnd,
     updateForm,
-    updateFormContent
+    updateFormContent,
+    updateCanvasContent
 }
 
 

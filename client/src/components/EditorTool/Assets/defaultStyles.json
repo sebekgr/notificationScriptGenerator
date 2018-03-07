@@ -1,8 +1,8 @@
 {
 	"canvas": {
 		"name": "Another Canvas",
-		"transitionToNext": 1000,
-		"delay": 5000,
+		"transitionToNext": "1000ms",
+		"delay": "5000ms",
 		"style": {
 			"animationDuration": "1000ms",
                 "backgroundColor": "grey",
@@ -82,11 +82,13 @@
 			"formStyle":{
 				"textAlign": "center",
 				"padding": "10px",
+				"margin": "10px",
 				"backgroundColor": "#df44fd"
 			},
 			"submitStyle":{
 				"width": "50px",
 				"height": "50px",
+				"float": "left",
 				"borderWidth": "2px",
 				"borderStyle": "solid",
 				"borderColor": "#000000",
@@ -94,6 +96,7 @@
 				"margin": "2px"
 			},
 			"inputStyle":{
+				"float": "right",
 				"width": "100px",
 				"height": "20px",
 				"borderWidth": "2px",

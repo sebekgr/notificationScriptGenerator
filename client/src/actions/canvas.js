@@ -39,3 +39,14 @@ export const onSortEnd = (elementsOrder, oldIndex, newIndex) => {
     }
 }
 
+export const updateCanvasContent = (id, value, property) => {
+    return {
+        type: 'UPDATE_CANVAS_CONTENT',
+        id,
+        value,
+        property
+
+
+
+    }
+}

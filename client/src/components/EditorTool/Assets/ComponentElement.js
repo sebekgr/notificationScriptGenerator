@@ -6,9 +6,10 @@ const  ComponentElement = SortableElement(({active, onSelect, content, elemType:
         case 'img':
             return <Element onMouseEnter={onHover} onClick={onSelect} className={active ? 'active element': 'element'} src={content} style={style} />
         case 'form':
+        console.log(content);
             return (
-                <form onClick={onSelect} onMouseEnter={onHover} style={style.formStyle} className={active ? 'active element': 'element'}>
-                    <input style={style.inputStyle} type="text" placeholder={content.input}/>
+                <form onClick={onSelect} onSubmit={(e) => {e.preventDefault(); alert(e.target[0].value)}} onMouseEnter={onHover} style={style.formStyle} className={active ? 'active element': 'element'}>
+                    <input style={style.inputStyle} type="text" placeholder={content.input} />
                     <button style={style.submitStyle} type="submit">{content.submit}</button>
                 </form>
             );

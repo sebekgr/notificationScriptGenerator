@@ -38,6 +38,7 @@ export default (state = initialState, action) => {
             return Object.assign({}, state, { elements: notDeletedElements });
 
         case 'RESET_SELECTED':
+        case 'ADD_CANVAS':
             return { ...state, selectedElement: {} }
 
         case 'SELECT_ELEMENT':
@@ -97,7 +98,6 @@ export default (state = initialState, action) => {
 
         case 'UPDATE_FORM_CONTENT':
             let context = null;
-
             if (much === 2) {
                 context = "action";
             } else if (much === 3) {
@@ -105,9 +105,7 @@ export default (state = initialState, action) => {
             } else if (much === 4) {
                 context = "submit";
             }
-
             let newContent = {}
-
             let elemys = state.elements.map(el => {
                 if (el.id === id) {
                     newContent = { ...el.content, [context]: content };
@@ -116,7 +114,6 @@ export default (state = initialState, action) => {
                 }
                 else return el;
             })
-
             return Object.assign({}, state, { elements: elemys, selectedElement: { ...state.selectedElement, content: newContent } });
 
         default:
