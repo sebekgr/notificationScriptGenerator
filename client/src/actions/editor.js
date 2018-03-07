@@ -30,11 +30,12 @@ export const updateElement = (id, value, property) => {
     }
 }
 
-export const updateElementContent = (id, content) => {
+export const updateElementContent = (id, content, much) => {
     return {
         type: 'UPDATE_ELEMENT_CONTENT',
         id,
-        content
+        content,
+        much
     }
 }
 

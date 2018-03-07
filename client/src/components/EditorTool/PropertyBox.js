@@ -119,7 +119,7 @@ class PropertyBox extends Component {
                     }
                 }
             }
-            return list;
+            return <p style={{border: '2px solid red', margin: '10px 0'}}>{list}</p>;
     }
 
     renderTest(selectedItem, style, listSelect){
