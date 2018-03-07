@@ -1,11 +1,8 @@
 import React from 'react';
 
 
-const PropertyItemRange = ({property, val, handleChange, min, max}) => {
-    //property.replace( /([a-z])([A-Z])/g, '$1 $2' ).toUpperCase();
-   
+const PropertyItemRange = ({property, val, handleChange, max, min}) => {
     let newVal = val.slice(0, -2);
-  
     return(
         <div>
             <label className="propertyLabel">{property}</label>
@@ -14,7 +11,6 @@ const PropertyItemRange = ({property, val, handleChange, min, max}) => {
                 className="propertyValue"
                 value={newVal}
                 onChange={handleChange}
-
             />
             
             
@@ -22,7 +18,8 @@ const PropertyItemRange = ({property, val, handleChange, min, max}) => {
                 type="range"
                 className="propertyValue" value={newVal}
                 onChange={handleChange}
-                max="1000"
+                max={max}
+                min={min}
             />
             
         </div>

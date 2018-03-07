@@ -6,9 +6,8 @@ const PropertyItemSelect = ({property, val, handleChange,  selectList}) => {
     const proplist = selectList.map( (name, i) => {
         return(
             <option
-                style={{fontFamily: (property !== 'animation' ? name : 'Verdana')}}
+                style={{fontFamily: (property !== 'animation' ? name : 'Lato')}}
                 key={i}
-                onMouseOver={handleChange}
                 value={name}>
                 {name}
             </option>
@@ -19,7 +18,7 @@ const PropertyItemSelect = ({property, val, handleChange,  selectList}) => {
     return(
         <div>
             <label className="propertyLabel">{property}</label>
-            <select onChange={handleChange}>
+            <select value={val} onChange={handleChange}>
                 {proplist}
             </select>
 

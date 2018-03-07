@@ -8,17 +8,19 @@ const initialState = {
         {
             id: 4563,
             name: "Main canvas",
-            transitionToNext: "1000ms",
             delay: "5000ms",
             style: {
-                animationDuration: "1000ms",
-                backgroundColor: "white",
-                animationName: "bounce",
-                border: "none",
-                width: "500px",
-                height: "500px",
-                padding: "20px",
-                borderRadius: "5px"
+                "animationDuration": "1000ms",
+			"backgroundColor": "grey",
+			"animationName": "bounce",
+			"border": "none",
+			"width": "500px",
+			"height": "500px",
+			"paddingTop": "2px",
+			"paddingBottom": "2px",
+			"paddingLeft": "2px",
+			"paddingRight": "2px",
+			"borderRadius": "5px"
             },
             children: []
         }
@@ -84,7 +86,7 @@ export default (state = initialState, action) => {
             const newCanvas = { id: Date.now(), name, transitionToNext, delay, style, children: [] };
             return {
                 ...state,
-                canvases: [...state.canvases, newCanvas, ...state],
+                canvases: [...state.canvases, newCanvas],
                 selectedCanvas: newCanvas
 
             }

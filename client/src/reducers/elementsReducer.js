@@ -8,7 +8,6 @@ let initialState = {
     floatRadio: ["none", "left", "right"],
     alignRadio: ["left", "center", "right"],
     fonts: ["Lato", "Karma", "Open Sans Condensed", "Josefin Sans"],
-
 };
 
 export default (state = initialState, action) => {
@@ -57,7 +56,6 @@ export default (state = initialState, action) => {
                     return el;
                 }
             });
-            console.log('update element content');
             return Object.assign({}, state, { elements, selectedElement: { ...state.selectedElement, content } });
 
         case 'UPDATE_ELEMENT': {
@@ -88,7 +86,6 @@ export default (state = initialState, action) => {
             let elemy = state.elements.map(el => {
                 if (el.id === id) {
                     newStyle = { ...el.style, [styl]: { ...el.style[styl], [property]: value } };
-                    console.log(newStyle);
                     return { ...el, style: newStyle }
                 }
                 else return el;
@@ -109,7 +106,6 @@ export default (state = initialState, action) => {
             let elemys = state.elements.map(el => {
                 if (el.id === id) {
                     newContent = { ...el.content, [context]: content };
-                    console.log(newContent);
                     return { ...el, content: newContent }
                 }
                 else return el;

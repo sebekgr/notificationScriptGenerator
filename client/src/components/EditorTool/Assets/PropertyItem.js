@@ -7,7 +7,13 @@ const PropertyItem = ({property, val, handleChange}) => {
     return(
         <div>
             <label className="propertyLabel">{property}</label>
-            <input type="text" className="propertyValue" value={val} onChange={handleChange}/>
+            <input
+                type="text"
+                className="propertyValue"
+                value={val}
+                onChange={handleChange}
+                onFocus={e => e.target.select()}
+                />
         </div>
     )
 }
