@@ -11,9 +11,11 @@ class PropertyItemColor extends Component  {
     
     render() {
         const {val, property, handleChange} = this.props;
+        let newProp = property.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
+        newProp = newProp.charAt(0).toUpperCase() + newProp.slice(1);
         return(
             <div>
-                <label className="propertyLabel">{property}</label>
+                <label className="propertyLabel">{newProp}</label>
                 <input
                     type="text"
                     className="propertyValue"

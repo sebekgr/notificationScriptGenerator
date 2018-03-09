@@ -17,7 +17,8 @@ class PropertyBox extends Component {
         this.selectRegex = /(family|animationName)/i;
         this.radioRegex = /(float|align)/i;
         this.paddingMarginRegex = /(padding|margin)/i;
-        this.widthHeightRegex = /(width|height)/i;
+        this.borderRegex = /(border$)/i;
+        this.widthHeightRegex = /(^width|^height)/i;
         this.min = 1000;
         this.max = 100000;
     }
@@ -33,7 +34,6 @@ class PropertyBox extends Component {
         }
         if (Object.keys(this.props.elements.selectedElement).length === 0 && much < 2) {
             if (prop === "transitionToNext" || prop === "delay") {
-                console.log(newValue);
                 this.props.updateCanvasContent(id, newValue, prop)
             } else {
                 this.props.updateCanvas(id, newValue, prop);
@@ -59,8 +59,6 @@ class PropertyBox extends Component {
     renderPropertyItem(forEdit, forEditStyle, listSelect, content, name = "Content", much = 1) {
         let i = 1 * much;
         let j = 100 * much;
-        let min = 0;
-        let max = 2000;
         let list = []
         const { floatRadio, alignRadio } = this.props.elements;
 
@@ -91,18 +89,23 @@ class PropertyBox extends Component {
             for (let [property, val] of Object.entries(forEditStyle)) {
                 switch (property) {
                     case (property.match(this.widthHeightRegex) || {}).input:
-                        if (forEdit.elemType !== 'img') { this.min = 100, this.max = 1300; }
-                        else { this.min = 10, this.max = 800 }
+                        if (forEdit.elemType !== 'img') { this.min = 100; this.max = 1300; }
+                        else { this.min = 10; this.max = 800 }
                         break;
                     case (property.match(this.paddingMarginRegex) || {}).input:
-                        this.min = 0, this.max = 100;
+                    case (property.match(this.borderRegex) || {}).input:
+                        this.min = 0; this.max = 100;
+                        break;
+                    case 'animationDuration':
+                        this.min = 1000; this.max = 5000;
                         break;
                     case 'fontSize':
-                        this.min = 5, this.max = 100;
+                        this.min = 5; this.max = 100;
                         break;
                     case 'borderRadius':
-                        this.min = 0, this.max = 500;
+                        this.min = 0; this.max = 500;
                         break;
+                    default: this.min = 0; this.max = 100;
                 }
 
                 if (val.match(this.rangeRegex)) {

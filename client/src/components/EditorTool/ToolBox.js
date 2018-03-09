@@ -2,8 +2,26 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../actions/index';
 import defaultStyle from './Assets/defaultStyles.json';
+import Tester from './Tester';
 
 class ToolBox extends Component {
+
+    state = {showWindowTester: false}
+
+
+    componentDidMount(){
+        window.addEventListener('beforeunload', () => {
+            this.closeWindowTester();
+          });
+    }
+
+    toggleWindowTester(){
+        this.setState({showWindowTester: !this.state.showWindowTester});
+    }
+
+    closeWindowTester(){
+        this.setState({showWindowTester: false});
+    }
 
 
        addElement(elemType){
@@ -25,7 +43,6 @@ class ToolBox extends Component {
         }
      
     }
-
 
     render() {
         let canvaslist = this.props.mainCanvas.canvases.map( canvas => {
@@ -69,13 +86,19 @@ class ToolBox extends Component {
                 <div>
                     &nbsp;
                     <button >Generate script</button>
-                    <button >Run test</button>
+                    <button onClick={() => this.toggleWindowTester()}>{this.state.showWindowTester ? 'Stop ' : 'Run ' }test</button>
                     <input className="urlInput" placeholder="Provide your website url here..." />
                     <button onClick={() => this.props.addCanvas(name, transitionToNext, delay, style)}>Add new Canvas</button>
                 </div>
                 <ul className="canvasList">
                     {canvaslist}
                 </ul>
+                    {this.state.showWindowTester && (
+                        <Tester src="https://www.w3schools.com/" closeWindowTester={() => this.closeWindowTester()}>
+
+                            
+                        </Tester>
+                    )}
             </div>
         )
     }

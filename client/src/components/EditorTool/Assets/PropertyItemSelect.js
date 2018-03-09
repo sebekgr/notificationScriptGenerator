@@ -2,7 +2,8 @@ import React from 'react';
 
 
 const PropertyItemSelect = ({property, val, handleChange,  selectList}) => {
-
+    property = property.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
+    property = property.charAt(0).toUpperCase() + property.slice(1)
     const proplist = selectList.map( (name, i) => {
         return(
             <option

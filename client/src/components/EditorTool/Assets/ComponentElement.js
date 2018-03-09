@@ -4,7 +4,7 @@ const  ComponentElement = SortableElement(({active, onSelect, content, elemType:
 
     switch(Element) {
         case 'img':
-            return <Element onMouseEnter={onHover} onClick={onSelect} className={active ? 'active element': 'element'} src={content} style={style} />
+            return <Element  onMouseEnter={onHover} onClick={onSelect} className={active ? 'active element': 'element'} src={content} style={style} />
         case 'form':
         console.log(content);
             return (

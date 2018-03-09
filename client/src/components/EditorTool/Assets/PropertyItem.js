@@ -2,7 +2,8 @@ import React from 'react';
 
 
 const PropertyItem = ({property, val, handleChange}) => {
-    property.replace( /([a-z])([A-Z])/g, '$1 $2' ).toUpperCase();
+    property = property.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
+    property = property.charAt(0).toUpperCase() + property.slice(1)
 
     return(
         <div>
