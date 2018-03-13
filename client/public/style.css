@@ -444,12 +444,10 @@
 .previewBox{
     background-image: url('bg.png');
     overflow:auto;
-    padding: 30px;
 }
 .mainCanvas {
   position: relative;
   margin: auto;
-    overflow: auto;
     top: 0;
     left: 0;
     right: 0;
@@ -535,3 +533,6 @@ p.element, h1.element, h2.element, span.element, img.element{
 
 /*tester*/
 
+.closeCanvasbtn{
+  align-self: start;
+}

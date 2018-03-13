@@ -50,3 +50,17 @@ export const updateCanvasContent = (id, value, property) => {
 
     }
 }
+
+export const handleChangeUrl = url =>{
+    return {
+        type: 'CHANGE_URL',
+        url
+    }
+}
+
+export const updateCanvasOverlay = value => {
+    return {
+        type: 'UPDATE_OVERLAY',
+        value
+    }
+}

@@ -6,6 +6,8 @@ import { SortableContainer } from 'react-sortable-hoc';
 
 class MainCanvas extends Component {
 
+    
+
 
     deleteElement(id, e) {
         this.props.deleteElement(id);
@@ -41,6 +43,14 @@ class MainCanvas extends Component {
         return tab;
     }
 
+    canvasStyle() {
+        let style = this.props.mainCanvas.selectedCanvas.style;
+        if (!this.props.mainCanvas.overlay) {
+            return style = Object.assign({}, style, { boxShadow: '-1px 1px 50px 10px rgba(0,0,0,0.25)', WebkitboxShadow: '-1px 1px 50px 10px rgba(0,0,0,0.25)' });
+        }
+        return style;
+    }
+
     render() {
         const isActive = this.props.elements.selectedElement.id;
         const SortableList = SortableContainer(({ elements, handleDelete, handleSelect, handleHover }) => {
@@ -74,7 +84,8 @@ class MainCanvas extends Component {
 
 
         return (
-            <div className="mainCanvas" style={this.props.mainCanvas.selectedCanvas.style} >
+
+            <div className="mainCanvas" style={this.canvasStyle()} >
 
                 <SortableList
                     elements={this.renderElements()}

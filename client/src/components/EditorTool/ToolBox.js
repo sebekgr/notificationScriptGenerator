@@ -6,8 +6,12 @@ import Tester from './Tester';
 
 class ToolBox extends Component {
 
-    state = {showWindowTester: false}
-
+    constructor(props){
+        super(props);
+        this.state = {showWindowTester: false}
+        this.urlRegex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+    }
+    
 
     componentDidMount(){
         window.addEventListener('beforeunload', () => {
@@ -21,6 +25,11 @@ class ToolBox extends Component {
 
     closeWindowTester(){
         this.setState({showWindowTester: false});
+    }
+
+    handleChangeUrl(url){
+        this.props.handleChangeUrl(url);
+        
     }
 
 
@@ -45,6 +54,7 @@ class ToolBox extends Component {
     }
 
     render() {
+        
         let canvaslist = this.props.mainCanvas.canvases.map( canvas => {
           
             return(
@@ -57,6 +67,7 @@ class ToolBox extends Component {
             );
         });
         const {name, transitionToNext, delay, style} = defaultStyle.canvas;
+        let {url} = this.props.mainCanvas;
         return (
             <div className="toolBoxContainer">
                 <h3>TOOLBOX</h3>
@@ -86,15 +97,15 @@ class ToolBox extends Component {
                 <div>
                     &nbsp;
                     <button >Generate script</button>
-                    <button onClick={() => this.toggleWindowTester()}>{this.state.showWindowTester ? 'Stop ' : 'Run ' }test</button>
-                    <input className="urlInput" placeholder="Provide your website url here..." />
-                    <button onClick={() => this.props.addCanvas(name, transitionToNext, delay, style)}>Add new Canvas</button>
+                    <button disabled={!url.match(this.urlRegex)} onClick={() => this.toggleWindowTester()}>{this.state.showWindowTester ? 'Stop ' : 'Run ' }test</button>
+                    <input onChange={e => this.handleChangeUrl(e.target.value)} className="urlInput" placeholder="Provide your website url here..." />
+                    <button disabled={this.props.mainCanvas.canvases.length === 2} onClick={() => this.props.addCanvas(name, transitionToNext, delay, style)}>Add new Canvas</button>
                 </div>
                 <ul className="canvasList">
                     {canvaslist}
                 </ul>
                     {this.state.showWindowTester && (
-                        <Tester src="https://www.w3schools.com/" closeWindowTester={() => this.closeWindowTester()}>
+                        <Tester src={this.props.mainCanvas.url} closeWindowTester={() => this.closeWindowTester()}>
 
                             
                         </Tester>

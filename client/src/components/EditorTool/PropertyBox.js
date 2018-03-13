@@ -6,6 +6,8 @@ import PropertyItemColor from './Assets/PropertyItemColor';
 import PropertyItemRadio from './Assets/PropertyItemRadio';
 import PropertyItemRange from './Assets/PropertyItemRange';
 import PropertyItemSelect from './Assets/PropertyItemSelect';
+import PropertyItemBackground from './Assets/PropertyItemBackground';
+
 
 
 class PropertyBox extends Component {
@@ -24,6 +26,7 @@ class PropertyBox extends Component {
     }
 
     handleChange(id, e, prop, much) {
+        if(e.length === 0) return false;
         let newValue = null;
         if ((e.match(/^\d+/)) && (prop === "animationDuration")) {
             newValue = `${e}ms`;
@@ -56,6 +59,10 @@ class PropertyBox extends Component {
         }
     }
 
+    updateCanvasOverlay(e){
+        this.props.updateCanvasOverlay(e);
+    }
+
     renderPropertyItem(forEdit, forEditStyle, listSelect, content, name = "Content", much = 1) {
         let i = 1 * much;
         let j = 100 * much;
@@ -79,7 +86,7 @@ class PropertyBox extends Component {
                 <PropertyItemRange
                     key={i++}
                     max="10000"
-                    property={"Delay with fire-up the canvas "}
+                    property={"Delay with showing-up/closing the canvas"}
                     val={forEdit['delay']}
                     handleChange={e => this.handleChange(forEdit.id, e.target.value, "delay", much)}
                 />
@@ -186,6 +193,9 @@ class PropertyBox extends Component {
             <div className="propertyListContainer">
                 <h3>Property editor</h3>
                 <ul className="propertyListBox style-3">
+                    <PropertyItemBackground
+                        handleChange={e => this.updateCanvasOverlay(e.target.value)}
+                        isChecked={this.props.mainCanvas.overlay} />
                     {this.renderTest(selectedItem, selectedItem.style, listSelect)}
                 </ul>
             </div>

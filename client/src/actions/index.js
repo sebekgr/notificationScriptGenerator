@@ -15,7 +15,9 @@ import {
     initCanvas,
     selectCanvas,
     onSortEnd,
-    updateCanvasContent
+    updateCanvasContent,
+    handleChangeUrl,
+    updateCanvasOverlay
 } from './canvas';
 
 import {
@@ -39,7 +41,9 @@ export {
     onSortEnd,
     updateForm,
     updateFormContent,
-    updateCanvasContent
+    updateCanvasContent,
+    handleChangeUrl,
+    updateCanvasOverlay
 }
 
 

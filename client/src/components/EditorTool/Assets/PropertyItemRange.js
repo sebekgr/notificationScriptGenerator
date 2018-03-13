@@ -12,7 +12,11 @@ const PropertyItemRange = ({property, val, handleChange, max, min}) => {
                 type="number"
                 className="propertyValue"
                 value={newVal}
+                pattern="[0-9]"
                 onChange={handleChange}
+                required="required"
+                max={max}
+                min={min}
             />
             
             

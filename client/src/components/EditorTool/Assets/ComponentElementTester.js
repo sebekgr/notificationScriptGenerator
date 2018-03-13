@@ -1,14 +1,13 @@
 import React from 'react';
-const  ComponentElementTester = ({content, elemType: Element, style}) => {
+const  ComponentElementTester = ({content, elemType: Element, style, onSubmit}) => {
 
     switch(Element) {
         case 'img':
             return <Element className="element" src={content} style={style} />
         case 'form':
-        console.log(content);
             return (
-                <form onSubmit={(e) => {e.preventDefault(); alert(e.target[0].value)}}style={style.formStyle} className="element">
-                    <input style={style.inputStyle} type="text" placeholder={content.input} />
+                <form onSubmit={onSubmit}style={style.formStyle} className="element">
+                    <input style={style.inputStyle} type="email" placeholder={content.input} required/>
                     <button style={style.submitStyle} type="submit">{content.submit}</button>
                 </form>
             );

@@ -41,4 +41,9 @@ if(process.env.NODE_ENV === 'production') {
     });
 }
 
+app.post('/api/add/', (req, res) => {
+    console.log(req);
+    res.send('OK').status(200);
+})
+
 app.listen(PORT, () => {console.log(`server  run at ${9000}`)});

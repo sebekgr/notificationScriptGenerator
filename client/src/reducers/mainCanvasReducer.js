@@ -2,8 +2,9 @@
 import { arrayMove } from 'react-sortable-hoc';
 
 const initialState = {
-
+    url: "http://pracuj.pl/",
     animationList: ["bounce", "flip", "fadeInDown", "fadeInLeft", "fadeInRight", "zoomIn", "rubberBand"],
+    overlay: true,
     canvases: [
         {
             id: 4563,
@@ -30,8 +31,15 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-    const { property, id, value, type, name, style, transitionToNext, delay, elementsOrder, oldIndex, newIndex } = action;
+    const { property, id, value, type, name, style, transitionToNext, delay, elementsOrder, oldIndex, newIndex, url} = action;
     switch (type) {
+
+        case 'UPDATE_OVERLAY':
+       
+        return Object.assign({}, state, {overlay: value === 'overlay'});
+
+        case 'CHANGE_URL':
+            return {...state, url};
 
         case 'ON_SORT_END':
             const sortChildren = arrayMove(elementsOrder, oldIndex, newIndex);
@@ -82,7 +90,7 @@ export default (state = initialState, action) => {
             return Object.assign({}, state, { selectedCanvas: state.canvases[0] });
 
         case 'ADD_CANVAS':
-
+        if(state.canvases.length !== 2) {
             const newCanvas = { id: Date.now(), name, transitionToNext, delay, style, children: [] };
             return {
                 ...state,
@@ -90,6 +98,9 @@ export default (state = initialState, action) => {
                 selectedCanvas: newCanvas
 
             }
+        } else return state;
+
+            
 
         case 'UPDATE_CANVAS': {
             let style = {}
