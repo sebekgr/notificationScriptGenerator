@@ -28,14 +28,11 @@ class PropertyBox extends Component {
     handleChange(id, e, prop, much, min, max) {
         console.log(prop, min, max, e);
         //small validation
-        if(e.length === 0) return false;
-        switch(prop){
-            case prop.match(this.paddingMarginRegex):
-        }
-
+        if(min > e && e < max) return false;
 
         let newValue = null;
-        if ((e.match(/^\d+/)) && (prop === "animationDuration")) {
+        
+        if ((e.match(/^\d+/)) && ((prop === "animationDuration") || prop === "delay")) {
             newValue = `${e}ms`;
         } else if (e.match(/^\d+/)) {
             newValue = `${e}px`;
@@ -43,7 +40,7 @@ class PropertyBox extends Component {
             newValue = e;
         }
         if (Object.keys(this.props.elements.selectedElement).length === 0 && much < 2) {
-            if (prop === "transitionToNext" || prop === "delay") {
+            if (prop === "delay") {
                 this.props.updateCanvasContent(id, newValue, prop)
             } else {
                 this.props.updateCanvas(id, newValue, prop);
@@ -92,10 +89,11 @@ class PropertyBox extends Component {
             list.push(
                 <PropertyItemRange
                     key={i++}
+                    min="1000"
                     max="10000"
                     property={"Delay with showing-up/closing the canvas"}
                     val={forEdit['delay']}
-                    handleChange={e => this.handleChange(forEdit.id, e.target.value, "delay", much, this.min, this.max)}
+                    handleChange={e => this.handleChange(forEdit.id, e.target.value, "delay", much, e.target.min, e.target.max)}
                 />
             );
         }
@@ -130,7 +128,7 @@ class PropertyBox extends Component {
                             val={val}
                             max={this.max}
                             min={this.min}
-                            handleChange={e => this.handleChange(forEdit.id, e.target.value, property, much, this.min, this.max)}
+                            handleChange={e => this.handleChange(forEdit.id, e.target.value, property, much, e.target.min, e.target.max)}
                         />
                     )
                 } else if (property.match(this.radioRegex)) {

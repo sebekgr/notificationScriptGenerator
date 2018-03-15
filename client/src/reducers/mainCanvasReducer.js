@@ -35,7 +35,6 @@ export default (state = initialState, action) => {
     switch (type) {
 
         case 'SET_HYDRATE_CANVAS':
-        console.log(data, " from reducer");
             return Object.assign({}, state, {canvases: data.canvases, url: data.url, overlay: data.overlay})
 
         case 'UPDATE_OVERLAY':

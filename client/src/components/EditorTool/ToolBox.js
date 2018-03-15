@@ -53,6 +53,10 @@ class ToolBox extends Component {
      
     }
 
+    refreshToNew(){
+        localStorage.clear();
+    }
+
     render() {
         
         let canvaslist = this.props.mainCanvas.canvases.map( canvas => {
@@ -97,6 +101,7 @@ class ToolBox extends Component {
                 <div>
                     &nbsp;
                     <button >Generate script</button>
+                    <button onClick={() => this.refreshToNew()}>Start new</button>
                     <button disabled={!url.match(this.urlRegex)} onClick={() => this.toggleWindowTester()}>{this.state.showWindowTester ? 'Stop ' : 'Run ' }test</button>
                     <input onChange={e => this.handleChangeUrl(e.target.value)} className="urlInput" placeholder="Provide your website url here..." />
                     <button disabled={this.props.mainCanvas.canvases.length === 2} onClick={() => this.props.addCanvas(name, transitionToNext, delay, style)}>Add new Canvas</button>
