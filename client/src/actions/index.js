@@ -6,7 +6,8 @@ import {
     updateElement,
     updateElementContent,
     updateForm,
-    updateFormContent
+    updateFormContent,
+    setHydrateElements
 } from './editor';
 
 import {
@@ -17,7 +18,8 @@ import {
     onSortEnd,
     updateCanvasContent,
     handleChangeUrl,
-    updateCanvasOverlay
+    updateCanvasOverlay,
+    setHydrateCanvas
 } from './canvas';
 
 import {
@@ -43,7 +45,9 @@ export {
     updateFormContent,
     updateCanvasContent,
     handleChangeUrl,
-    updateCanvasOverlay
+    updateCanvasOverlay,
+    setHydrateElements,
+    setHydrateCanvas
 }
 
 

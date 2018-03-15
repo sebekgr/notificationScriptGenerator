@@ -444,6 +444,26 @@
 .previewBox{
     background-image: url('bg.png');
     overflow:auto;
+ }
+ .previewBox:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+.previewWrapper{
+min-height:100%;
+min-width:100%;
+}
+.previewWrapper:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
 }
 .mainCanvas {
   position: relative;
@@ -467,9 +487,6 @@
     display: block;
     height: 0;
     clear: both;
-}
-.sortableList{
-  border: 1px solid red;
 }
 .sortableList:after{
   content: '';

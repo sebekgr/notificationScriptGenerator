@@ -26,9 +26,14 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Headers", "Origin, Content-Type");
+    next();
+  });
+
 //set up routes
 require('./routes/authRoutes')(app);
-
 
 //set up routes for production. Serving client side assets
 if(process.env.NODE_ENV === 'production') {
@@ -41,8 +46,12 @@ if(process.env.NODE_ENV === 'production') {
     });
 }
 
-app.post('/api/add/', (req, res) => {
-    console.log(req);
+
+
+app.post('/api/add', (req, res) => {
+    console.log(JSON.stringify(req.headers));
+    console.log(req.body);
+
     res.send('OK').status(200);
 })
 

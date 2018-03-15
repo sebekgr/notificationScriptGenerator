@@ -4,7 +4,7 @@
 		"delay": "5000ms",
 		"style": {
 			"animationDuration": "1000ms",
-			"backgroundColor": "grey",
+			"backgroundColor": "#ffffff",
 			"animationName": "bounce",
 			"border": "none",
 			"width": "500px",

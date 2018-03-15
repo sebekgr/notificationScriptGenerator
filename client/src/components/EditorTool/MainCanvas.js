@@ -82,7 +82,7 @@ class MainCanvas extends Component {
             );
         });
 
-
+        
         return (
 
             <div className="mainCanvas" style={this.canvasStyle()} >

@@ -64,3 +64,10 @@ export const updateCanvasOverlay = value => {
         value
     }
 }
+
+export const setHydrateCanvas = data => {
+    return {
+        type: 'SET_HYDRATE_CANVAS',
+        data
+    }
+}

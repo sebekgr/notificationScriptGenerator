@@ -12,7 +12,7 @@ const initialState = {
             delay: "5000ms",
             style: {
                 "animationDuration": "1000ms",
-			"backgroundColor": "grey",
+			"backgroundColor": "#ffffff",
 			"animationName": "bounce",
 			"border": "none",
 			"width": "500px",
@@ -31,8 +31,12 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-    const { property, id, value, type, name, style, transitionToNext, delay, elementsOrder, oldIndex, newIndex, url} = action;
+    const { property, id, value, type, name, style, transitionToNext, delay, elementsOrder, oldIndex, newIndex, url, data} = action;
     switch (type) {
+
+        case 'SET_HYDRATE_CANVAS':
+        console.log(data, " from reducer");
+            return Object.assign({}, state, {canvases: data.canvases, url: data.url, overlay: data.overlay})
 
         case 'UPDATE_OVERLAY':
        

@@ -56,3 +56,11 @@ export const updateFormContent = (id, content, much) => {
         much
     }
 }
+
+
+export const setHydrateElements = data => {
+    return{
+        type: 'SET_HYDRATE_ELEMENTS',
+        data
+    }
+}

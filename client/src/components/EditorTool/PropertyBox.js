@@ -25,8 +25,15 @@ class PropertyBox extends Component {
         this.max = 100000;
     }
 
-    handleChange(id, e, prop, much) {
+    handleChange(id, e, prop, much, min, max) {
+        console.log(prop, min, max, e);
+        //small validation
         if(e.length === 0) return false;
+        switch(prop){
+            case prop.match(this.paddingMarginRegex):
+        }
+
+
         let newValue = null;
         if ((e.match(/^\d+/)) && (prop === "animationDuration")) {
             newValue = `${e}ms`;
@@ -88,7 +95,7 @@ class PropertyBox extends Component {
                     max="10000"
                     property={"Delay with showing-up/closing the canvas"}
                     val={forEdit['delay']}
-                    handleChange={e => this.handleChange(forEdit.id, e.target.value, "delay", much)}
+                    handleChange={e => this.handleChange(forEdit.id, e.target.value, "delay", much, this.min, this.max)}
                 />
             );
         }
@@ -123,7 +130,7 @@ class PropertyBox extends Component {
                             val={val}
                             max={this.max}
                             min={this.min}
-                            handleChange={e => this.handleChange(forEdit.id, e.target.value, property, much)}
+                            handleChange={e => this.handleChange(forEdit.id, e.target.value, property, much, this.min, this.max)}
                         />
                     )
                 } else if (property.match(this.radioRegex)) {

@@ -12,9 +12,11 @@ let initialState = {
 
 export default (state = initialState, action) => {
 
-    const { id, elemType, content, style, type, property, value, much, } = action;
+    const { id, elemType, content, style, type, property, value, much, data} = action;
     switch (type) {
 
+        case 'SET_HYDRATE_ELEMENTS':
+        return Object.assign({}, state, {elements: data});
 
         case 'ADD_ELEMENT':
             return {
