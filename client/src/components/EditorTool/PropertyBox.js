@@ -26,7 +26,6 @@ class PropertyBox extends Component {
     }
 
     handleChange(id, e, prop, much, min, max) {
-        console.log(prop, min, max, e);
         //small validation
         if(min > e && e < max) return false;
 

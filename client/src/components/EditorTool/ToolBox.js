@@ -54,13 +54,15 @@ class ToolBox extends Component {
     }
 
     refreshToNew(){
+        this.props.clearState();
+        this.props.initCanvas();
         localStorage.clear();
     }
 
     render() {
         
         let canvaslist = this.props.mainCanvas.canvases.map( canvas => {
-          
+         
             return(
              <li
                 onClick={() => this.props.selectCanvas(canvas.id)}

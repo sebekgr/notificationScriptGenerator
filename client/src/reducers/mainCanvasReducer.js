@@ -34,6 +34,9 @@ export default (state = initialState, action) => {
     const { property, id, value, type, name, style, transitionToNext, delay, elementsOrder, oldIndex, newIndex, url, data} = action;
     switch (type) {
 
+        case 'CLEAR_STATE':
+            return initialState;
+
         case 'SET_HYDRATE_CANVAS':
             return Object.assign({}, state, {canvases: data.canvases, url: data.url, overlay: data.overlay})
 

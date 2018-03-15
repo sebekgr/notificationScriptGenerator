@@ -15,6 +15,9 @@ export default (state = initialState, action) => {
     const { id, elemType, content, style, type, property, value, much, data} = action;
     switch (type) {
 
+        case 'CLEAR_STATE':
+            return initialState;
+
         case 'SET_HYDRATE_ELEMENTS':
         return Object.assign({}, state, {elements: data});
 

@@ -7,8 +7,7 @@ import * as actions from '../../actions/index';
 class Preview extends Component {
     componentDidMount() {
         window.addEventListener('beforeunload', () => {
-           // this.savingDate();
-            return null;
+           this.savingDate();
         });
 
         if (!localStorage.length) {

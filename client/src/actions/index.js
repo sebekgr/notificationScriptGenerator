@@ -19,7 +19,8 @@ import {
     updateCanvasContent,
     handleChangeUrl,
     updateCanvasOverlay,
-    setHydrateCanvas
+    setHydrateCanvas,
+    clearState
 } from './canvas';
 
 import {
@@ -47,7 +48,8 @@ export {
     handleChangeUrl,
     updateCanvasOverlay,
     setHydrateElements,
-    setHydrateCanvas
+    setHydrateCanvas,
+    clearState
 }
 
 
