@@ -1,16 +1,12 @@
 import React from 'react';
+import {Switch, Card} from 'antd';
 
 
 const PropertyItemBackground = ({val, handleChange, isChecked}) =>{
     return(
-        <div>
-            <p>Background settings:</p>
-            <label htmlFor="overlay">Overlay</label>
-            <input checked={isChecked} type="radio" id="overlay" value="overlay" onChange={handleChange}/>
-
-            <label htmlFor="overlay">Shadow</label>
-            <input checked={!isChecked} type="radio" id="overlay" value="shadow" onChange={handleChange}/>
-        </div>
+        <Card title={"Background"} style={{backgroundColor: '#40a9ff'}}>
+            <Switch checked={isChecked} onChange={handleChange} checkedChildren="Shadow" unCheckedChildren="Overlay" />
+        </Card>
     );
 
 }

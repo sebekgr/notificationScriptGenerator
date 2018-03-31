@@ -77,3 +77,11 @@ export const clearState = () => {
         type: 'CLEAR_STATE'
     }
 }
+
+export const removeCanvas = (id, children) => {
+    return {
+        type: 'REMOVE_CANVAS',
+        id,
+        children
+    }
+}

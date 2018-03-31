@@ -362,101 +362,56 @@
   }
 
 
-
-
-
-
-
-
-/*scrollbar*/
-.style-3::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
+form::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
-.style-3::-webkit-scrollbar
-{
-	width: 6px;
-	background-color: #F5F5F5;
+
+
+/*scroll*/
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 7px;
 }
 
-.style-3::-webkit-scrollbar-thumb
-{
-	background-color: #000000;
+::-webkit-scrollbar-track {
+  height: 4px;
+  border-radius: 2px;
+  background-color: #f5f5f5;
 }
+
+::-webkit-scrollbar-thumb {
+  background-color: #001529;
+  height: 4px;
+  border-radius: 4px;
+}
+
 
 /*canvas style*/
 .canvasList{
   display: flex;
 }
-.canvasTag{
-  padding:5px;
-  border: 1px solid black;
-  background-color: #fff;
-  border-radius: 3px;
+
+
+.fullHeight{
+  min-height: 100%;
+  height: 100%;
 }
 
 
-.editorBoxContainer {
-    border: 1px solid red;
-    display: grid;
-    grid-template-columns: .3fr 1fr;
-    grid-template-rows: 50px 1fr;
-    height: calc(100vh - 35px);
-}
-.toolBoxContainer{
-   grid-column: 1/ span 2;
-   grid-row: 1/ span 1;
-   background: green;
-   display: flex;
-   align-items: center;
-   padding: 20px;
-}
-.toolBoxList{
-    display: flex;
+
+.editorMainCanvasWrapper{
+background-image: url('bg.svg');
+
+height: auto;
+min-height: 100%;
+padding:30px;
+overflow: auto;
 }
 
-.urlInput{
-    width: 200px;
-}
-
-.propertyListContainer{
-    display: flex;
-    flex-flow: column wrap;
-    background: orange;
-    justify-content:flex-start;
-    padding: 10px;
-}
-.propertyValue{
-    width: 100%;
-    margin: 10px 0;
-    box-sizing: border-box;
-}
-
-.propertyListBox{
-    max-height: 80vh;
-    overflow-y: auto;
-}
-.propertyLabel{
-    flex: 1;
-}
-.previewBox{
-    background-image: url('bg.png');
-    overflow:auto;
- }
- .previewBox:after {
-  visibility: hidden;
-  display: block;
-  font-size: 0;
-  content: " ";
-  clear: both;
-  height: 0;
-}
-.previewWrapper{
-min-height:100%;
-min-width:100%;
-}
 .previewWrapper:after {
   visibility: hidden;
   display: block;
@@ -478,7 +433,7 @@ min-width:100%;
     background-color: rgb(218, 218, 218);
 }
 .toolBoxElement{
-   cursor: pointer;
+   margin-right:5px;
 }
 
 /*canvas*/
@@ -497,15 +452,21 @@ min-width:100%;
 
 /*elemnts*/
 
-span.element{
+div.element{
   display: block!important;
   border: 1px solid grey;
   opacity: .5;
   text-align: center;
   width:100%;
 }
-p.element, h1.element, h2.element, span.element, img.element{
+
+p.element, h1.element, h2.element, div.element, img.element{
   box-sizing: border-box!important;
+}
+element::after{
+  content: "";
+  clear: both;
+  display: table;
 }
 .element{
     cursor: pointer;
@@ -520,36 +481,10 @@ p.element, h1.element, h2.element, span.element, img.element{
     box-shadow: 0 0 5px 5px rgba(115,138,230,1),0 0 5px 5px rgba(115,138,230,1)!important;
     z-index:10!important;
 }
-.deleteComponentBtn{
-    position: absolute;
-    display: none;
-    border:0;
-    z-index: 9999;
-    border-radius: 50%;
-    border: 2px solid red;
-    background: transparent;
-    color: red;
-    font-weight: bold;
-    font-size:20px;
-}
 
-.deleteComponentBtn:hover{
-    display: block;
-}
-
-.element:hover + .deleteComponentBtn{
-    display: block;
-}
-
-.wrapperBtnComponent{
-  border:0;
-  background: transparent;
-}
-
-
-
-/*tester*/
-
-.closeCanvasbtn{
-  align-self: start;
+.modalContent{
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  justify-items: center;
 }

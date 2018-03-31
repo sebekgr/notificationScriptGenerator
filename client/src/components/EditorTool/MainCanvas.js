@@ -5,25 +5,19 @@ import ComponentElement from './Assets/ComponentElement';
 import { SortableContainer } from 'react-sortable-hoc';
 
 class MainCanvas extends Component {
-
-    
+ 
 
 
     deleteElement(id, e) {
-        this.props.deleteElement(id);
         e.stopPropagation();
+        this.props.deleteElement(id);
+        
     }
 
     selectElement(id, e) {
-        this.props.selectElement(id);
         e.stopPropagation();
-    }
-
-    onHover(e, refBtnKey) {
-        let y = Math.trunc(e.target.offsetTop) - 15;
-        let x = Math.trunc(e.target.offsetLeft) - 15;
-
-        this[refBtnKey].style.cssText = `top: ${y}px; left: ${x}px; `;
+        this.props.selectElement(id);
+        
     }
 
     onSortEnd = ({ oldIndex, newIndex }) => {
@@ -46,7 +40,7 @@ class MainCanvas extends Component {
     canvasStyle() {
         let style = this.props.mainCanvas.selectedCanvas.style;
         if (!this.props.mainCanvas.overlay) {
-            return style = Object.assign({}, style, { boxShadow: '-1px 1px 50px 10px rgba(0,0,0,0.25)', WebkitboxShadow: '-1px 1px 50px 10px rgba(0,0,0,0.25)' });
+            return style = Object.assign({}, style, { boxShadow: '-1px 1px 50px 10px rgba(0,0,0,0.5)', WebkitboxShadow: '-1px 1px 50px 10px rgba(0,0,0,0.5)' });
         }
         return style;
     }
@@ -57,26 +51,16 @@ class MainCanvas extends Component {
             return (
                 <ul className="sortableList">
                     {elements.map((element, index) => {
-                        const refBtnName = element.id + "btn";
-                        return [
-
+                        return (
                             <ComponentElement
                                 key={element.id}
                                 index={index}
                                 {...element}
-                                onHover={(e) => this.onHover(e, refBtnName)}
                                 active={isActive === element.id}
-                                onSelect={(e) => this.selectElement(element.id, e)}
-                            />,
-                            <button
-                                key={element.id * 2}
-                                onClick={(e) => this.deleteElement(element.id, e)}
-                                className="deleteComponentBtn"
-                                ref={ref => this[refBtnName] = ref}
-                            >X
-                            </button>
-
-                        ]
+                                onSelect={(e) =>this.selectElement(element.id, e)}
+                                onDelete={(e) => this.deleteElement(element.id, e)}
+                            />
+                        )
                     })}
                 </ul>
             );

@@ -20,13 +20,19 @@ import {
     handleChangeUrl,
     updateCanvasOverlay,
     setHydrateCanvas,
-    clearState
+    clearState,
+    removeCanvas
 } from './canvas';
 
 import {
     fetchUser,
     logoutUser
 } from './user';
+
+import {
+    generateScript,
+    showScriptPopUp
+} from './script';
 
 
 export {
@@ -49,7 +55,10 @@ export {
     updateCanvasOverlay,
     setHydrateElements,
     setHydrateCanvas,
-    clearState
+    clearState,
+    removeCanvas,
+    generateScript,
+    showScriptPopUp
 }
 
 

@@ -1,22 +1,24 @@
 import React from 'react';
+import { Card, Radio} from 'antd';
+const RadioButton = Radio.Button;
+const RadioGroup = Radio.Group;
 
-
-const PropertyItemRadioFloat = ({property, handleChange, type, isChecked}) => {
-    property = property.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
-    property = property.charAt(0).toUpperCase() + property.slice(1)
+const PropertyItemRadio = ({id, property, handleChange, type, isChecked}) => {
+    let newProp = property.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
+        newProp = newProp.charAt(0).toUpperCase() + newProp.slice(1);
     const propertyRadioItem = type.map( (tname, i) => {
-        return[
-            <input key={i} checked={tname === isChecked} onChange={handleChange} type="radio" className="propertyValue" value={tname} id={tname} />,
-                <label key={--i} htmlFor={tname} className="property-label">{tname}</label>
-        ]
+        return (
+            <RadioButton key={i} checked={tname === isChecked} value={tname} id={tname}> {tname}</RadioButton>
+        );
     })
 
     return(
-        <div>
-            {property}
+        <Card title={newProp} style={{backgroundColor: '#40a9ff'}}>
+            <RadioGroup onChange={handleChange}>
             {propertyRadioItem}
-        </div>
+            </RadioGroup>
+        </Card>
     )
 }
 
-export default PropertyItemRadioFloat;
+export default PropertyItemRadio;

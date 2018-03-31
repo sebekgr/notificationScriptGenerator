@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import MainCanvas from './MainCanvas';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
-
+import { Layout} from 'antd';
 
 class Preview extends Component {
     componentDidMount() {
         window.addEventListener('beforeunload', () => {
-           this.savingDate();
+            this.savingDate();
         });
 
         if (!localStorage.length) {
@@ -35,11 +35,12 @@ class Preview extends Component {
 
     render() {
         return (
-            <div className="previewBox style-3" >
-                <div className="previewWrapper" style={{ padding: '30px', background: this.props.mainCanvas.overlay ? 'rgba(0,0,0,0.5)' : null }}>
+            <Layout style={{height: 'auto',backgroundColor: this.props.mainCanvas.overlay ? 'rgba(0,0,0,0.5)' : null }}>
+                <div className="editorMainCanvasWrapper">
                     <MainCanvas current={this.props.selectedCanvas} />
                 </div>
-            </div>
+
+            </Layout>
         )
     }
 }

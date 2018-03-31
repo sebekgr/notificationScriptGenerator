@@ -7,8 +7,7 @@ import PropertyItemRadio from './Assets/PropertyItemRadio';
 import PropertyItemRange from './Assets/PropertyItemRange';
 import PropertyItemSelect from './Assets/PropertyItemSelect';
 import PropertyItemBackground from './Assets/PropertyItemBackground';
-
-
+import { Layout } from  'antd';
 
 class PropertyBox extends Component {
 
@@ -23,33 +22,38 @@ class PropertyBox extends Component {
         this.widthHeightRegex = /(^width|^height)/i;
         this.min = 1000;
         this.max = 100000;
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(id, e, prop, much, min, max) {
+    // handleChange(id, e, prop, much, min, max) {
+    handleChange(value, id, property, much, max = this.max, min = this.max ){
         //small validation
-        if(min > e && e < max) return false;
+       if(min > value && value < max){
+           return false;
+       } 
 
         let newValue = null;
         
-        if ((e.match(/^\d+/)) && ((prop === "animationDuration") || prop === "delay")) {
-            newValue = `${e}ms`;
-        } else if (e.match(/^\d+/)) {
-            newValue = `${e}px`;
+        if ((String(value).match(/^\d+/)) && ((property === "animationDuration") || property === "delay")) {
+            newValue = `${value}ms`;
+        } else if (String(value).match(/^\d+/)) {
+            newValue = `${value}px`;
         } else {
-            newValue = e;
+            newValue = value;
         }
         if (Object.keys(this.props.elements.selectedElement).length === 0 && much < 2) {
-            if (prop === "delay") {
-                this.props.updateCanvasContent(id, newValue, prop)
+            if (property === "delay") {
+                this.props.updateCanvasContent(id, newValue, property)
             } else {
-                this.props.updateCanvas(id, newValue, prop);
+                this.props.updateCanvas(id, newValue, property);
             }
         } else if (Object.keys(this.props.elements.selectedElement).length !== 0 && much < 2) {
-            this.props.updateElement(id, newValue, prop);
-
+            this.props.updateElement(id, newValue, property);
+            
         }
         if (much > 1) {
-            this.props.updateForm(id, newValue, prop, much);
+            this.props.updateForm(id, newValue, property, much);
+            
         }
 
     }
@@ -62,23 +66,26 @@ class PropertyBox extends Component {
         }
     }
 
-    updateCanvasOverlay(e){
+    updateCanvasBackground(e){
         this.props.updateCanvasOverlay(e);
     }
 
-    renderPropertyItem(forEdit, forEditStyle, listSelect, content, name = "Content", much = 1) {
+    renderPropertyItem(forEdit, forEditStyle, listSelect, content, name = "Content", much = 1){
         let i = 1 * much;
         let j = 100 * much;
         let list = []
         const { floatRadio, alignRadio } = this.props.elements;
 
-        if (forEdit.hasOwnProperty('elemType')) {
+
+        list.push(<div key={`${i} div`} style={{backgroundColor:'black', width: '100%', height: '4px'}}>----</div>)
+        if (forEdit.hasOwnProperty('elemType') && forEdit.elemType !== "div") {
             var { float, textAlign } = forEditStyle;
             list.push(
                 <PropertyItem
                     key={i++}
                     property={name}
                     val={content}
+                    much={much}
                     handleChange={(e) => this.updateElementContent(forEdit.id, e, much)}
                 />
             );
@@ -86,14 +93,17 @@ class PropertyBox extends Component {
 
         if (forEdit.hasOwnProperty('delay')) {
             list.push(
+
                 <PropertyItemRange
-                    key={i++}
-                    min="1000"
-                    max="10000"
-                    property={"Delay with showing-up/closing the canvas"}
-                    val={forEdit['delay']}
-                    handleChange={e => this.handleChange(forEdit.id, e.target.value, "delay", much, e.target.min, e.target.max)}
-                />
+                            key={j++}
+                            id={forEdit.id}
+                            property={"delay"}
+                            value={forEdit['delay']}
+                            max={100000}
+                            min={1000}
+                            much={much}
+                            handleChange={this.handleChange}
+                        />
             );
         }
         if (forEditStyle) {
@@ -123,11 +133,13 @@ class PropertyBox extends Component {
                     list.push(
                         <PropertyItemRange
                             key={j++}
+                            id={forEdit.id}
                             property={property}
-                            val={val}
+                            value={val}
                             max={this.max}
                             min={this.min}
-                            handleChange={e => this.handleChange(forEdit.id, e.target.value, property, much, e.target.min, e.target.max)}
+                            much={much}
+                            handleChange={this.handleChange}
                         />
                     )
                 } else if (property.match(this.radioRegex)) {
@@ -140,32 +152,37 @@ class PropertyBox extends Component {
                             val={val}
                             type={type}
                             isChecked={isChecked}
-                            handleChange={e => this.handleChange(forEdit.id, e.target.value, property, much)}
+                            handleChange={(e) => this.handleChange(e.target.value, forEdit.id, property, much)}
                         />
                     )
                 } else if (property.match(this.colorRegex)) {
                     list.push(
                         <PropertyItemColor
+                            id={forEdit.id}
+                            much={much}
                             key={j++}
                             property={property}
                             val={val}
-                            handleChange={color => this.handleChange(forEdit.id, color.hex, property, much)}
+                            handleChange={this.handleChange}
                         />
                     )
                 } else if (property.match(this.selectRegex)) {
                     list.push(
                         <PropertyItemSelect
                             property={property}
+                            id={forEdit.id}
+                            much={much}
                             val={val}
                             key={j++}
                             selectList={listSelect}
-                            handleChange={e => this.handleChange(forEdit.id, e.target.value, property, much)}
+                            handleChange={this.handleChange}
                         />
                     )
                 }
             }
         }
-        return <div key={j * 6} style={{ border: '2px solid red', margin: '10px 0' }}>{list}</div>;
+        return  list
+                  
     }
 
     renderTest(selectedItem, style, listSelect) {
@@ -194,16 +211,17 @@ class PropertyBox extends Component {
         let selectedItem = Object.keys(selectedElement).length === 0 ? selectedCanvas : selectedElement;
         let listSelect = selectedItem === selectedElement ? fontList : animationList;
         return (
-            <div className="propertyListContainer">
-                <h3>Property editor</h3>
-                <ul className="propertyListBox style-3">
-                    <PropertyItemBackground
-                        handleChange={e => this.updateCanvasOverlay(e.target.value)}
-                        isChecked={this.props.mainCanvas.overlay} />
-                    {this.renderTest(selectedItem, selectedItem.style, listSelect)}
-                </ul>
-            </div>
-        )
+            <Layout style={{overflowY: 'auto',overflowX: 'hidden', height:'100%', width: 'auto'}}>
+                
+                    <PropertyItemBackground key="scs"
+                        handleChange={(e) => this.updateCanvasBackground(e)}
+                        isChecked={this.props.mainCanvas.overlay}
+                    />
+
+                   {this.renderTest(selectedItem, selectedItem.style, listSelect)}
+                   </Layout>
+
+        );
     }
 
 }

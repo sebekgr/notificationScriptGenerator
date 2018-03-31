@@ -11,13 +11,21 @@
     },
     "/auth/current_user": {
       "target": "http://localhost:9000"
+    },
+    "/api/add": {
+      "target": "http://localhost:9000"
+    },
+    "/script/generate": {
+      "target": "http://localhost:9000"
     }
   },
   "dependencies": {
+    "antd": "^3.3.0",
     "axios": "^0.17.1",
     "history": "^4.7.2",
     "react": "^16.2.0",
     "react-color": "^2.14.0",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
@@ -34,7 +42,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "./",
   "devDependencies": {
     "redux-devtools-extension": "^2.13.2"
   }

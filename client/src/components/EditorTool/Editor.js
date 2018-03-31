@@ -1,24 +1,28 @@
-import React, {Component} from 'react';
-import ToolBox from './ToolBox';
+import React, { Component } from 'react';
 import PropertyBox from './PropertyBox';
 import Preview from './Preview';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { Layout} from 'antd';
+const {   Sider } = Layout;
 
 class Editor extends Component {
 
     render() {
-        return(
-            <div className="editorBoxContainer">
-               <ToolBox />
-               <PropertyBox/>
-               <Preview />
-            </div>
-        )
+        return[
+                <Sider key="sider">
+                    
+                        <PropertyBox />
+                    
+                </Sider>
+            ,
+                <Preview key="preview" />
+
+        ]
     }
 }
 
-const mapStateToProps = ({elements, mainCanvas}) => {
-    return {elements, mainCanvas};
+const mapStateToProps = ({ elements, mainCanvas }) => {
+    return { elements, mainCanvas };
 }
 
 export default connect(mapStateToProps)(Editor);

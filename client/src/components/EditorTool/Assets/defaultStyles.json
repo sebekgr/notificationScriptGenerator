@@ -102,8 +102,9 @@
 		},
 		"content": "https://thesocietypages.org/socimages/files/2009/05/nopic_192.gif"
 	},
-	"span": {
-		"height": "40px"
+	"div": {
+		"height": "40px",
+		"width": "200px"
 	},
 	"form": {
 		"style": {
@@ -117,7 +118,8 @@
 				"paddingBottom": "2px",
 				"paddingLeft": "2px",
 				"paddingRight": "2px",
-				"backgroundColor": "#df44fd"
+				"width": "200px",
+				"height": "auto"
 			},
 			"submitStyle": {
 				"width": "50px",
@@ -160,4 +162,5 @@
 			"submit": "Subscribe"
 		}
 	}
+	
 }

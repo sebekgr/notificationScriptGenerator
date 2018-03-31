@@ -4,15 +4,14 @@ import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 import store, { history } from './store'
 import App from './components/App';
-
+import 'antd/dist/antd.css';
+//localStorage.clear();
 const root = document.querySelector('#root')
 
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-
         <App />
-
     </ConnectedRouter>
   </Provider>,
   root

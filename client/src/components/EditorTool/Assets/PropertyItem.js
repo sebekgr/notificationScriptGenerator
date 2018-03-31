@@ -1,22 +1,21 @@
 import React from 'react';
-
+import { Card, Input} from 'antd';
 
 const PropertyItem = ({property, val, handleChange}) => {
-    property = property.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
-    property = property.charAt(0).toUpperCase() + property.slice(1)
+    let newProp = property.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
+        newProp = newProp.charAt(0).toUpperCase() + newProp.slice(1);
 
     return(
-        <div>
-            <label className="propertyLabel">{property}</label>
-            <input
-                type="text"
-                className="propertyValue"
+        <Card title={newProp} style={{backgroundColor: '#40a9ff'}}>
+            <Input
                 value={val}
                 onChange={handleChange}
                 onFocus={e => e.target.select()}
-                />
-        </div>
+             />
+        </Card>
     )
 }
 
 export default PropertyItem;
+
+

@@ -2,21 +2,21 @@
 import { arrayMove } from 'react-sortable-hoc';
 
 const initialState = {
-    url: "http://pracuj.pl/",
+    url: "",
     animationList: ["bounce", "flip", "fadeInDown", "fadeInLeft", "fadeInRight", "zoomIn", "rubberBand"],
-    overlay: true,
+    overlay: false,
     canvases: [
         {
             id: 4563,
             name: "Main canvas",
-            delay: "5000ms",
+            delay: "3000ms",
             style: {
                 "animationDuration": "1000ms",
-			"backgroundColor": "#ffffff",
+			"backgroundColor": "#f0f2f5",
 			"animationName": "bounce",
 			"border": "none",
-			"width": "500px",
-			"height": "500px",
+			"width": "600px",
+			"height": "400px",
 			"paddingTop": "2px",
 			"paddingBottom": "2px",
 			"paddingLeft": "2px",
@@ -34,6 +34,10 @@ export default (state = initialState, action) => {
     const { property, id, value, type, name, style, transitionToNext, delay, elementsOrder, oldIndex, newIndex, url, data} = action;
     switch (type) {
 
+        case 'REMOVE_CANVAS':
+            const notRemovedCanvas = state.canvases.filter( canvas => canvas.id !== id);
+        return Object.assign({}, state, {canvases: notRemovedCanvas, selectedCanvas: state.canvases[0]});
+
         case 'CLEAR_STATE':
             return initialState;
 
@@ -41,8 +45,8 @@ export default (state = initialState, action) => {
             return Object.assign({}, state, {canvases: data.canvases, url: data.url, overlay: data.overlay})
 
         case 'UPDATE_OVERLAY':
-       
-        return Object.assign({}, state, {overlay: value === 'overlay'});
+
+        return Object.assign({}, state, {overlay: value});
 
         case 'CHANGE_URL':
             return {...state, url};

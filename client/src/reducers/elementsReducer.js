@@ -12,14 +12,19 @@ let initialState = {
 
 export default (state = initialState, action) => {
 
-    const { id, elemType, content, style, type, property, value, much, data} = action;
+    const { id, elemType, content, style, type, property, value, much, data, children } = action;
     switch (type) {
+
+        case 'REMOVE_CANVAS':
+            let elementsAfterDelete = state.elements.filter(element => !children.includes(element.id));
+
+            return Object.assign({}, state, { elements: elementsAfterDelete });
 
         case 'CLEAR_STATE':
             return initialState;
 
         case 'SET_HYDRATE_ELEMENTS':
-        return Object.assign({}, state, {elements: data});
+            return Object.assign({}, state, { elements: data });
 
         case 'ADD_ELEMENT':
             return {

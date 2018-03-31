@@ -5,9 +5,8 @@ export const fetchUser = () => async dispatch => {
     dispatch({type: 'FETCH_USER', res: res.data});
 };
 
-
-
 export const logoutUser = () => async dispatch => {
-    const res = axios.get('/auth/logout');
+    await axios.get('/auth/logout');
     dispatch({type: 'LOGOUT_USER'});
 };
+
