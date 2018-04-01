@@ -35,7 +35,7 @@
                 return false;
             }
             //testFetch(content.action);
-            testFetch('https://jsonplaceholder.typicode.com/posts/1');
+            testFetch(content.action, email);
         }, false);
         form.innerHTML = `
             <input type="email" placeholder="${content.input}" style="${retrieveStyle(null, style.inputStyle)}" required/>
@@ -43,11 +43,16 @@
             `;
         return form;
     }
-    function testFetch(url) {
+    function testFetch(url, data) {
         let fDiv = document.getElementById(parents[0].id);
         let oo = document.querySelector('#oo');
         fetch(url, {
-            method: 'GET'
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
         }).then(res => {
             if (parents.length === 2) {
                 oo.insertBefore(parents[1], fDiv);

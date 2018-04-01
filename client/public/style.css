@@ -472,7 +472,10 @@ element::after{
     cursor: pointer;
     box-sizing: border-box;
 }
-
+.closeCanvasBtn{
+  background:#fff;border-radius:50%;border:2px solid black!important;
+  align-self: start!important;
+}
 
 .active{
     position: relative;

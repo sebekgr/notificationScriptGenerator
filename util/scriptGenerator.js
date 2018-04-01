@@ -4,6 +4,7 @@ const util = require('util');
 const crypto = require('crypto');
 const {promisify} = require('util');
 const writeFile = promisify(fs.writeFile);
+const readdir = promisify(fs.readdir);
 const mkdir = promisify(fs.mkdir);
 
 async function createScript(data, user, url) {
@@ -15,9 +16,14 @@ async function createScript(data, user, url) {
     const scriptContent = util.inspect(data, false, null);
 
     try {
-        //make directory
-        const directory = await mkdir(`${__dirname}/../files`);
-        //save file
+
+        //read directory
+        const directory = await readdir(`${__dirname}/../`, 'utf8');
+        if(!directory.includes('files')) {
+            //make directory
+            await mkdir(`${__dirname}/../files`);
+        }
+           //save file
         const file = await writeFile(`${__dirname}/../files/${fileName}.js`, 
         `(function(){const ed=${scriptContent};`
         , 'utf8');
@@ -25,13 +31,7 @@ async function createScript(data, user, url) {
         return {fileName, status: 'success'};
 
     } catch (error) {
-        if(error.code === 'EEXIST') {
-            console.log('directory already exists');
-            return {fileName, status: 'success'};
-        } else {
-            return {status: 'error'}
-        }
-        console.error(error);
+        return {status: 'error'}
     }
 
     

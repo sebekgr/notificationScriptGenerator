@@ -70,7 +70,9 @@ class Tester extends Component {
         return (
             <div key="kcanvas" style={{ padding: '30px 0', overflow: 'auto', background: this.props.mainCanvas.overlay ? 'rgba(0,0,0,0.5)' : null, position: 'fixed', justifyContent: 'center', alignContent: 'center', zIndex: '99', margin: 'auto', top: '0', bottom: '0', left: '0', right: '0', display: 'flex' }}>
                 <div style={canvasStyle} > {children}  </div>
-                <button onClick={() => this.onCloseCanvas()} style={{ alignSelf: 'start' }}>Close</button>
+                <button onClick={() => this.onCloseCanvas()}
+                    style={{background:'#fff',borderRadius:'50%',border:'2px solid black', alignSelf: 'start'}}
+                >✖</button>
             </div>
         );
     }
