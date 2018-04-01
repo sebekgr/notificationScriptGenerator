@@ -8,19 +8,18 @@ async function createScript(data, user, url) {
     const secret = user;
     const hash = crypto.createHmac('sha256', secret);
     hash.update(text);
-    const fileName = hash.digest('hex');
+    const fileName = hash.digest('hex').slice(0,12);
 
     const scriptContent = util.inspect(data, false, null);
     
     await fs.writeFile(`${__dirname}/../files/${fileName}.js`, 
-        `const exampleData2=${scriptContent}`
+        `(function(){const ed=${scriptContent}`
         , 'utf8', (err) => {
             if (err) console.log(err);
             console.log("files has been created");
     });
 
-    return fileName.slice(0, 12);
-
+    return fileName;
     
 }
 

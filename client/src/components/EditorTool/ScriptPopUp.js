@@ -80,6 +80,7 @@ class ScriptPopUp extends Component {
                     <p>Now please copy link below and place into your index.html file</p>
                     <CopyToClipboard onCopy={() => this.setState({ copied: true })} text={this.props.script.generatedUrl}>
                         <Input
+                            readonly="readonly"
                             defaultValue={this.props.script.generatedUrl}
                             onFocus={e => e.target.select()}
                         />
