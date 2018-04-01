@@ -27,9 +27,10 @@ class Tester extends Component {
 
     async onSubmit(e) {
         e.preventDefault();
+
         try {
             let mail = e.target[0].value;
-            let res = await axios.post('/api/add', { "mail": mail });
+            let res = await axios.post(e.target.action, { "mail": mail });
             console.log(res.data);
 
             if (this.props.mainCanvas.canvases.length > 1) {

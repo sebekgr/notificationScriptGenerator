@@ -50,4 +50,13 @@ module.exports = app => {
      });
 
 
+     app.post('/test/', (req, res) => {
+        res.set({
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST'
+        })
+            console.log(req.body);
+
+            res.send(req.body).status(200);
+     })
 }
