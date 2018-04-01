@@ -16,3 +16,8 @@ export const showScriptPopUp = visible => {
         visible
     }
 }
+export const closeScriptPopUp = () => {
+    return {
+        type: 'CLOSE',
+    }
+}

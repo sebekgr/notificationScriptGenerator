@@ -9,7 +9,7 @@ const readFile = promisify(fs.readFile);
 module.exports = app => {
     app.post('/script/generate', loginRequired, async (req, res) => {
         const {canvasesReady, overlay, animation, url, user} = req.body;
-        const data = {canvasesReady, overlay, animation, url};
+        const data = {canvasesReady, overlay, animation};
         const fname = await scriptGenerator(data, user, url);
         try {
             await User.findOneAndUpdate({_id: user}, {host: url, script: fname});
@@ -28,9 +28,7 @@ module.exports = app => {
             'Content-Type': 'text/plain',
             'Access-Control-Allow-Origin': '*'
         })
-
         //find host who wants connect
-        //console.log(req.params);
         const host = new URL(req.headers.referer).href;
         const query = await User.findOne({host}, {script: 1});
         if(query === null) {
@@ -42,7 +40,8 @@ module.exports = app => {
         const coreScript = await readFile(`${__dirname}/../util/core.js`, 'utf8');
         //sending scripts
         //res.status(200).send(userScript, coreScript);
-        res.send(userScript + coreScript);
+        console.log('sending script');
+        res.status(200).send(userScript + coreScript);
         }
         
 

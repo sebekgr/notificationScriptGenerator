@@ -45,7 +45,6 @@ class ScriptPopUp extends Component {
                 }
                 element.style = style;
             }
-            console.log(style);
         });
         const shadow = '-1px 1px 50px 10px rgba(0,0,0,0.5)';
         let animation ='';
@@ -80,7 +79,7 @@ class ScriptPopUp extends Component {
                     <p>Now please copy link below and place into your index.html file</p>
                     <CopyToClipboard onCopy={() => this.setState({ copied: true })} text={this.props.script.generatedUrl}>
                         <Input
-                            readonly="readonly"
+                            readOnly={true}
                             defaultValue={this.props.script.generatedUrl}
                             onFocus={e => e.target.select()}
                         />
@@ -103,6 +102,10 @@ class ScriptPopUp extends Component {
     onClose() {
         this.props.showScriptPopUp(false)
         this.setState({ copied: false })
+    }
+
+    componentWillUnmount() {
+        this.props.closeScriptPopUp();
     }
 
     render() {

@@ -31,7 +31,8 @@ import {
 
 import {
     generateScript,
-    showScriptPopUp
+    showScriptPopUp,
+    closeScriptPopUp
 } from './script';
 
 
@@ -58,7 +59,8 @@ export {
     clearState,
     removeCanvas,
     generateScript,
-    showScriptPopUp
+    showScriptPopUp,
+    closeScriptPopUp
 }
 
 

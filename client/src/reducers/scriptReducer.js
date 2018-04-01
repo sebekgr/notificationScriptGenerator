@@ -14,5 +14,8 @@ export default (state = initialState, action) => {
         return Object.assign({}, state, {visible});
         default:
             return state;
+
+        case 'CLOSE':
+        return initialState;
     }
 }

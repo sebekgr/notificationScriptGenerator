@@ -13,7 +13,7 @@ async function createScript(data, user, url) {
     const scriptContent = util.inspect(data, false, null);
     
     await fs.writeFile(`${__dirname}/../files/${fileName}.js`, 
-        `(function(){const ed=${scriptContent}`
+        `(function(){const ed=${scriptContent};`
         , 'utf8', (err) => {
             if (err) console.log(err);
             console.log("files has been created");

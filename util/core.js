@@ -141,8 +141,7 @@
     function closeCanvas() {
         document.body.removeChild(document.querySelector('#oo'));
     }
-    if(window.location.href === ed.url) return init();
-    else return fals;
+    init();
     
     
 })();
