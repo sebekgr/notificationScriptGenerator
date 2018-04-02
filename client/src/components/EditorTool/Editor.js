@@ -1,23 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropertyBox from './PropertyBox';
 import Preview from './Preview';
 import { connect } from 'react-redux';
-import { Layout} from 'antd';
-const {   Sider } = Layout;
+import { Layout } from 'antd';
+const { Sider } = Layout;
 
 class Editor extends Component {
 
     render() {
-        return[
-                <Sider key="sider">
-                    
-                        <PropertyBox />
-                    
+        return (
+            <Fragment>
+                <Sider>
+                    <PropertyBox />
                 </Sider>
-            ,
-                <Preview key="preview" />
-
-        ]
+                <Preview/>
+            </Fragment>
+        )
     }
 }
 

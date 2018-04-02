@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import Profile from './Profile';
-import Editor from './EditorTool/Editor';
+// import Profile from './Profile';
+// import Editor from './EditorTool/Editor';
 import Home from './Home';
 import NotFound from './NotFound';
 import MyHeader from './MyHeader';
-import { Layout} from 'antd';
+import { Layout, Icon} from 'antd';
+import Loadable from 'react-loadable';
+
 const { Footer, Header } = Layout;
 
 const PrivateRoute = ({ auth, component: Component, ...rest }) => (
@@ -22,6 +24,17 @@ const PrivateRoute = ({ auth, component: Component, ...rest }) => (
         }
     />
 );
+
+const Loading = () => <div> <Icon type="loading" /> </div>;
+const AsyncEditor = Loadable({
+    loader: () => import('./EditorTool/Editor'),
+    loading: Loading
+});
+
+const AsyncProfile = Loadable({
+    loader: () => import('./Profile'),
+    loading: Loading
+});
 
 class App extends Component {
 
@@ -38,8 +51,8 @@ class App extends Component {
          
                     <Layout style={{height: 'auto'}}>
                         <Route exact path="/" component={Home} />
-                        <PrivateRoute exact path="/profile" component={Profile} auth={this.props.auth} />
-                        <PrivateRoute exact path="/profile/editor" component={Editor} auth={this.props.auth} />
+                        <PrivateRoute exact path="/profile" component={AsyncProfile} auth={this.props.auth} />
+                        <PrivateRoute exact path="/profile/editor" component={AsyncEditor} auth={this.props.auth} />
                     </Layout>
                 
                 {this.props.location.pathname !== '/profile/editor' ? <Footer style={{ textAlign: 'center', height:'10vh' }}> Notification Generator ©{new Date().getFullYear()} Created by Sebastian Gralikowski </Footer> : null}
