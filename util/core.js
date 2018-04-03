@@ -29,7 +29,7 @@
         form.style.display = 'inline-block';
         form.addEventListener('submit', e => {
             e.preventDefault();
-            const email = e.target[0].value;
+            const email = e.target[0].value.trim();
             const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             if (!regex.test(email)) {
                 alert("Entar a valid email");
@@ -51,7 +51,8 @@
             method: 'POST',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'mode': 'cors'
             },
             body: JSON.stringify(data)
         }).then(res => {
@@ -69,15 +70,6 @@
             .catch((error) => {
                 alert("Sorry but something went wrong! Please try again soon")
             })
-    }
-    
-    function formAction(url, data) {
-        fetch(url, {
-            method: 'GET',
-            body: JSON.stringify(data)
-        }).then(res => res.json())
-            .then(data => console.log(data))
-            .catch(alert("dobre w chuj error ;("))
     }
     
     //createchildren

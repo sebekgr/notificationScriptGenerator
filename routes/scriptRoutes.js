@@ -53,7 +53,7 @@ module.exports = app => {
      app.post('/test', (req, res) => {
         res.set({
             'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'POST',
+            'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type, Authorization'
         })
             console.log(req.body);
