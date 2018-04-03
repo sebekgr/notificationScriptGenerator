@@ -51,4 +51,7 @@ if(process.env.NODE_ENV === 'production') {
     });
 }
 
+//heroku keepalive
+setInterval(() => {app.get('https://tranquil-savannah-34304.herokuapp.com/')},300000);
+
 app.listen(PORT, () => {console.log(`server  run at ${9000}`)});
