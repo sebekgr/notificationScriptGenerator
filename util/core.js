@@ -26,6 +26,7 @@
     function createForm(content, style) {
         let form = document.createElement('form');
         form = retrieveStyle(form, style.formStyle);
+        form.style.display = 'inline-block';
         form.addEventListener('submit', e => {
             e.preventDefault();
             const email = e.target[0].value;
@@ -123,14 +124,19 @@
     
     //injecting css for animation
     function animationInject() {
+        let fonts = document.createElement('link');
+        fonts.href = 'https://fonts.googleapis.com/css?family=Josefin+Sans|Karma|Lato|Open+Sans+Condensed:300';
+        fonts.rel = 'stylesheet';
         const head = document.querySelector('head');
         let style = document.querySelector('style');
         if (!style) {
             style = document.createElement('style');
             style.innerText = ed.animation;
             head.appendChild(style);
+            head.appendChild(fonts);
         } else {
             style.innerText += ed.animation;
+            head.appendChild(fonts);
         }
     }
     

@@ -13,7 +13,7 @@ const PropertyItemRadio = ({id, property, handleChange, type, isChecked}) => {
     })
 
     return(
-        <Card title={newProp} style={{backgroundColor: '#40a9ff'}}>
+        <Card title={newProp} hoverable="true" style={{background: '#f0f2f5', border:'1px solid #e1e1e1'}}>
             <RadioGroup onChange={handleChange}>
             {propertyRadioItem}
             </RadioGroup>

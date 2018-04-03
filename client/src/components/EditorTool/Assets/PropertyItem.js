@@ -6,7 +6,7 @@ const PropertyItem = ({property, val, handleChange}) => {
         newProp = newProp.charAt(0).toUpperCase() + newProp.slice(1);
 
     return(
-        <Card title={newProp} style={{backgroundColor: '#40a9ff'}}>
+        <Card title={newProp} hoverable="true" style={{background: '#f0f2f5', border:'1px solid #e1e1e1'}}>
             <Input
                 value={val}
                 onChange={handleChange}

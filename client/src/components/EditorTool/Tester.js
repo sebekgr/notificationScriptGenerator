@@ -27,9 +27,8 @@ class Tester extends Component {
 
     async onSubmit(e) {
         e.preventDefault();
-
         try {
-            let mail = e.target[0].value;
+            let mail = e.target[0].value.trim();
             let res = await axios.post(e.target.action, { "mail": mail });
             console.log(res.data);
 
@@ -42,6 +41,7 @@ class Tester extends Component {
                 this.onCloseCanvas();
             }
         } catch (e) {
+            console.log(e);
             this.externalWindow.alert("Something went wrong. Please try again soon");
         }
 
@@ -122,6 +122,8 @@ class Tester extends Component {
 
     componentWillUnmount() {
         this.externalWindow.close();
+        clearInterval(this.firstInterval);
+        clearInterval(this.secondInterval);
     }
 }
 

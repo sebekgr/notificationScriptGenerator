@@ -1,26 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ToolBox from './EditorTool/ToolBox';
+import { Menu } from 'antd';
+import Loadable from 'react-loadable';
+import Loading from './Loading';
+const AsyncToolBox = Loadable({
+    loader: () => import('./EditorTool/ToolBox'),
+    loading: Loading
+});
 
 const MyHeader = ({ auth, location }) => (
 
-
-    <ul>
-       <Link to="/">Home</Link>
-
-        {auth ?
-            [
-               <Link key="profile" to="/profile">Profile</Link>,
-               <Link key="editor" to="/profile/editor">Editor</Link>
-            ]
+        <Menu mode="horizontal" defaultSelectedKeys={['1']}>
+            <Menu.Item key="1"><Link to="/">Home</Link></Menu.Item>
+            <Menu.Item key="2"><Link to="/profile">Profile</Link></Menu.Item>
+            <Menu.Item key="3"><Link to="/profile/editor">Editor</Link></Menu.Item>
+            {location === "/profile/editor" ?
+            <AsyncToolBox key="menutoolbox" />
             : null}
-
-        {location === "/profile/editor" ?
-            <ToolBox key="menutoolbox" />
-            : null}
-
-    </ul>
-
+        </Menu>
+        
 
 );
 

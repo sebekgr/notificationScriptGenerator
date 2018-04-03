@@ -1,26 +1,18 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import PropertyBox from './PropertyBox';
 import Preview from './Preview';
-import { connect } from 'react-redux';
 import { Layout } from 'antd';
-const { Sider } = Layout;
+const { Sider} = Layout;
+const Editor = () => {
+    return (
+        <Layout style={{height:'100%'}}>
+            <Sider width="300" style={{overflow: 'auto', background: '#f9f9f9'}}>
+                <PropertyBox />
+            </Sider>
+                <Preview />
+        </Layout>
 
-class Editor extends Component {
-
-    render() {
-        return (
-            <Fragment>
-                <Sider>
-                    <PropertyBox />
-                </Sider>
-                <Preview/>
-            </Fragment>
-        )
-    }
+    )
 }
 
-const mapStateToProps = ({ elements, mainCanvas }) => {
-    return { elements, mainCanvas };
-}
-
-export default connect(mapStateToProps)(Editor);
+export default Editor;

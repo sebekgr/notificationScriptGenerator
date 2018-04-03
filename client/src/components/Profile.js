@@ -1,18 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-class Profile extends React.Component {
+const Profile = props => (
+  <Fragment>
+    <h1>Profile</h1>
+    <p>Welcome Profile!</p>
+    <a href="/auth/logout">Logout </a>
+  </Fragment>
+);
 
-    render(){
-
-        return(
-            <div>
-            <h1>profile</h1>
-    
-
-                <a href="/auth/logout">Wyloguj sie</a>
-            </div>
-        )
-    }
-}
 
 export default Profile;

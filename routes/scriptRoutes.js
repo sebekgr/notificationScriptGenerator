@@ -50,7 +50,7 @@ module.exports = app => {
      });
 
      //testing post request from form editor;
-     app.post('/test/', (req, res) => {
+     app.post('/test', (req, res) => {
         res.set({
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'POST'

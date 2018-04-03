@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 const Home = props => (
-  <div>
+  <Fragment>
     <h1>Home</h1>
     <p>Welcome home!</p>
+
     <a href="/auth/google">Login in </a>
-  </div>
-    );
+  </Fragment>
+);
 
 
 export default Home;

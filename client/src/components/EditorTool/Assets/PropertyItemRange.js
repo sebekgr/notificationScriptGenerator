@@ -5,12 +5,13 @@ const PropertyItemRange = ({property, value, handleChange, max, min, id, much}) 
     let units = value.slice(-2);
     let newProp = property.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
         newProp = newProp.charAt(0).toUpperCase() + newProp.slice(1);
+        const step = property === 'delay' ? 1000: 1;
     value = parseInt(value, 10);
     return (
 
-                    <Card title={newProp} style={{backgroundColor: '#40a9ff'}}>
+                    <Card title={newProp} hoverable="true" style={{background: '#f0f2f5', border:'1px solid #e1e1e1'}}>
                         <Slider
-             
+                        step={step}
                          min={min}
                           max={max}
                           onChange={value => handleChange(value, id, property, much, max, min)}

@@ -3,6 +3,7 @@ import MainCanvas from './MainCanvas';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
 import { Layout} from 'antd';
+const {Content} = Layout;
 
 class Preview extends Component {
     componentDidMount() {
@@ -35,12 +36,12 @@ class Preview extends Component {
 
     render() {
         return (
-            <Layout style={{height: 'auto',backgroundColor: this.props.mainCanvas.overlay ? 'rgba(0,0,0,0.5)' : null }}>
+            <Content style={{height: 'auto',backgroundColor: this.props.mainCanvas.overlay ? 'rgba(0,0,0,0.5)' : null }}>
                 <div className="editorMainCanvasWrapper">
                     <MainCanvas current={this.props.selectedCanvas} />
                 </div>
 
-            </Layout>
+            </Content>
         )
     }
 }

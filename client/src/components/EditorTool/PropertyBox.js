@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import PropertyItem from './Assets/PropertyItem';
@@ -7,7 +7,7 @@ import PropertyItemRadio from './Assets/PropertyItemRadio';
 import PropertyItemRange from './Assets/PropertyItemRange';
 import PropertyItemSelect from './Assets/PropertyItemSelect';
 import PropertyItemBackground from './Assets/PropertyItemBackground';
-import { Layout } from  'antd';
+import { List } from 'antd';
 
 class PropertyBox extends Component {
 
@@ -25,15 +25,14 @@ class PropertyBox extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    // handleChange(id, e, prop, much, min, max) {
-    handleChange(value, id, property, much, max = this.max, min = this.max ){
+    handleChange(value, id, property, much, max = this.max, min = this.max) {
         //small validation
-       if(min > value && value < max){
-           return false;
-       } 
+        if (min > value && value < max) {
+            return false;
+        }
 
         let newValue = null;
-        
+
         if ((String(value).match(/^\d+/)) && ((property === "animationDuration") || property === "delay")) {
             newValue = `${value}ms`;
         } else if (String(value).match(/^\d+/)) {
@@ -49,11 +48,11 @@ class PropertyBox extends Component {
             }
         } else if (Object.keys(this.props.elements.selectedElement).length !== 0 && much < 2) {
             this.props.updateElement(id, newValue, property);
-            
+
         }
         if (much > 1) {
             this.props.updateForm(id, newValue, property, much);
-            
+
         }
 
     }
@@ -66,18 +65,16 @@ class PropertyBox extends Component {
         }
     }
 
-    updateCanvasBackground(e){
+    updateCanvasBackground(e) {
         this.props.updateCanvasOverlay(e);
     }
 
-    renderPropertyItem(forEdit, forEditStyle, listSelect, content, name = "Content", much = 1){
+    renderPropertyItem(forEdit, forEditStyle, listSelect, content, name = "Content", much = 1) {
         let i = 1 * much;
         let j = 100 * much;
         let list = []
         const { floatRadio, alignRadio } = this.props.elements;
 
-
-        list.push(<div key={`${i} div`} style={{backgroundColor:'black', width: '100%', height: '4px'}}>----</div>)
         if (forEdit.hasOwnProperty('elemType') && forEdit.elemType !== "div") {
             var { float, textAlign } = forEditStyle;
             list.push(
@@ -95,15 +92,15 @@ class PropertyBox extends Component {
             list.push(
 
                 <PropertyItemRange
-                            key={j++}
-                            id={forEdit.id}
-                            property={"delay"}
-                            value={forEdit['delay']}
-                            max={100000}
-                            min={1000}
-                            much={much}
-                            handleChange={this.handleChange}
-                        />
+                    key={j++}
+                    id={forEdit.id}
+                    property={"delay"}
+                    value={forEdit['delay']}
+                    max={100000}
+                    min={1000}
+                    much={much}
+                    handleChange={this.handleChange}
+                />
             );
         }
         if (forEditStyle) {
@@ -181,8 +178,15 @@ class PropertyBox extends Component {
                 }
             }
         }
-        return  list
-                  
+        return <List
+            bordered="true"
+            dataSource={list}
+            itemLayout="vertical"
+            renderItem={item => (<List.Item>{item}</List.Item>)}
+            header={name}
+            key={j}
+        />
+
     }
 
     renderTest(selectedItem, style, listSelect) {
@@ -211,15 +215,19 @@ class PropertyBox extends Component {
         let selectedItem = Object.keys(selectedElement).length === 0 ? selectedCanvas : selectedElement;
         let listSelect = selectedItem === selectedElement ? fontList : animationList;
         return (
-            <Layout style={{overflowY: 'auto',overflowX: 'hidden', height:'100%', width: 'auto'}}>
-                
-                    <PropertyItemBackground key="scs"
-                        handleChange={(e) => this.updateCanvasBackground(e)}
-                        isChecked={this.props.mainCanvas.overlay}
-                    />
+            <Fragment>
+                <PropertyItemBackground
+                    handleChange={(e) => this.updateCanvasBackground(e)}
+                    isChecked={this.props.mainCanvas.overlay}
+                />
 
-                   {this.renderTest(selectedItem, selectedItem.style, listSelect)}
-                   </Layout>
+
+                {this.renderTest(selectedItem, selectedItem.style, listSelect)}
+
+            </Fragment>
+
+
+
 
         );
     }
