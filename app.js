@@ -29,17 +29,18 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+app.use((req,res,next) => {
+    res.set({
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+    })
+    next();
+})
 
 //set up routes
 require('./routes/authRoutes')(app);
 require('./routes/scriptRoutes')(app);//route for generating script
-
-// app.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-//     res.header("Access-Control-Allow-Headers", "Origin, Content-Type");
-//     next();
-//   });
 
 //set up routes for production. Serving client side assets
 if(process.env.NODE_ENV === 'production') {
