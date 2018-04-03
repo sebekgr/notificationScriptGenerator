@@ -102,7 +102,7 @@
     function createOverlay(statement, canvas) {
         let overlay = document.createElement('div');
         let close = document.createElement('button');
-        close.style.cssText = 'background:#fff;border-radius:50%;border:2px solid black;position:absolute;top:-20px;right:-20px;';
+        close.style.cssText = 'background:#fff;border-radius:50%;border:2px solid black;position:absolute;top:-15px;right:-15px;';
         close.innerText = "✖";
         close.onclick = closeCanvas;
         overlay.id = "oo";
