@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import {Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import Home from './Home';
@@ -8,21 +8,25 @@ import MyHeader from './MyHeader';
 import {Layout} from 'antd';
 import Loadable from 'react-loadable';
 import Loading from './Loading';
+import Login from './Login';
 const {  Content, Footer } = Layout;
 
 
-const PrivateRoute = ({ auth, component: Component, ...rest }) => (
-    <Route
-        {...rest}
-        render={props =>
-            auth ? (
-                <Component {...props} />
-            ) : (
-                    <Route component={NotFound} />
-                )
-        }
+
+
+
+const PrivateRoute = ({auth, component: Component, ...rest }) => (
+    <Route {...rest} render={(props) => (
+        auth ? <Component {...props} /> :
+        <Redirect to={{
+            pathname: '/login',
+            from: props.location.pathname
+        }} />
+    )}
     />
 );
+
+
 
 
 const AsyncEditor = Loadable({
@@ -42,19 +46,22 @@ class App extends Component {
     }
 
     render() {
+        const {auth} = this.props;
+        let isAuth = Boolean(auth);
         return (
             <Layout style={{height: '100vh'}}>
-                    <MyHeader auth={this.props.auth} location={this.props.location.pathname} />
-                
+                    <MyHeader location={this.props.location.pathname} />
                     <Content style={{height: '80%'}}>
-                        <Route exact path="/" component={Home} />
-                        <PrivateRoute exact path="/profile" component={AsyncProfile} auth={this.props.auth} />
-                        <PrivateRoute exact path="/profile/editor" component={AsyncEditor} auth={this.props.auth} />
+                        <Switch>
+                            <Route exact path="/" component={Home}/>
+                            <Route path="/login" component={Login} />
+                            <PrivateRoute auth={isAuth} exact path="/profile" component={AsyncProfile} />
+                            <PrivateRoute auth={isAuth} exact path="/profile/editor" component={AsyncEditor} />
+                            <Route component={NotFound} />
+                        </Switch>
                     </Content>
                     {this.props.location.pathname !== '/profile/editor' ? <Footer style={{ textAlign: 'center'}}> Popup Generator ©{new Date().getFullYear()} Created by Sebastian Gralikowski </Footer> : null}
-               
-                
-            </Layout>
+           </Layout>
         );
     }
 }

@@ -6,11 +6,8 @@ const key = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT || 8080;
 const path = require('path');
-
-//static files
-app.use('/files', express.static('files'));
 
 //connect with db
 mongoose.connect(key.mongoDB, () => { console.log('connected to mongoDB')});
@@ -51,7 +48,4 @@ if(process.env.NODE_ENV === 'production') {
     });
 }
 
-//heroku keepalive
-setInterval(() => {app.get('https://tranquil-savannah-34304.herokuapp.com/')},300000);
-
-app.listen(PORT, () => {console.log(`server  run at ${9000}`)});
+app.listen(PORT, () => {console.log(`server  run at ${PORT}`)});

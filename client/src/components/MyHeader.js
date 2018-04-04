@@ -8,18 +8,21 @@ const AsyncToolBox = Loadable({
     loading: Loading
 });
 
-const MyHeader = ({ auth, location }) => (
+const MyHeader = ({ location }) => {
 
-        <Menu mode="horizontal" defaultSelectedKeys={['1']}>
+    return(
+        <Menu mode="horizontal" >
             <Menu.Item key="1"><Link to="/">Home</Link></Menu.Item>
             <Menu.Item key="2"><Link to="/profile">Profile</Link></Menu.Item>
             <Menu.Item key="3"><Link to="/profile/editor">Editor</Link></Menu.Item>
-            {location === "/profile/editor" ?
+            {location === "/profile/editor"  ?
             <AsyncToolBox key="menutoolbox" />
             : null}
         </Menu>
+    )
+        
         
 
-);
+};
 
 export default MyHeader;

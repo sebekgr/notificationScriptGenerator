@@ -1,13 +1,22 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
+import { connect } from 'react-redux';
 
-const Home = props => (
-  <Fragment>
-    <h1>Home</h1>
-    <p>Welcome home!</p>
+class Home extends Component {
+  render(){
+    return (
+      <Fragment>
+      <h1>Home</h1>
+      <p>Welcome home!</p>
+     
+    </Fragment>
+    )
+  }
+  
+}
+  
 
-    <a href="/auth/google">Login in </a>
-  </Fragment>
-);
+const mapStateToProps = ({ auth}) => {
+  return { auth };
+}
 
-
-export default Home;
+export default connect(mapStateToProps)(Home);

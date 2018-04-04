@@ -17,6 +17,10 @@
   border-radius: 4px;
 }
 
+h1{
+  font-size: 32px;
+}
+
 /*element active*/
 .active{
   position: relative;
@@ -430,4 +434,14 @@ display: table;
 min-height: 100%;
 padding:30px;
 overflow: auto;
+}
+
+.googleLogin{
+  padding: 10px 20px;
+  color: #fff;
+  background: #F32E06;
+  border-radius: 5px;
+  display: flex;
+  text-transform: uppercase;
+  
 }
