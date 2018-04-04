@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import {Icon} from 'antd';
+
+import LoginBtn from './LoginBtn';
+
+
 
 class Login extends Component {
 
@@ -11,16 +14,17 @@ class Login extends Component {
             return (<Redirect to={this.props.location.from}/>)
         } else {
             return (
-            <div style={{display: 'flex', fontSize: '26px',justifyContent: 'center',  padding: '10%'}}>
-                <a className="googleLogin" href="/auth/google">Please login with &nbsp;<Icon style={{fontSize: '36px'}} type="google-plus" /></a> 
-            </div>
+                <Fragment>
+                    <h1>Before you start it, please log in</h1>
+                    <LoginBtn />
+                </Fragment>
             );
         }
     }
 
     render() {
         return (
-            <div>
+            <div className="loginBox">
                 {this.handleLogin()}
             </div>
         )

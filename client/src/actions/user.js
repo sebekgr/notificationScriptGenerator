@@ -9,4 +9,8 @@ export const logoutUser = () => async dispatch => {
     await axios.get('/auth/logout');
     dispatch({type: 'LOGOUT_USER'});
 };
+export const deleteUser = id => async dispatch => {
+    await axios.delete(`/auth/delete/${id}`);
+    dispatch({type: 'DELETE_USER'});
+};
 

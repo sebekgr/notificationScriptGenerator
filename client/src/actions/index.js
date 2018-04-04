@@ -26,7 +26,8 @@ import {
 
 import {
     fetchUser,
-    logoutUser
+    logoutUser,
+    deleteUser
 } from './user';
 
 import {
@@ -60,7 +61,8 @@ export {
     removeCanvas,
     generateScript,
     showScriptPopUp,
-    closeScriptPopUp
+    closeScriptPopUp,
+    deleteUser
 }
 
 

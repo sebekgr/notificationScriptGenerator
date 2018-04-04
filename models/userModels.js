@@ -6,7 +6,8 @@ const userSchema = new Schema({
     username: String,
     googleId: String,
     host: {type: String, default: "http://localhost/"},
-    script: String
+    script: {type: String, default: ""},
+    avatar: String
 
 });
 

@@ -1,5 +1,5 @@
 const passport = require('passport');
-
+const User = require('../models/userModels');
 
 //auth get current user data
 module.exports = app => {
@@ -26,4 +26,11 @@ module.exports = app => {
     app.get('/auth/google/redirect', passport.authenticate('google'), (req, res) => {
         res.redirect('/profile');
     });
+
+    //deleting user from db
+    app.delete('/auth/delete/:id', async (req, res) => {
+        await User.findOneAndRemove({_id: req.params.id }).exec();
+        res.send('user has been deleted').status(200);
+    }
+    );
 };

@@ -13,14 +13,15 @@
 			"paddingBottom": "2px",
 			"paddingLeft": "2px",
 			"paddingRight": "2px",
-			"borderRadius": "5px"
+			"borderRadius": "5px",
+			"textAlign": "center"
 		}
 	},
 	"h1": {
 		"style": {
 			"fontSize": "32px",
 			"fontFamily": "Karma",
-			"color": "blalck",
+			"color": "black",
 			"marginTop": "2px",
 			"marginBottom": "2px",
 			"marginLeft": "2px",
@@ -34,7 +35,9 @@
 			"fontWeight": "normal",
 			"borderWidth": "2px",
 			"borderStyle": "solid",
-			"borderColor": "#000000"
+			"borderColor": "#000000",
+			"width": "500px",
+			"height": "40px"
 		},
 		"content": "Provide your Header1 content here"
 	},
@@ -56,7 +59,9 @@
 			"fontWeight": "normal",
 			"borderWidth": "2px",
 			"borderStyle": "solid",
-			"borderColor": "#000000"
+			"borderColor": "#000000",
+			"width": "500px",
+			"height": "40px"
 		},
 		"content": "Provide your Header2 content here"
 	},
@@ -78,7 +83,9 @@
 			"fontWeight": "normal",
 			"borderWidth": "2px",
 			"borderStyle": "solid",
-			"borderColor": "#000000"
+			"borderColor": "#000000",
+			"width": "500px",
+			"height": "40px"
 		},
 		"content": "Provide your text here"
 	},

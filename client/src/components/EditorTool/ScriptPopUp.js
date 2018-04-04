@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { Modal, Icon, Input } from 'antd';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import CopyClipboard from './Assets/CopyClipboard';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
 import animationList from './Assets/animationList';
+import wpImg from './Assets/wp.jpg';
 
 const makeStyle = string => {
     return string.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
 }
 
 class ScriptPopUp extends Component {
-
-    state = { copied: false }
-
 
     componentDidMount() {
         const canvases = this.props.mainCanvas.canvases;
@@ -69,29 +67,33 @@ class ScriptPopUp extends Component {
             return (
                 <div className="modalContent">
                     <h3>Proccesing with request</h3>
-                    <Icon type="loading" style={{ fontSize: "56px", color: '#1890ff' }} />
+                    <Icon type="loading" style={{ color: '#1890ff' }} />
                 </div>);
         } else if (status === 'success') {
             return (
                 <div className="modalContent">
                     <h3>SUCCESS !</h3>
-                    <Icon type="smile" style={{ fontSize: "56px", color: 'green' }} />
-                    <p>Now please copy link below and place into your index.html file</p>
-                    <CopyToClipboard onCopy={() => this.setState({ copied: true })} text={this.props.script.generatedUrl}>
+                    <Icon type="smile" className="modalIcon"  style={{ color: 'green'}} />
+                    {/* <CopyToClipboard onCopy={() => this.setState({ copied: true })} text={this.props.script.generatedUrl}>
                         <Input
                             readOnly={true}
                             defaultValue={this.props.script.generatedUrl}
                             onFocus={e => e.target.select()}
-                        />
-                    </CopyToClipboard>
-                    {this.state.copied ? <span style={{ color: 'green' }}>Link has been copied to clipboard</span> : null}
+                        /> 
+                    </CopyToClipboard>*/}
+                    <CopyClipboard text={this.props.script.generatedUrl} />
+                    <p>Now please copy link and place into your <strong>HEAD</strong> section in <strong>index.html</strong> file</p>
+                    <p>If you are wordpress user copy script link into <strong>header.php</strong> in your wp theme</p>
+                    <img src={wpImg} />
+                    
+                    {/* {this.state.copied ? <span style={{ color: 'green' }}>Link has been copied to clipboard</span> : null} */}
                 </div>
             )
         } else {
             return (
                 <div className="modalContent">
                     <h3>Error !</h3>
-                    <Icon type="meh" style={{ fontSize: "56px", color: 'red' }} />
+                    <Icon type="meh" style={{ color: 'red' }} />
                     <p>Something went wrong. Please try again soon</p>
                 </div>
             )

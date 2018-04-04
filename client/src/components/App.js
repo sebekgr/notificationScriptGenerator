@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import Home from './Home';
 import NotFound from './NotFound';
 import MyHeader from './MyHeader';
 import {Layout} from 'antd';
@@ -38,6 +37,10 @@ const AsyncProfile = Loadable({
     loader: () => import('./Profile'),
     loading: Loading
 });
+const AsyncHome = Loadable({
+    loader: () => import('./Home'),
+    loading: Loading
+});
 
 class App extends Component {
 
@@ -53,7 +56,7 @@ class App extends Component {
                     <MyHeader location={this.props.location.pathname} />
                     <Content style={{height: '80%'}}>
                         <Switch>
-                            <Route exact path="/" component={Home}/>
+                            <Route exact path="/" component={AsyncHome}/>
                             <Route path="/login" component={Login} />
                             <PrivateRoute auth={isAuth} exact path="/profile" component={AsyncProfile} />
                             <PrivateRoute auth={isAuth} exact path="/profile/editor" component={AsyncEditor} />

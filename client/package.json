@@ -14,6 +14,9 @@
     },
     "/script/generate": {
       "target": "http://localhost:8080"
+    },
+    "/auth/delete": {
+      "target": "http://localhost:8080"
     }
   },
   "dependencies": {
