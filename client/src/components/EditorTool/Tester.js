@@ -73,8 +73,8 @@ class Tester extends Component {
                  {children}
                  <button
                     onClick={() => this.onCloseCanvas()}
-                    style={{background:'#fff',borderRadius:'50%',border:'2px solid black', position:'absolute',right:'-15px',top:'-15px'}}
-                >✖</button></div>
+                    style={{background:'transparent',border:'0',fontWeight: '900', position:'absolute',right:'0',top:'0'}}
+                >X</button></div>
                 
             </div>
         );

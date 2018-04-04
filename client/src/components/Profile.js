@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Card, Avatar, List, Popconfirm, Icon, Button  } from 'antd';
+import { Card,  Popconfirm, Button  } from 'antd';
 import { Link } from 'react-router-dom';
 import CopyClipboard from './EditorTool/Assets/CopyClipboard';
 import * as actions from '../actions';
@@ -28,7 +28,7 @@ class Profile extends Component {
   }
 
   handleDeleteProfile(){
-    console.log("kasuje")
+    localStorage.clear();
     this.props.deleteUser(this.props.auth._id);
   }
 
@@ -46,7 +46,7 @@ class Profile extends Component {
 
 
   render() {
-    const { username, avatar, host, script } = this.props.auth;
+    const { username, avatar, script } = this.props.auth;
 
     const myScript = script === '' ? this.isNot() : this.isScript(script);
 
@@ -59,7 +59,7 @@ class Profile extends Component {
           title="Welcome"
         hoverable extra={this.deleteProfile()}>
           <Meta
-            avatar={<img src={avatar} />}
+            avatar={<img alt="Avatar" src={avatar} />}
             title={username}
           >
 

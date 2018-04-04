@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Icon, Input } from 'antd';
+import { Modal, Icon } from 'antd';
 import CopyClipboard from './Assets/CopyClipboard';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
@@ -74,19 +74,11 @@ class ScriptPopUp extends Component {
                 <div className="modalContent">
                     <h3>SUCCESS !</h3>
                     <Icon type="smile" className="modalIcon"  style={{ color: 'green'}} />
-                    {/* <CopyToClipboard onCopy={() => this.setState({ copied: true })} text={this.props.script.generatedUrl}>
-                        <Input
-                            readOnly={true}
-                            defaultValue={this.props.script.generatedUrl}
-                            onFocus={e => e.target.select()}
-                        /> 
-                    </CopyToClipboard>*/}
                     <CopyClipboard text={this.props.script.generatedUrl} />
                     <p>Now please copy link and place into your <strong>HEAD</strong> section in <strong>index.html</strong> file</p>
                     <p>If you are wordpress user copy script link into <strong>header.php</strong> in your wp theme</p>
-                    <img src={wpImg} />
-                    
-                    {/* {this.state.copied ? <span style={{ color: 'green' }}>Link has been copied to clipboard</span> : null} */}
+                    <img src={wpImg} alt="wordpress"/>                
+                  
                 </div>
             )
         } else {

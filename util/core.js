@@ -98,11 +98,11 @@
     function createOverlay(statement, canvas) {
         let overlay = document.createElement('div');
         let close = document.createElement('button');
-        close.style.cssText = 'background:#fff;border-radius:50%;border:2px solid black;position:absolute;top:-15px;right:-15px;width:20px;height:20px;';
-        close.innerText = "✖";
+        close.style.cssText = 'background:transparent;position:absolute;top:0;right:0;border:0;color:black;font-weight:900';
+        close.innerText = "X";
         close.onclick = closeCanvas;
         overlay.id = "oo";
-        let css = 'display:flex;overflow:auto;position:fixed;z-index:99;margin:auto;top:0;bottom:0;left:0;right:0;padding:30px 0;';
+        let css = 'display:flex;justify-content:center;align-content:center;overflow:auto;position:fixed;z-index:99;margin:auto;top:0;bottom:0;left:0;right:0;padding:30px 0;';
         overlay.style = css;
         statement ? overlay.style.background = 'rgba(0,0,0,.5)' : null;
         createCanvas(ed.canvasesReady);
