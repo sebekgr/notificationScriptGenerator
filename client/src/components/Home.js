@@ -24,7 +24,7 @@ class Home extends Component {
 
   render(){
     const settings = {
-      autoplaySpeed: 5000,
+      autoplaySpeed: 4000,
       swipeToSlide: true,
       lazyLoad: true
     };
@@ -35,7 +35,7 @@ class Home extends Component {
           <h2> Build your own Popup <br/> with 4 simply steps</h2>
           <h3 className="info">#{this.state.currentIndex+1} {this.state.description[this.state.currentIndex]}</h3>
         </div>
-        <Carousel afterChange={e => this.change(e)} {...settings}>
+        <Carousel autoplay afterChange={e => this.change(e)} {...settings}>
           <div><LoginBtn /></div>
           <div className="prev"></div>
           <div className="prev2"></div>

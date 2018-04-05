@@ -7,6 +7,19 @@ import { SortableContainer } from 'react-sortable-hoc';
 class MainCanvas extends Component {
  
 
+    componentDidMount(){
+        
+
+        document.addEventListener('keydown', e => {
+            let {id} = this.props.elements.selectedElement;
+            if((e.keyCode === 46 || e.keyCode === 8) && id !== undefined) {
+                this.props.deleteElement(id);
+            } else if(e.keyCode === 27){
+                this.props.selectElement(id);
+            }
+
+        })
+    }
 
     deleteElement(id, e) {
         e.stopPropagation();

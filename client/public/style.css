@@ -498,6 +498,9 @@ h3{
   display: flex;
   flex-flow: column nowrap;
 }
+.welcomeBox h1{
+  color: #1890ff;
+}
 .welcomeBox h2{
   margin-bottom: 150px;
 }

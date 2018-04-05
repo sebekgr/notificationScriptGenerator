@@ -25,6 +25,8 @@ class PropertyBox extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
+    
+
     handleChange(value, id, property, much, max = this.max, min = this.max) {
         //small validation
         if (min > value && value < max) {
@@ -74,9 +76,8 @@ class PropertyBox extends Component {
         let j = 100 * much;
         let list = []
         const { floatRadio, alignRadio } = this.props.elements;
-
         if (forEdit.hasOwnProperty('elemType') && forEdit.elemType !== "div") {
-            var { float, textAlign } = forEditStyle;
+            var { float } = forEditStyle;
             list.push(
                 <PropertyItem
                     key={i++}
@@ -107,12 +108,14 @@ class PropertyBox extends Component {
             for (let [property, val] of Object.entries(forEditStyle)) {
                 switch (property) {
                     case (property.match(this.widthHeightRegex) || {}).input:
-                        if (forEdit.elemType !== 'img') { this.min = 100; this.max = 1300; }
-                        else { this.min = 10; this.max = 800 }
+                        if (forEdit.elemType !== 'img') {
+                             this.min = 0; this.max = 1300;
+                        } 
+                        else { this.min = 10; this.max = 800; }
                         break;
                     case (property.match(this.paddingMarginRegex) || {}).input:
                     case (property.match(this.borderRegex) || {}).input:
-                        this.min = 0; this.max = 100;
+                        this.min = 0; this.max = 300;
                         break;
                     case 'animationDuration':
                         this.min = 1000; this.max = 5000;
@@ -141,7 +144,7 @@ class PropertyBox extends Component {
                     )
                 } else if (property.match(this.radioRegex)) {
                     let type = property.match(/(float)/) ? floatRadio : alignRadio;
-                    let isChecked = property.match(/(float)/) ? float : textAlign;
+                    let isChecked = property.match(/(float)/) ? float : forEditStyle.textAlign;
                     list.push(
                         <PropertyItemRadio
                             key={j++}
@@ -179,25 +182,27 @@ class PropertyBox extends Component {
             }
         }
         return <List
+            style={{marginTop: '20px'}}
             bordered="true"
             dataSource={list}
             itemLayout="vertical"
             renderItem={item => (<List.Item>{item}</List.Item>)}
-            header={name}
+            header={<strong style={{color: '#1890ff'}}>{name}</strong>}
             key={j}
+            size="large"
         />
 
     }
 
-    renderTest(selectedItem, style, listSelect) {
+    renderProperties(selectedItem, style, listSelect) {
 
         let mylist = [];
 
         if (selectedItem.elemType === "form") {
             mylist = [];
-            mylist.push(this.renderPropertyItem(selectedItem, style.formStyle, listSelect, selectedItem.content.action, "Form action", 2));
-            mylist.push(this.renderPropertyItem(selectedItem, style.submitStyle, listSelect, selectedItem.content.input, "Textfield", 3));
-            mylist.push(this.renderPropertyItem(selectedItem, style.inputStyle, listSelect, selectedItem.content.submit, "Button form", 4));
+            mylist.push(this.renderPropertyItem(selectedItem, style.formStyle, listSelect, selectedItem.content.action, "Form", 2));
+            mylist.push(this.renderPropertyItem(selectedItem, style.inputStyle, listSelect, selectedItem.content.input, "Textfield", 3));
+            mylist.push(this.renderPropertyItem(selectedItem, style.submitStyle, listSelect, selectedItem.content.submit, "Button form", 4));
             return mylist;
         } else {
             mylist = [];
@@ -222,7 +227,7 @@ class PropertyBox extends Component {
                 />
 
 
-                {this.renderTest(selectedItem, selectedItem.style, listSelect)}
+                {this.renderProperties(selectedItem, selectedItem.style, listSelect)}
 
             </Fragment>
 

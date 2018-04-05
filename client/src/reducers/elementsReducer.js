@@ -89,9 +89,9 @@ export default (state = initialState, action) => {
             if (much === 2) {
                 styl = "formStyle";
             } else if (much === 3) {
-                styl = "submitStyle";
-            } else if (much === 4) {
                 styl = "inputStyle";
+            } else if (much === 4) {
+                styl = "submitStyle";
             }
             let elemy = state.elements.map(el => {
                 if (el.id === id) {

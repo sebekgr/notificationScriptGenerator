@@ -1,28 +1,19 @@
 
 import { arrayMove } from 'react-sortable-hoc';
+import defaultStyles from '../components/EditorTool/Assets/defaultStyles.json';
 
 const initialState = {
     url: "",
     animationList: ["bounce", "flip", "fadeInDown", "fadeInLeft", "fadeInRight", "zoomIn", "rubberBand"],
+    alignRadio: ["left", "center", "right"],
     overlay: false,
     canvases: [
         {
             id: 4563,
             name: "Main canvas",
             delay: "3000ms",
-            style: {
-                "animationDuration": "1000ms",
-			"backgroundColor": "#f0f2f5",
-			"animationName": "bounce",
-			"border": "none",
-			"width": "600px",
-			"height": "400px",
-			"paddingTop": "2px",
-			"paddingBottom": "2px",
-			"paddingLeft": "2px",
-			"paddingRight": "2px",
-			"borderRadius": "5px"
-            },
+            style: defaultStyles.canvas.style
+            ,
             children: []
         }
     ],
