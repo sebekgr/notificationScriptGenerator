@@ -22,14 +22,16 @@ class MyHeader extends Component {
     renderToolBox = () => <SubMenu key="sub1" title="Elements"><AsyncToolBox key="menutoolbox" /></SubMenu>
 
     render(){
-        const {location} = this.props;
+        const {location, auth} = this.props;
         return(
             
             <Menu mode="horizontal">
                 
                 {location === '/profile/editor' ? this.renderToolBox() : null}
                 <Menu.Item key="1"><Link to="/">Home</Link></Menu.Item>
-                <Menu.Item key="2"><Link to="/profile">Profile</Link></Menu.Item>
+                <Menu.Item key="2">
+                    {auth ? <Link to="/profile">Profile</Link> : <Link to="/login">Login</Link>}
+                </Menu.Item>
                 <Menu.Item key="3"><Link to="/profile/editor">Editor</Link></Menu.Item>
                 
             </Menu>

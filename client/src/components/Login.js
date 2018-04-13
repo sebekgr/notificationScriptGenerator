@@ -15,7 +15,7 @@ class Login extends Component {
         } else {
             return (
                 <Fragment>
-                    <h1>Before you start it, please log in</h1>
+                    <h1>Login</h1>
                     <LoginBtn />
                 </Fragment>
             );

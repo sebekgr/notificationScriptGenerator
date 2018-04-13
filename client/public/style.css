@@ -503,8 +503,9 @@ h3{
 margin: auto;
 display: flex;
 flex-flow: column nowrap;
-justify-content: center;
+justify-content: space-around;
 align-items: center;
+height: 100%;
 }
 
 .mainContentWrapper{
@@ -517,15 +518,17 @@ align-items: center;
 .homeWrapper p {
   text-align: center;
 }
-
+/*notfound*/
+.notfound{
+  margin: auto;
+  text-align: center;
+}
 
 /*login*/
 .loginBox{
   display: flex;
   flex-flow: column wrap;
-  justify-content: center;
-  height: 100%;
-  align-items: center;
+  margin: auto;
 }
 
 /*profile*/
@@ -575,6 +578,9 @@ align-items: center;
   }
   h2{
     font-size: 20px;
+  }
+  .homeWrapper {
+    height: auto;
   }
   .homeWrapper p {
     margin: auto 5px;

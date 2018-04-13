@@ -68,13 +68,14 @@ class Profile extends Component {
           style={{margin: 'auto', width: '360px'}}
           title="Welcome"
           
-        hoverable extra={this.deleteProfile()}>
+        hoverable extra={<Button href="/auth/logout">Logout</Button>}>
           <Meta
             avatar={<img alt="Avatar" src={avatar} />}
             title={username}
-          >
+            description={this.deleteProfile()}
+          />
+          
 
-          </Meta>
           <div className="scriptWrapper"> {myScript}</div>
         </Card>
       </div>

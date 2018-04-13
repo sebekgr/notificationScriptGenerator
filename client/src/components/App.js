@@ -54,7 +54,7 @@ class App extends Component {
         let isAuth = Boolean(auth);
         return (
             <Layout style={{height: '100vh'}}>
-                    <MyHeader location={this.props.location.pathname} />
+                    <MyHeader auth={isAuth} location={this.props.location.pathname} />
                     <Content className="mainContentWrapper" style={{height: '80%'}}>
                         <Switch>
                             <Route exact path="/" component={AsyncHome}/>
