@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const app = express();
 const passportSetup = require('./config/passportSetup');
 const mongoose = require('mongoose');
@@ -6,7 +7,7 @@ const key = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 4000;
 const path = require('path');
 
 //connect with db

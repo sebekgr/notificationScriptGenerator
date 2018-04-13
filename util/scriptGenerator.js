@@ -25,7 +25,9 @@ async function createScript(data, user, url) {
         }
            //save file
         const file = await writeFile(`${__dirname}/../files/${fileName}.js`, 
-        `(function(){const ed=${scriptContent};`
+        `(function(){const ed=${scriptContent};
+        
+        `
         , 'utf8');
 
         return {fileName, status: 'success'};

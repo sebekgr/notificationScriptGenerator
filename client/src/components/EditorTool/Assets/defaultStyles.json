@@ -32,8 +32,7 @@
 			"paddingRight": "2px",
 			"float": "none",
 			"textAlign": "left",
-			"fontWeight": "normal",
-			"borderWidth": "2px",
+			"borderWidth": "0px",
 			"borderStyle": "solid",
 			"borderColor": "#000000",
 			"width": "500px",
@@ -57,7 +56,7 @@
 			"float": "none",
 			"textAlign": "left",
 			"fontWeight": "normal",
-			"borderWidth": "2px",
+			"borderWidth": "0px",
 			"borderStyle": "solid",
 			"borderColor": "#000000",
 			"width": "500px",
@@ -81,20 +80,20 @@
 			"float": "none",
 			"textAlign": "left",
 			"fontWeight": "normal",
-			"borderWidth": "2px",
+			"borderWidth": "0px",
 			"borderStyle": "solid",
 			"borderColor": "#000000",
 			"width": "500px",
-			"height": "40px"
+			"height": "25px"
 		},
 		"content": "Provide your text here"
 	},
 	"img": {
 		"style": {
-			"width": "100px",
-			"height": "100px",
+			"width": "400px",
+			"height": "266px",
 			"float": "none",
-			"borderWidth": "2px",
+			"borderWidth": "0px",
 			"borderStyle": "solid",
 			"borderColor": "#000000",
 			"borderRadius": "15px",
@@ -107,7 +106,7 @@
 			"paddingLeft": "2px",
 			"paddingRight": "2px"
 		},
-		"content": "https://thesocietypages.org/socimages/files/2009/05/nopic_192.gif"
+		"content": "https://image.ibb.co/dBLdhH/testimage.jpg"
 	},
 	"div": {
 		"height": "40px",
@@ -125,19 +124,22 @@
 				"paddingBottom": "2px",
 				"paddingLeft": "2px",
 				"paddingRight": "2px",
-				"width": "200px",
+				"width": "500px",
 				"height": "auto",
 				"backgroundColor": "transparent"
 			},
 			"inputStyle": {
-				"float": "right",
-				"width": "100px",
-				"height": "20px",
-				"borderWidth": "2px",
+				"float": "left",
+				"width": "400px",
+				"height": "30px",
+				"fontSize": "16px",
+				"textAlign": "center",
+				"color": "#40a9ff",
+				"borderWidth": "1px",
 				"borderStyle": "solid",
-				"borderColor": "#000000",
-				"borderRadius": "13px",
-				"backgroundColor": "#ffffff",
+				"borderColor": "#cccdce",
+				"borderRadius": "3px",
+				"backgroundColor": "transparent",
 				"marginTop": "2px",
 				"marginBottom": "2px",
 				"marginLeft": "2px",
@@ -148,13 +150,16 @@
 				"paddingRight": "2px"
 			},
 			"submitStyle": {
-				"width": "50px",
+				"width": "400px",
 				"height": "50px",
 				"float": "left",
-				"borderWidth": "2px",
+				"fontSize": "16px",
+				"color": "#fff",
+				"borderWidth": "0px",
 				"borderStyle": "solid",
 				"borderColor": "#000000",
-				"borderRadius": "15px",
+				"backgroundColor": "#40a9ff",
+				"borderRadius": "3px",
 				"marginTop": "2px",
 				"marginBottom": "2px",
 				"marginLeft": "2px",
@@ -162,12 +167,12 @@
 				"paddingTop": "2px",
 				"paddingBottom": "2px",
 				"paddingLeft": "2px",
-				"paddingRight": "2px",
-				"backgroundColor": "#ffffff"
+				"paddingRight": "2px"
+				
 			}
 		},
 		"content": {
-			"action": "http://http://vps476880.ovh.net/test",
+			"action": "http://vps476880.ovh.net/test",
 			"input": "Provide your e-mail",
 			"submit": "Subscribe"
 		}

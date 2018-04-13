@@ -36,7 +36,7 @@ class Preview extends Component {
 
     render() {
         return (
-            <Content style={{height: 'auto',backgroundColor: this.props.mainCanvas.overlay ? 'rgba(0,0,0,0.5)' : null }}>
+            <Content className="contentCanvasWrapper" style={{height: 'auto', backgroundColor: this.props.mainCanvas.overlay ? 'rgba(0,0,0,0.5)' : null }}>
                 <div className="editorMainCanvasWrapper">
                     <MainCanvas current={this.props.selectedCanvas} />
                 </div>

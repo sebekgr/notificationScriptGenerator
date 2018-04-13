@@ -8,7 +8,8 @@ import {Layout} from 'antd';
 import Loadable from 'react-loadable';
 import Loading from './Loading';
 import Login from './Login';
-const {  Content, Footer } = Layout;
+import MyFooter from './Footer'
+const {  Content } = Layout;
 
 
 
@@ -54,7 +55,7 @@ class App extends Component {
         return (
             <Layout style={{height: '100vh'}}>
                     <MyHeader location={this.props.location.pathname} />
-                    <Content style={{height: '80%'}}>
+                    <Content className="mainContentWrapper" style={{height: '80%'}}>
                         <Switch>
                             <Route exact path="/" component={AsyncHome}/>
                             <Route path="/login" component={Login} />
@@ -63,7 +64,7 @@ class App extends Component {
                             <Route component={NotFound} />
                         </Switch>
                     </Content>
-                    {this.props.location.pathname !== '/profile/editor' ? <Footer style={{ textAlign: 'center'}}> Popup Generator ©{new Date().getFullYear()} Created by Sebastian Gralikowski </Footer> : null}
+                    {this.props.location.pathname !== '/profile/editor' ? <MyFooter/> : null}
            </Layout>
         );
     }

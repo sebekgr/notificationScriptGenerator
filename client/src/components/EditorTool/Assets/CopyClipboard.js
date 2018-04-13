@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import {Input} from 'antd';
-
+import {Input  } from 'antd';
+const { TextArea } = Input;
 
 class CopyToCliboard extends Component {
 
@@ -14,17 +14,18 @@ class CopyToCliboard extends Component {
 
     render() {
         return (
-            <Fragment>
+            <div>
             <CopyToClipboard onCopy={() => this.setState({ copied: true })} text={this.props.text}>
-                <Input
+                <TextArea
+                    autosize 
                     readOnly={true}
                     defaultValue={this.props.text}
                     onFocus={e => e.target.select()}
                 />
                 
             </CopyToClipboard>
-            {this.state.copied ? <span style={{ color: 'green' }}>Link has been copied to clipboard</span> : null}
-        </Fragment>
+            {this.state.copied ? <span>Link has been copied to clipboard</span> : null}
+        </div>
         )
         
     }

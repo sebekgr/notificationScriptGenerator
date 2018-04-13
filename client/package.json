@@ -4,19 +4,19 @@
   "private": true,
   "proxy": {
     "/auth/google": {
-      "target": "http://localhost:8080"
+      "target": "http://localhost:4000"
     },
     "/auth/logout": {
-      "target": "http://localhost:8080"
+      "target": "http://localhost:4000"
     },
     "/auth/current_user": {
-      "target": "http://localhost:8080"
+      "target": "http://localhost:4000"
     },
     "/script/generate": {
-      "target": "http://localhost:8080"
+      "target": "http://localhost:4000"
     },
     "/auth/delete": {
-      "target": "http://localhost:8080"
+      "target": "http://localhost:4000"
     }
   },
   "dependencies": {

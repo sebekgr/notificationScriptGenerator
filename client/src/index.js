@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'react-router-redux'
 import store, { history } from './store'
 import App from './components/App';
 
-//localStorage.clear();
+// localStorage.clear();
 const root = document.querySelector('#root')
 
 render(

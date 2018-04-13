@@ -4,7 +4,6 @@ import CopyClipboard from './Assets/CopyClipboard';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
 import animationList from './Assets/animationList';
-import wpImg from './Assets/wp.jpg';
 
 const makeStyle = string => {
     return string.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
@@ -77,8 +76,6 @@ class ScriptPopUp extends Component {
                     <CopyClipboard text={this.props.script.generatedUrl} />
                     <p>Now please copy link and place into your <strong>HEAD</strong> section in <strong>index.html</strong> file</p>
                     <p>If you are wordpress user copy script link into <strong>header.php</strong> in your wp theme</p>
-                    <img src={wpImg} alt="wordpress"/>                
-                  
                 </div>
             )
         } else {

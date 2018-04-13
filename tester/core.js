@@ -26,16 +26,17 @@
     function createForm(content, style) {
         let form = document.createElement('form');
         form = retrieveStyle(form, style.formStyle);
+        form.style.display = 'inline-block';
         form.addEventListener('submit', e => {
             e.preventDefault();
-            const email = e.target[0].value;
+            const email = e.target[0].value.trim();
             const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             if (!regex.test(email)) {
                 alert("Entar a valid email");
                 return false;
             }
             //testFetch(content.action);
-            testFetch('https://jsonplaceholder.typicode.com/posts/1');
+            testFetch(content.action, email);
         }, false);
         form.innerHTML = `
             <input type="email" placeholder="${content.input}" style="${retrieveStyle(null, style.inputStyle)}" required/>
@@ -43,11 +44,15 @@
             `;
         return form;
     }
-    function testFetch(url) {
+    function testFetch(url, data) {
         let fDiv = document.getElementById(parents[0].id);
         let oo = document.querySelector('#oo');
         fetch(url, {
-            method: 'GET'
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            body: JSON.stringify(data)
         }).then(res => {
             if (parents.length === 2) {
                 oo.insertBefore(parents[1], fDiv);
@@ -63,15 +68,6 @@
             .catch((error) => {
                 alert("Sorry but something went wrong! Please try again soon")
             })
-    }
-    
-    function formAction(url, data) {
-        fetch(url, {
-            method: 'GET',
-            body: JSON.stringify(data)
-        }).then(res => res.json())
-            .then(data => console.log(data))
-            .catch(alert("dobre w chuj error ;("))
     }
     
     //createchildren
@@ -102,11 +98,11 @@
     function createOverlay(statement, canvas) {
         let overlay = document.createElement('div');
         let close = document.createElement('button');
-        close.style.cssText = 'background:#fff;border-radius:50%;border:2px solid black;position:absolute;top:-15px;right:-15px;';
-        close.innerText = "✖";
+        close.style.cssText = 'background:transparent;position:absolute;top:0;right:0;border:0;color:black;font-weight:900';
+        close.innerText = "X";
         close.onclick = closeCanvas;
         overlay.id = "oo";
-        let css = 'display:flex;overflow:auto;position:fixed;place-content:center;z-index:99;margin:auto;top:0px;bottom:0px;left:0px;right:0px;padding:30px 0;';
+        let css = 'display:flex;justify-content:center;align-content:center;overflow:auto;position:fixed;z-index:99;margin:auto;top:0;bottom:0;left:0;right:0;padding:30px 0;';
         overlay.style = css;
         statement ? overlay.style.background = 'rgba(0,0,0,.5)' : null;
         createCanvas(ed.canvasesReady);
@@ -118,14 +114,20 @@
     
     //injecting css for animation
     function animationInject() {
+        let fonts = document.createElement('link');
+        fonts.href = 'https://fonts.googleapis.com/css?family=Josefin+Sans|Karma|Lato|Open+Sans+Condensed:300';
+        fonts.rel = 'stylesheet';
         const head = document.querySelector('head');
+        const stl = `${ed.animation} #oo *{box-sizing:border-box}`
         let style = document.querySelector('style');
         if (!style) {
             style = document.createElement('style');
-            style.innerText = ed.animation;
+            style.innerText = stl;
             head.appendChild(style);
+            head.appendChild(fonts);
         } else {
-            style.innerText += ed.animation;
+            style.innerText += stl;
+            head.appendChild(fonts);
         }
     }
     

@@ -443,12 +443,28 @@ display: table;
 }
 
 /*previed*/
+
+.editorBox{
+  height: 100%;
+  overflow: hidden;
+  /*width: 100vw;*/
+}
+
+.ant-layout-sider-zero-width-trigger{
+  z-index:400;
+}
+
+
 .editorMainCanvasWrapper{
   background-image: url('bg.svg');
+  position: relative;
   height: auto;
 min-height: 100%;
-padding:30px;
+padding: 30px;
 overflow: auto;
+}
+.mainCanvas{
+  margin: auto;
 }
 
 .googleLogin{
@@ -473,55 +489,35 @@ overflow: auto;
 h1{
   font-size: 36px;
   line-height: 1.1;
+  text-align: center;
 }
 h2{
   font-size: 28px;
   line-height: 1.2;
+  text-align: center;
 }
 h3{
   font-size: 20px;
 }
 .homeWrapper{
-  position: relative;
-  margin-top: 5%;
-  min-height: auto;
-  height: auto;
+margin: auto;
+display: flex;
+flex-flow: column nowrap;
+justify-content: center;
+align-items: center;
 }
-.welcomeBox{
-  position: absolute;
-  z-index: 10;
-  top:0;
-  bottom:0;
-  left:20px;
-  width:350px;
-  margin: auto;
+
+.mainContentWrapper{
   display: flex;
-  flex-flow: column nowrap;
 }
-.welcomeBox h1{
+
+.homeWrapper h1{
   color: #1890ff;
 }
-.welcomeBox h2{
-  margin-bottom: 150px;
+.homeWrapper p {
+  text-align: center;
 }
 
-.ant-carousel .slick-slide {
-height:410px!important;
-background-repeat: no-repeat!important;
-background-position: 60% top!important;
-display: flex!important;
-
-}
-.ant-carousel .slick-slide a {
-  margin: auto;
-}
-
-.ant-carousel .slick-dots li button {
-  background: #000!important;
-}
-.prev{ background-image: url('prev.jpg')!important;}
-.prev2{background-image: url('prev2.jpg')!important;}
-.prev3{background-image: url('prev3.jpg')!important;}
 
 /*login*/
 .loginBox{
@@ -533,12 +529,64 @@ display: flex!important;
 }
 
 /*profile*/
+.profileCard{
+  margin: auto;
+  max-width: 400px;
+}
 .profileBox{
-  display:flex;
-  justify-content: center;
-  margin-top:5%;
-  flex-flow: column wrap;
-  align-content: center;
-  align-items: center;
+  width: 100%;
+  display: flex;
+}
+.scriptWrapper{
+  margin-top:10px;
+}
+.scriptWrapper p{
+ width: 100%;
+}
+/*footer*/
 
+.footer-list{
+  display: flex;
+  justify-content: center;
+}
+.footer-list li {
+  padding: 5px;
+}
+
+/*toolbox*/
+.toolboxBox{
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.ant-popover{
+  z-index:2000!important;
+}
+/*media*/
+@media only screen and (max-width: 360px){
+  html{
+    font-size: 18px;
+  }
+  h1{
+    font-size: 24px;
+    text-align: center;
+  }
+  h2{
+    font-size: 20px;
+  }
+  .homeWrapper p {
+    margin: auto 5px;
+  }
+  .footer{
+    width: 80%;
+    margin: 0 auto;
+  }
+  .contentCanvasWrapper{
+    width: 100vw;
+  }
+  .editorBox{
+    overflow: hidden;
+  }
 }

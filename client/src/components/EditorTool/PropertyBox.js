@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import PropertyItem from './Assets/PropertyItem';
@@ -7,7 +7,7 @@ import PropertyItemRadio from './Assets/PropertyItemRadio';
 import PropertyItemRange from './Assets/PropertyItemRange';
 import PropertyItemSelect from './Assets/PropertyItemSelect';
 import PropertyItemBackground from './Assets/PropertyItemBackground';
-import { List } from 'antd';
+import { List, Button } from 'antd';
 
 class PropertyBox extends Component {
 
@@ -25,7 +25,7 @@ class PropertyBox extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    
+
 
     handleChange(value, id, property, much, max = this.max, min = this.max) {
         //small validation
@@ -109,8 +109,8 @@ class PropertyBox extends Component {
                 switch (property) {
                     case (property.match(this.widthHeightRegex) || {}).input:
                         if (forEdit.elemType !== 'img') {
-                             this.min = 0; this.max = 1300;
-                        } 
+                            this.min = 0; this.max = 1000;
+                        }
                         else { this.min = 10; this.max = 800; }
                         break;
                     case (property.match(this.paddingMarginRegex) || {}).input:
@@ -182,12 +182,12 @@ class PropertyBox extends Component {
             }
         }
         return <List
-            style={{marginTop: '20px'}}
+            style={{ marginTop: '20px' }}
             bordered="true"
             dataSource={list}
             itemLayout="vertical"
             renderItem={item => (<List.Item>{item}</List.Item>)}
-            header={<strong style={{color: '#1890ff'}}>{name}</strong>}
+            header={<strong style={{ color: '#1890ff' }}>{name}</strong>}
             key={j}
             size="large"
         />
@@ -212,6 +212,17 @@ class PropertyBox extends Component {
 
     }
 
+    handleDelete () {
+        let { id } = this.props.elements.selectedElement;
+        if (id !== undefined) {
+            return <Button onClick={() => this.props.deleteElement(id)} type="danger" icon="delete">Delete element</Button>
+        } else {
+            return false;
+        }
+        
+        
+    }
+
     render() {
         const fontList = this.props.elements.fonts;
         const animationList = this.props.mainCanvas.animationList;
@@ -220,7 +231,8 @@ class PropertyBox extends Component {
         let selectedItem = Object.keys(selectedElement).length === 0 ? selectedCanvas : selectedElement;
         let listSelect = selectedItem === selectedElement ? fontList : animationList;
         return (
-            <Fragment>
+            <div style={{ overflow: 'auto', height: '100%' }}>
+                {window.innerWidth <= 768 ? this.handleDelete() : null}
                 <PropertyItemBackground
                     handleChange={(e) => this.updateCanvasBackground(e)}
                     isChecked={this.props.mainCanvas.overlay}
@@ -229,7 +241,7 @@ class PropertyBox extends Component {
 
                 {this.renderProperties(selectedItem, selectedItem.style, listSelect)}
 
-            </Fragment>
+            </div>
 
 
 

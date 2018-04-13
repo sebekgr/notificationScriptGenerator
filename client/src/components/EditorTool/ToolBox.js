@@ -74,7 +74,7 @@ class ToolBox extends Component {
                       onClick={() => this.props.selectCanvas(canvas.id)}
                       closable={index !== 0}
                       afterClose={() => this.handleRemoveCanvas(canvas)}
-                      color={this.props.mainCanvas.selectedCanvas.id === canvas.id ? '#e1e1e1' : null}
+                      color={this.props.mainCanvas.selectedCanvas.id === canvas.id ? '#40a9ff' : null}
                       
                     >
                         {canvas.name}
@@ -88,18 +88,18 @@ class ToolBox extends Component {
         let { url } = this.props.mainCanvas;
         return (
 
-            <div style={{display: 'flex', alignItems: 'center', padding: '15px', width: 'auto', flexWrap: 'wrap'}}>
+            <div className="toolboxBox">
                 {this.props.script.visible ? <ScriptPopUp /> : null }               
                 <Tooltip key="h1" title="Add heading 1 element"><Button onClick={() => this.addElement("h1")} className="toolBoxElement">Header 1</Button></Tooltip >
-                    <Tooltip key="h2" title="Add heading 2 element"><Button onClick={() => this.addElement("h2")} className="toolBoxElement">Header 2</Button></Tooltip >
-                    <Tooltip key="text" title="Add text element"><Button onClick={() => this.addElement("p")} className="toolBoxElement">Text</Button></Tooltip >
-                    <Tooltip key="image" title="Add image element"><Button onClick={() => this.addElement("img")} className="toolBoxElement">Image</Button></Tooltip >
-                    <Tooltip key="spacer" title="Add spacer element"><Button onClick={() => this.addElement("div")} className="toolBoxElement">Spacer</Button></Tooltip >
-                    <Tooltip key="form" title="Add form element"><Button onClick={() => this.addElement("form")} className="toolBoxElement">Form</Button></Tooltip >
-                    <Button key="addcanvas" className="toolBoxElement" disabled={this.props.mainCanvas.canvases.length === 2} onClick={() => this.props.addCanvas(name, transitionToNext, delay, style)}>Add new Canvas</Button>
+                <Tooltip key="h2" title="Add heading 2 element"><Button onClick={() => this.addElement("h2")} className="toolBoxElement">Header 2</Button></Tooltip >
+                <Tooltip key="text" title="Add text element"><Button onClick={() => this.addElement("p")} className="toolBoxElement">Text</Button></Tooltip >
+                <Tooltip key="image" title="Add image element"><Button onClick={() => this.addElement("img")} className="toolBoxElement">Image</Button></Tooltip >
+                <Tooltip key="spacer" title="Add spacer element"><Button onClick={() => this.addElement("div")} className="toolBoxElement">Spacer</Button></Tooltip >
+                <Tooltip key="form" title="Add form element"><Button onClick={() => this.addElement("form")} className="toolBoxElement">Form</Button></Tooltip >
+                <Button key="addcanvas" className="toolBoxElement" disabled={this.props.mainCanvas.canvases.length === 2} onClick={() => this.props.addCanvas(name, transitionToNext, delay, style)}>Add new Canvas</Button>
                 {canvaslist}
 
-                    <Popconfirm title="Your elements will be removed. Are you sure to continue?" onConfirm={() =>this.refreshToNew()} okText="Yes" cancelText="No">
+                    <Popconfirm style={{zIndex: '800!important'}} title="Your elements will be removed. Are you sure to continue?" onConfirm={() =>this.refreshToNew()} okText="Yes" cancelText="No">
                         <Button className="toolBoxElement" >Fresh start</Button>
                         </Popconfirm>
 

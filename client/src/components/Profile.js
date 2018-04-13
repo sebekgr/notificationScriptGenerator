@@ -7,12 +7,21 @@ import * as actions from '../actions';
 const { Meta } = Card;
 class Profile extends Component {
 
+  componentDidMount(){
+    
+    this.props.fetchUser();
+    const { script } = this.props.auth;
+    if(script === ''){
+      localStorage.clear();
+    }
+  }
 
-  isScript(script) {
+  isScript(script, host) {
     return (
       <Fragment>
-        <p>You have one script</p>
-        <CopyClipboard text={`${window.location.origin}/script/${script}`} />
+        <p>You already have one script for: </p>
+        <p><a href={host}>{host}</a></p>
+        <CopyClipboard text={`<script async src="${window.location.origin}/script/${script}"></script>`} />
       </Fragment>
     )
   }
@@ -46,9 +55,9 @@ class Profile extends Component {
 
 
   render() {
-    const { username, avatar, script } = this.props.auth;
+    const { username, avatar, script, host } = this.props.auth;
 
-    const myScript = script === '' ? this.isNot() : this.isScript(script);
+    const myScript = script === '' ? this.isNot() : this.isScript(script, host);
 
     return (
 
@@ -56,7 +65,9 @@ class Profile extends Component {
       <div className="profileBox">
 
         <Card
+          style={{margin: 'auto', width: '360px'}}
           title="Welcome"
+          
         hoverable extra={this.deleteProfile()}>
           <Meta
             avatar={<img alt="Avatar" src={avatar} />}
@@ -64,7 +75,7 @@ class Profile extends Component {
           >
 
           </Meta>
-          <div style={{ width: '400px', marginTop: '20px' }}> {myScript}</div>
+          <div className="scriptWrapper"> {myScript}</div>
         </Card>
       </div>
     )
