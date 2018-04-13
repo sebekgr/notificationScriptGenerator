@@ -1,5 +1,5 @@
     let parents = [];
-
+    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     //get style
     function retrieveStyle(element, style) {
         let inStyle = '';
@@ -30,7 +30,6 @@
         form.addEventListener('submit', e => {
             e.preventDefault();
             const email = e.target[0].value.trim();
-            const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             if (!regex.test(email)) {
                 alert("Entar a valid email");
                 return false;

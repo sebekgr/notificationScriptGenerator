@@ -10,13 +10,13 @@ module.exports = app => {
     app.post('/script/generate', loginRequired, async (req, res) => {
         const {canvasesReady, overlay, animation, url, user} = req.body;
         const data = {canvasesReady, overlay, animation};
-        console.log(req.headers)
+        const myHost = new URL(req.headers.referer).origin;
         
         try {
             const fname = await scriptGenerator(data, user, url);
             await User.findOneAndUpdate({_id: user}, {host: url, script: fname.fileName});
             await res.send({status: fname.status,
-                    url: `<script async src="${req.headers.origin}script/${fname.fileName}"></script>`})
+                    url: `<script async src="${myHost}/script/${fname.fileName}"></script>`})
                     .status(200);
         } catch (err) {
             res.status(422).send({status: 'error'});

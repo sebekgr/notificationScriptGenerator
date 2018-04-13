@@ -24,7 +24,7 @@ class CopyToCliboard extends Component {
                 />
                 
             </CopyToClipboard>
-            {this.state.copied ? <span>Link has been copied to clipboard</span> : null}
+            {this.state.copied ? <span style={{color: 'green'}}>Link has been copied to clipboard</span> : null}
         </div>
         )
         

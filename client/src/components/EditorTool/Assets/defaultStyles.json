@@ -172,7 +172,7 @@
 			}
 		},
 		"content": {
-			"action": "http://vps476880.ovh.net/test",
+			"action": "http://vps476880.ovh.net:4000/test",
 			"input": "Provide your e-mail",
 			"submit": "Subscribe"
 		}
