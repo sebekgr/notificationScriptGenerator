@@ -16,7 +16,7 @@ module.exports = app => {
             const fname = await scriptGenerator(data, user, url);
             await User.findOneAndUpdate({_id: user}, {host: url, script: fname.fileName});
             await res.send({status: fname.status,
-                    url: `<script async src="${req.protocol}://${req.headers.origin}script/${fname.fileName}"></script>`})
+                    url: `<script async src="${req.headers.origin}script/${fname.fileName}"></script>`})
                     .status(200);
         } catch (err) {
             res.status(422).send({status: 'error'});
